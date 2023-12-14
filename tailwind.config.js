@@ -1,6 +1,9 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
-  content: ["./src/**/*.{html,js}"],
+  content: [
+    "./index.html",
+    "./src/**/*.{js,ts,jsx,tsx}",
+  ],
   theme: {
     screens: {
       tablet: "960px",
@@ -16,7 +19,22 @@ module.exports = {
       charcoal: '#1E1E1E',
       slateGray: '#494545',
     },
-    extend: {},
+    fontSize: {
+      xs: '0.2rem',
+      sm: '0.8rem',
+      base: '1rem',
+      xl: '1.25rem',
+      '2xl': '1.563rem',
+      '3xl': '1.953rem',
+      '4xl': '2.441rem',
+      '5xl': '3.052rem',
+    },
+    fontFamily: {
+      CrimsonText: ['CrimsonText'],
+      LucidaFax: ['LucidaFax'],
+    },
+    
+    // extend: {},
   },
   plugins: [],
 }
