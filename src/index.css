@@ -39,7 +39,7 @@
 
 /* general */
 .bold{
-  @apply text-5xl font-bold;
+  @apply text-3xl font-bold;
 }
 .semibold{
   @apply text-2xl font-bold;
@@ -62,7 +62,12 @@
 .navbar ul li{
   @apply mx-4;
 }
-
+.btn-full-emerald{
+  @apply text-indigo font-semibold rounded-lg bg-emerald text-xl px-5 py-2 me-2 mb-2;
+}
+.btn-hollow-emerald{
+  @apply text-indigo rounded-lg border-2 border-emerald  px-5 py-1 me-2 mb-2;
+}
 
 /* Homepage  */
 /* .homepage{
@@ -70,9 +75,6 @@
 } */
 .lander{
   @apply flex justify-around font-LucidaFax bg-indigo text-emerald px-10 py-5;
-}
-.btn-emerald{
-  @apply text-indigo  font-semibold rounded-lg bg-emerald text-xl px-5 py-2.5 me-2 mb-2;
 }
 
 

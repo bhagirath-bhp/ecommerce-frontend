@@ -1,33 +1,54 @@
 import React from 'react'
 import Navbar from '../components/Navbar'
 import ImgDiscover from '../components/ImgDiscover'
+import Product from '../components/Product';
+
 const Homepage = () => {
   const imgSet = [
-    {key: 1,  url: "/public/product-image1.png"},
-    {key: 2, url: "/public/product-image2.png"},
-    {key: 3, url: "/public/product-image3.png"},
-    {key: 4, url: "/public/product-image4.png"},
-    {key: 5,  url: "/public/product-image1.png"},
-    {key: 6, url: "/public/product-image2.png"},
-    {key: 7, url: "/public/product-image3.png"},
-    {key: 8, url: "/public/product-image4.png"},
+    { key: 1, url: "/public/product-image1.png" },
+    { key: 2, url: "/public/product-image2.png" },
+    { key: 3, url: "/public/product-image3.png" },
+    { key: 4, url: "/public/product-image4.png" },
+    { key: 5, url: "/public/product-image1.png" },
+    { key: 6, url: "/public/product-image2.png" },
+    { key: 7, url: "/public/product-image3.png" },
+    { key: 8, url: "/public/product-image4.png" },
+  ];
+  const productSet = [
+    { key:1, title: "Product1", description: "This is a very nice product.", price: 489, url: "/public/product-image1.png" },
+    { key:2, title: "Product1", description: "This is a very nice product.", price: 489, url: "/public/product-image2.png" },
+    { key:3, title: "Product1", description: "This is a very nice product.", price: 489, url: "/public/product-image3.png" },
+    { key:4, title: "Product1", description: "This is a very nice product.", price: 489, url: "/public/product-image4.png" },
+    { key:5, title: "Product1", description: "This is a very nice product.", price: 489, url: "/public/product-image1.png" },
+    { key:6, title: "Product1", description: "This is a very nice product.", price: 489, url: "/public/product-image2.png" }
   ]
-  const imgComponentSet = imgSet.map(img => { return <ImgDiscover key={img.key} url={img.url}  className='img-rect'/> })
+  const imgComponentSet = imgSet.map(img => { return <ImgDiscover key={img.key} url={img.url} className='img-rect' /> });
+  const productContainerSet = productSet.map((product) => (<Product key={product.key} title={product.title} description={product.description} url={product.url} price={product.price}/>))
   return (
     <>
+      {/* Navbar */}
       <Navbar />
+
+      {/* Homepage */}
       <div className="homepage">
+        
+        
+        {/* Landing Section */}
         <div className="lander">
-          <div className="landing-para max-w-[40%]">
-            <h3 className='bold'>Discover the Magic of Drakaina's Products</h3>
+          <div className="landing-para max-w-[40%] py-[50px]">
+            <h3 className='font-bold text-5xl'>Discover the Magic of Drakaina's Products</h3>
             <p>Experience the enchantment of our magical products that will transport you to a world of wonder and awe.</p>
-            <button className='btn-emerald my-5'>Shop Now</button>
+            <button className='btn-full-emerald my-5'>Shop Now</button>
           </div>
           <div className="landing-img">
             <img src="/img-tarot1.png" className="scale-y-[0.90]" />
           </div>
         </div>
-        <div className="discover flex-column items-center font-Chivo px-10 py-5">
+
+
+
+        {/* Discover Section */}
+        <div className="discover flex-column items-center font-Chivo px-10 py-5 min-h-screen">
           <div className="discover-text flex justify-between">
             <h3 className='semibold max-w-[25%]'>Discover the Enchanting World of Drakaina's Magical Products</h3>
             <p className='max-w-[55%] light'>At Drakaina, we offer a unique selection of high-quality magic products with mystical properties, from spell books to enchanted artifacts. Explore our website and embark on a journey into the realm of enchantment today.</p>
@@ -36,6 +57,26 @@ const Homepage = () => {
             {imgComponentSet}
           </div>
         </div>
+
+
+        {/* Products Sections */}
+        <div className="products flex-column justify-between items-center min-h-screen p-9">
+          <div className="products-head flex justify-between w-full">
+            <div className="mb-9 font-Chivo text-indigo ">
+              <h3 className='font-bold text-5xl'>Enchantments</h3>
+              <p>Discover a world of magic with our enchanting products.</p>
+            </div>
+            <div className="ph-right">
+              <button className='btn-hollow-emerald'>View All</button>
+            </div>
+          </div>
+          <div className="products-container flex justify-between flex-wrap">
+            {productContainerSet}
+          </div>
+        </div>
+
+
+
       </div>
     </>
   )
