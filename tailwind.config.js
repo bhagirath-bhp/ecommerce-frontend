@@ -32,6 +32,12 @@ module.exports = {
     fontFamily: {
       CrimsonText: ['CrimsonText'],
       LucidaFax: ['LucidaFax'],
+      Chivo: ['Chivo'],
+      Inter: ['Inter'],
+      Julee: ['Julee'],
+      LaoMuangDon: ['LaoMuangDon'],
+      Roboto: ['Roboto'],
+
     },
     
     // extend: {},

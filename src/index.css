@@ -36,6 +36,23 @@
   src: url('../public/fonts/Roboto/Roboto-Regular.ttf') format('ttf'),
 }
 
+
+/* general */
+.bold{
+  @apply text-5xl font-bold;
+}
+.semibold{
+  @apply text-2xl font-bold;
+}
+.light{
+  @apply text-xl font-[90];
+}
+
+
+
+
+
+/* Navbar */
 .navbar{
   @apply flex justify-between items-center py-[10px] px-[30px] bg-indigo text-emerald font-CrimsonText;
 }
@@ -47,22 +64,22 @@
 }
 
 
-
+/* Homepage  */
 /* .homepage{
   @apply px-10;
 } */
-.btn-emerald{
-  @apply text-indigo font-semibold rounded-lg bg-emerald text-sm px-5 py-2.5 me-2 mb-2;
-}
 .lander{
-  @apply flex font-LucidaFax bg-indigo text-emerald p-10;
+  @apply flex justify-around font-LucidaFax bg-indigo text-emerald px-10 py-5;
 }
-.landing-para{
-  @apply max-w-[30%];
+.btn-emerald{
+  @apply text-indigo  font-semibold rounded-lg bg-emerald text-xl px-5 py-2.5 me-2 mb-2;
 }
-.lander .landing-para h3{
-  @apply text-3xl font-bold;
+
+
+/* Homepage : Discover  */
+.img-rect{
+  @apply w-[250px]; 
 }
-.landing-para h3, .landing-para p, .landing-para button{
-  @apply my-5;
+.discover-img-set::-webkit-scrollbar{
+  height: 0;
 }
