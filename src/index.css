@@ -82,6 +82,20 @@
 .img-rect{
   @apply w-[250px]; 
 }
-.discover-img-set::-webkit-scrollbar{
+.noscrollbar::-webkit-scrollbar{
   height: 0;
+}
+.scroller{
+  animation: scroll 40s infinite linear forwards;
+}
+.blur-mask{
+  mask: linear-gradient(90deg, transparent, white 10%, white 90%, transparent);
+}
+.first{
+  border: 2px solid red;
+}
+@keyframes scroll {
+  to{
+    transform: translateX(calc(-50% - .5rem));
+  }
 }
