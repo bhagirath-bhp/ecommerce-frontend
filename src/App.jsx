@@ -2,6 +2,7 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import './App.css'
 import Homepage from './pages/Homepage'
 import ProductsPage from './pages/Productpage'
+import AddProductPage from './pages/admin/AddProductPage'
 
 function App() {
 
