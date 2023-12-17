@@ -49,6 +49,10 @@
 }
 
 
+.icon{
+  @apply text-4xl
+}
+
 
 
 
@@ -85,8 +89,11 @@
 .noscrollbar::-webkit-scrollbar{
   height: 0;
 }
-.scroller{
+.scroll-animation-left{
   animation: scroll 40s infinite linear forwards;
+}
+.scroll-animation-right{
+  animation: scroll 40s infinite linear reverse;
 }
 .blur-mask{
   mask: linear-gradient(90deg, transparent, white 10%, white 90%, transparent);
@@ -98,4 +105,12 @@
   to{
     transform: translateX(calc(-50% - .5rem));
   }
+}
+
+
+
+
+/* footer styles  */
+.footer-quicklinks ul li{
+  margin: 5px 0;
 }

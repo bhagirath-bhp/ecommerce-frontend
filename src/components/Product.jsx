@@ -13,7 +13,7 @@ const Product = (props) => {
             </div>
             <div className="product-price flex justify-between items-center p-5">
                 <h3 className="product-title font-bold text-3xl">₹{props.price}</h3>
-                <IoMdArrowDroprightCircle className='text-5xl text-indigo cursor-pointer' /> {/* Added cursor-pointer for icon interaction */}
+                <IoMdArrowDroprightCircle className='icon text-indigo cursor-pointer' /> {/* Added cursor-pointer for icon interaction */}
             </div>
         </div>
     )
