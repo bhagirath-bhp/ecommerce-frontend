@@ -1,10 +1,9 @@
 import Navbar from '../components/Navbar'
 import ImgDiscover from '../components/ImgDiscover'
 import Product from '../components/Product';
-import Testimonial from '../components/Testimonial';
 import Footer from '../components/Footer';
 import RippleButton from '../components/RippleButton';
-
+import TestimonialCarousel from '../components/TestimonialCarousel';
 const Homepage = () => {
   const imgSet = [
     { key: 1, url: "/public/product-image1.png" },
@@ -24,25 +23,13 @@ const Homepage = () => {
     { key: 5, title: "Product1", description: "This is a very nice product.", price: 489, url: "/public/product-image1.png" },
     { key: 6, title: "Product1", description: "This is a very nice product.", price: 489, url: "/public/product-image2.png" }
   ]
-  const testimonialSet = [
-    { key: 1, name: "Chhota Bheem 1", message: "This is a very nice product.", designation: "CSO @ Dholakpur", url: "/public/product-image1.png", className: "first" },
-    { key: 2, name: "Chhota Bheem 2", message: "This is a very nice product.", designation: "CSO @ Dholakpur", url: "/public/product-image2.png" },
-    { key: 3, name: "Chhota Bheem 3", message: "This is a very nice product.", designation: "CSO @ Dholakpur", url: "/public/product-image3.png" },
-    { key: 4, name: "Chhota Bheem 4", message: "This is a very nice product.", designation: "CSO @ Dholakpur", url: "/public/product-image4.png" },
-    { key: 5, name: "Chhota Bheem 5", message: "This is a very nice product.", designation: "CSO @ Dholakpur", url: "/public/product-image1.png" },
-    { key: 6, name: "Chhota Bheem 1", message: "This is a very nice product.", designation: "CSO @ Dholakpur", url: "/public/product-image2.png" },
-    { key: 7, name: "Chhota Bheem 2", message: "This is a very nice product.", designation: "CSO @ Dholakpur", url: "/public/product-image3.png" },
-    { key: 8, name: "Chhota Bheem 3", message: "This is a very nice product.", designation: "CSO @ Dholakpur", url: "/public/product-image4.png" },
-    { key: 9, name: "Chhota Bheem 4", message: "This is a very nice product.", designation: "CSO @ Dholakpur", url: "/public/product-image1.png" },
-    { key: 10, name: "Chhota Bheem 5", message: "This is a very nice product.", designation: "CSO @ Dholakpur", url: "/public/product-image2.png" },
-  ]
-
+  
+  
   const imgComponentSet = imgSet.map(img => { return <ImgDiscover key={img.key} url={img.url} className='img-rect' /> });
   const productComponentSet = productSet.map((product) => (<Product key={product.key} title={product.title} description={product.description} url={product.url} price={product.price} />))
-  const testimonialComponentSet = testimonialSet.map((testimonial) => (<Testimonial key={testimonial.key} name={testimonial.name} message={testimonial.message} url={testimonial.url} designation={testimonial.designation} />))
-
+  
   return (
-    <div className='border-2'>
+    <div>
       {/* Navbar */}
       <Navbar />
 
@@ -99,11 +86,7 @@ const Homepage = () => {
         {/* Testimonial  */}
         <div className="testimonial-wrapper flex-column overflow-x-hidden font-CrimsonText text-indigo p-9">
           <h3 className='font-bold text-3xl text-center my-9'>Let customers speak for us</h3>
-          <div className="testimonial-container blur-mask noscrollbar my-9">
-            <div className="testimonial-inner flex w-fit gap-[1rem] scroll-animation-left">
-              {testimonialComponentSet}
-            </div>
-          </div>
+          <TestimonialCarousel/>
         </div>
 
 

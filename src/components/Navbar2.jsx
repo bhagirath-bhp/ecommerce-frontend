@@ -1,8 +1,20 @@
 import { IoIosSearch, IoMdCart, IoIosArrowRoundBack } from 'react-icons/io';
 import { HiBars3 } from 'react-icons/hi2';
+import { useState } from 'react';
+
 const Navbar2 = () => {
+    const [isNavOpen, setIsNavOpen] = useState(false);
+    const categoriesSet = [
+        {key: 1, title:"Category 1"},
+        {key: 2, title:"Category 2"},
+        {key: 3, title:"Category 3"},
+        {key: 4, title:"Category 4"},
+        {key: 5, title:"Category 5"},
+        {key: 6, title:"Category 6"},
+    ]
+    const categoriesComponentSet = categoriesSet.map((category)=>(<li key={category.key}>{category.title}</li>))
     return (
-        <nav className="bg-indigo text-white p-4 flex items-center justify-evenly">
+        <nav className="navbar flex">
             <a href="#" className="text-5xl">
                 <IoIosArrowRoundBack />
             </a>
@@ -18,9 +30,30 @@ const Navbar2 = () => {
                 <a href="#" className="text-3xl mx-9 text-emerald">
                     <IoMdCart />
                 </a>
-                <div className="text-3xl text-emerald">
+                <div className="text-3xl text-emerald" onClick={()=>{isNavOpen ? setIsNavOpen(false) : setIsNavOpen(true)}}>
                     <HiBars3 />
                 </div>
+                <ul className={`navul flex-column z-[60] items-center w-full overflow-hidden max-h-0 opacity-0 transition-height duration-1000 ease-in-out ${isNavOpen ? "max-h-[50rem] opacity-100" : "max-h-0 opacity-0"} border-[1px] border-emerald absolute top-[4.2rem] left-[-1rem] p-3 z-10 bg-indigo`}>
+                    <li className="main-ul-li">
+                        Shop Now
+                    </li>
+                    <li className="main-ul-li">
+                        About Us
+                    </li>
+                    <li className="main-ul-li">
+                        Contact
+                    </li>
+                    <li className="flex justify-center text-center">
+                        <ul className="dropdown top-[1.7rem] left-1/2 flex-column justify-center items-center h-auto overflow-hidden bg-indigo transition-height duration-500 ease-in-out w-full">
+                            <div className="border-y-2 border-emerald w-full my-5">
+                                {categoriesComponentSet}
+                            </div>
+                        </ul>
+                    </li>
+                    <div className="signin mx-4 py-1 hover:bg-[#725188] text-center">
+                        <a href="">Sign in</a>
+                    </div>
+                </ul>
             </div>
         </nav>
     )

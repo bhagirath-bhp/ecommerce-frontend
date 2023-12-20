@@ -131,7 +131,19 @@ span.ripple {
   }
 }
 
-
+/* one product page styles */
+.product-details-sub li h3{
+  @apply inline font-bold
+}
+.review-bars .progress-bar{
+  @apply max-w-[60%]
+}
+.review-bars .review-star-box{
+  @apply my-9
+}
+.review-bars p{
+  @apply leading-[5px] mx-3
+}
 
 
 /* footer styles  */
