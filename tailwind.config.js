@@ -6,8 +6,10 @@ module.exports = {
   ],
   theme: {
     screens: {
+      smMobile: "340px",
+      mobile: "640px",
       tablet: "960px",
-      desktop: "1248px"
+      desktop: "1240px"
     },
     colors: {
       black: '#000000',
@@ -39,8 +41,13 @@ module.exports = {
       Roboto: ['Roboto'],
 
     },
-    
-    // extend: {},
+
+    extend: {
+      transitionProperty: {
+        'height': 'max-h opacity'
+      },
+    },
+
   },
   plugins: [],
 }

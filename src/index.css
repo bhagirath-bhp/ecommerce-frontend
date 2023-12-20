@@ -55,16 +55,39 @@
 
 
 
+span.ripple {
+  position: absolute;
+  border-radius: 50%;
+  transform: scale(0);
+  animation: ripple 600ms linear;
+  background-color: rgba(255, 255, 255, 0.7);
+}
+
+@keyframes ripple {
+  to {
+    transform: scale(4);
+    opacity: 0;
+  }
+}
+
+
+
 
 /* Navbar */
 .navbar{
-  @apply flex justify-between items-center py-[10px] px-[30px] bg-indigo text-emerald font-CrimsonText;
+  @apply justify-between items-center py-[10px] px-[30px] bg-indigo text-emerald font-CrimsonText;
 }
-.navbar ul{
-  @apply flex;
+.navbar .main-ul-li{
+  @apply mx-4 my-3 p-2 cursor-pointer text-center;
 }
-.navbar ul li{
-  @apply mx-4;
+.navbar .main-ul-li:hover{
+  @apply bg-[#725188]
+}
+.dropdown li{
+  @apply p-3;
+}
+.dropdown li:hover{
+  @apply bg-[#725188]
 }
 .btn-full-emerald{
   @apply text-indigo font-semibold rounded-lg bg-emerald text-xl px-5 py-2 me-2 mb-2;
@@ -78,8 +101,9 @@
   @apply px-10;
 } */
 .lander{
-  @apply flex justify-around font-LucidaFax bg-indigo text-emerald px-10 py-5;
+  @apply font-LucidaFax bg-indigo text-emerald px-10 py-5;
 }
+
 
 
 /* Homepage : Discover  */
@@ -90,10 +114,10 @@
   height: 0;
 }
 .scroll-animation-left{
-  animation: scroll 40s infinite linear forwards;
+  animation: scroll 50s infinite linear forwards;
 }
 .scroll-animation-right{
-  animation: scroll 40s infinite linear reverse;
+  animation: scroll 0s infinite linear reverse;
 }
 .blur-mask{
   mask: linear-gradient(90deg, transparent, white 10%, white 90%, transparent);

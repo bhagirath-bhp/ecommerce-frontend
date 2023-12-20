@@ -1,6 +1,6 @@
-import React from 'react';
 import Product from '../components/Product';
-import Navbar from '../components/Navbar';
+import Navbar2 from '../components/Navbar2';
+import Footer from '../components/Footer';
 
 const ProductsPage = () => {
   const products = [
@@ -17,10 +17,10 @@ const ProductsPage = () => {
     { key:11, title: "Product1", description: "This is a very nice product.", price: 489, url: "/public/product-image1.png" },
     { key:12, title: "Product1", description: "This is a very nice product.", price: 489, url: "/public/product-image2.png" }
   ];
-
+  
   return (
     <>
-      <Navbar/>
+      <Navbar2/>
         <div className="products flex-column justify-between items-center min-h-screen p-9">
           <div className="products-head flex justify-between w-full">
             <div className="mb-9 font-Chivo text-indigo ">
@@ -30,16 +30,17 @@ const ProductsPage = () => {
           </div>
           <div className="products-container flex justify-between flex-wrap">
           {products.map(product => (
-              <Product
-                key={product.key}
-                title={product.title}
-                description={product.description}
-                price={product.price}
-                url={product.url}
-              />
+            <Product
+            key={product.key}
+            title={product.title}
+            description={product.description}
+            price={product.price}
+            url={product.url}
+            />
             ))}
           </div>
         </div>
+        <Footer/>
       </>
   );
 }
