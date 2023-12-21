@@ -7,6 +7,12 @@ import RippleButton from "../components/RippleButton";
 import Product from "../components/Product";
 
 const ProductPage = () => {
+    const productImageUrls = [
+        {key: 1, url: "https://images.unsplash.com/photo-1663564305303-eb4c3cbc8619?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3"},
+        {key: 2, url: "https://images.unsplash.com/photo-1663564306837-4ae873fbbc3f?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3"},
+        {key: 3, url: "https://images.unsplash.com/photo-1663564305613-c40450f29903?q=80&w=1887&auto=format&fit=crop&ixlib=rb-4.0.3"},
+        {key: 4, url: "https://images.unsplash.com/photo-1663564307102-6df750b2196b?q=80&w=1887&auto=format&fit=crop&ixlib=rb-4.0.3"}
+    ];
     const productSet = [
         { key: 1, title: "Product1", description: "This is a very nice product.", price: 489, url: "/public/product-image1.png" },
         { key: 2, title: "Product1", description: "This is a very nice product.", price: 489, url: "/public/product-image2.png" },
@@ -22,9 +28,9 @@ const ProductPage = () => {
             <Navbar2 />
 
             <main className="p-5">
-                <section className="product-details-main grid grid-cols-3 grid-rows-2 mb-5 w-full">
+                <section className="product-details-main grid grid-cols-3 grid-rows-1 mb-5 w-full">
                     <div className="image-carousel mr-9 mb-9 smMobile:col-start-1 smMobile:col-end-4 tablet:row-start-1 tablet:row-end-3 tablet:col-span-1">
-                        <ImageCarousel />
+                        <ImageCarousel urls={productImageUrls}/>
                     </div>
                     <div className="product-highlights flex my-5 tablet:row-start-1 tablet:col-start-2 tablet:col-end-4 smMobile:row-start-2 smMobile: smMobile:col-start-1 smMobile:col-end-4">
                         <div className="product-text-contents max-w-[70%]">
