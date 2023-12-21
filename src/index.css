@@ -135,6 +135,9 @@ span.ripple {
 .product-details-sub li h3{
   @apply inline font-bold
 }
+.product-dsp .dsp{
+  @apply border-2 px-3 py-2 m-2 flex items-center justify-center max-w-[10rem] text-2xl font-bold border-black rounded-lg;
+}
 .review-bars .progress-bar{
   @apply max-w-[60%]
 }

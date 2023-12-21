@@ -22,7 +22,7 @@ const RippleButton = (props) => {
     return (
         <button
             onClick={createRipple}
-            className={`my-5 relative block rounded-lg ${props.buttonStyles} text-xl font-bold leading-normal transition duration-150 ease-in-out overflow-hidden`}
+            className={`my-5 relative block rounded-lg ${props.buttonStyles} text-xl font-bold leading-normal transition duration-[500ms] ease-in-out overflow-hidden`}
         >
             {props.areaLabel}
             <span className="ripple absolute"></span>

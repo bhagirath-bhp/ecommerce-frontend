@@ -86,7 +86,7 @@ const Homepage = () => {
         {/* Testimonial  */}
         <div className="testimonial-wrapper flex-column overflow-x-hidden font-CrimsonText text-indigo p-9">
           <h3 className='font-bold text-3xl text-center my-9'>Let customers speak for us</h3>
-          <TestimonialCarousel/>
+          <TestimonialCarousel type="testimonial"/>
         </div>
 
 
