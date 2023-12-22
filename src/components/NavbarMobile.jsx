@@ -8,7 +8,7 @@ const NavbarMobile = (props) => {
             <div className="logo"></div>
             <HiBars3 onClick={() => { (isNavOpen) ? setIsNavOpen(false) : setIsNavOpen(true) }} />
 
-            <ul className={`navul flex-column items-center w-full overflow-hidden max-h-0 opacity-0 transition-height duration-1000 ease-in-out ${isNavOpen ? "max-h-[50rem] opacity-100" : "max-h-0 opacity-0"} border-[1px] border-emerald absolute top-[7rem] left-0 p-3 z-10 bg-indigo`}>
+            <ul className={`navul flex-column items-center w-full overflow-hidden max-h-0 opacity-0 transition-height duration-1000 ease-in-out ${isNavOpen ? "max-h-[50rem] opacity-100" : "max-h-0 opacity-0"} border-[1px] border-golden absolute top-[7rem] left-0 p-3 z-10 bg-black`}>
                 <li className="main-ul-li">
                     Shop Now
                 </li>
@@ -19,8 +19,8 @@ const NavbarMobile = (props) => {
                     Contact
                 </li>
                 <li className="flex justify-center text-center">
-                    <ul className="dropdown top-[1.7rem] left-1/2 flex-column justify-center items-center h-auto overflow-hidden bg-indigo transition-height duration-500 ease-in-out w-full">
-                        <div className="border-y-2 border-emerald w-full my-5">
+                    <ul className="dropdown top-[1.7rem] left-1/2 flex-column justify-center items-center h-auto overflow-hidden bg-black transition-height duration-500 ease-in-out w-full">
+                        <div className="border-y-2 border-golden w-full my-5">
                             {props.categoriesComponentSet}
                         </div>
                     </ul>

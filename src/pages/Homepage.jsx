@@ -42,7 +42,7 @@ const Homepage = () => {
           <div className="landing-para col-span-2 row-span-1 max-w-[60%] py-[50px]">
             <h3 className='font-bold text-5xl'>Discover the Magic of Drakaina's Products</h3>
             <p>Experience the enchantment of our magical products that will transport you to a world of wonder and awe.</p>
-            <RippleButton areaLabel="Shop Now" buttonStyles="bg-emerald text-indigo hover:bg-emerald px-5 py-2 me-2 mb-2" />
+            <RippleButton areaLabel="Shop Now" buttonStyles="bg-golden text-black hover:bg-golden px-5 py-2 me-2 mb-2" />
           </div>
           <div className="landing-img col-span-1">
             <img src="/img-tarot1.png" className="scale-y-[0.90]" />
@@ -66,25 +66,25 @@ const Homepage = () => {
         {/* Products Sections */}
         <div className="products flex-column justify-center items-center min-h-[500px] p-9">
           <div className="products-head flex justify-between w-full">
-            <div className="mb-9 font-Chivo text-indigo ">
+            <div className="mb-9 font-Chivo text-black ">
               <h3 className='font-bold text-5xl smMobile:text-4xl'>Enchantments</h3>
               <p>Discover a world of magic with our enchanting products.</p>
             </div>
             <div className="ph-right tablet:block smMobile:hidden">
-              <RippleButton areaLabel="View All" buttonStyles="border-2 border-emerald text-indigo hover:bg-emerald px-5 py-1 me-2 mb-2"/>
+              <RippleButton areaLabel="View All" buttonStyles="border-2 border-golden text-black hover:bg-golden px-5 py-1 me-2 mb-2"/>
             </div>
           </div>
           <div className="products-container flex justify-evenly flex-wrap">
             {productComponentSet}
           </div>
           <div className="ph-right tablet:hidden smMobile:block">
-            <RippleButton areaLabel="View All" buttonStyles="border-2 border-emerald text-indigo hover:bg-emerald px-5 py-1 me-2 mb-2"  />
+            <RippleButton areaLabel="View All" buttonStyles="border-2 border-golden text-black hover:bg-golden px-5 py-1 me-2 mb-2"  />
           </div>
         </div>
 
 
         {/* Testimonial  */}
-        <div className="testimonial-wrapper flex-column overflow-x-hidden font-CrimsonText text-indigo p-9">
+        <div className="testimonial-wrapper flex-column overflow-x-hidden font-CrimsonText text-black p-9">
           <h3 className='font-bold text-3xl text-center my-9'>Let customers speak for us</h3>
           <TestimonialCarousel type="testimonial"/>
         </div>

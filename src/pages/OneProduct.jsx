@@ -39,8 +39,8 @@ const ProductPage = () => {
                             <h3 className="text-2xl font-bold my-3">₹489</h3>
                         </div>
                         <div className="product-buttons mx-5 smMobile:hidden tablet:block">
-                            <RippleButton areaLabel="Buy Now" buttonStyles=" px-4 py-2 bg-emerald text-indigo" />
-                            <RippleButton areaLabel="Add to Cart" buttonStyles=" px-4 py-2 bg-emerald text-indigo" />
+                            <RippleButton areaLabel="Buy Now" buttonStyles=" px-4 py-2 bg-golden text-black" />
+                            <RippleButton areaLabel="Add to Cart" buttonStyles=" px-4 py-2 bg-golden text-black" />
                         </div>
                     </div>
                     <div className="product-dsp tablet:row-start-2 tablet:row-end-3 tablet:col-start-2 tablet:col-end-4 smMobile:col-start-1 smMobile:col-end-4 grid grid-cols-4 grid-rows-3">
@@ -54,8 +54,8 @@ const ProductPage = () => {
                         <div className="dsp">dsp</div>
                     </div>
                     <div className="product-buttons tablet:hidden smMobile:flex smMobile:justify-between smMobile:w-[90vw] pr-3">
-                        <RippleButton areaLabel="Buy Now" buttonStyles="px-4 py-2 bg-emerald text-indigo" />
-                        <RippleButton areaLabel="Add to Cart" buttonStyles="px-4 py-2 bg-emerald text-indigo" />
+                        <RippleButton areaLabel="Buy Now" buttonStyles="px-4 py-2 bg-golden text-black" />
+                        <RippleButton areaLabel="Add to Cart" buttonStyles="px-4 py-2 bg-golden text-black" />
                     </div>
                 </section>
                 <section className="product-details-sub">

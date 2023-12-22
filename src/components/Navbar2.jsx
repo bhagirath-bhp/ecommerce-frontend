@@ -27,13 +27,13 @@ const Navbar2 = () => {
                         className="bg-white w-full text-black rounded-lg p-2 focus:outline-none "
                     />
                 </div>
-                <a href="#" className="text-3xl mx-9 text-emerald">
+                <a href="#" className="text-3xl mx-9 text-golden">
                     <IoMdCart />
                 </a>
-                <div className="text-3xl text-emerald" onClick={()=>{isNavOpen ? setIsNavOpen(false) : setIsNavOpen(true)}}>
+                <div className="text-3xl text-golden" onClick={()=>{isNavOpen ? setIsNavOpen(false) : setIsNavOpen(true)}}>
                     <HiBars3 />
                 </div>
-                <ul className={`navul flex-column z-[60] items-center w-full overflow-hidden max-h-0 opacity-0 transition-height duration-1000 ease-in-out ${isNavOpen ? "max-h-[50rem] opacity-100" : "max-h-0 opacity-0"} border-[1px] border-emerald absolute top-[4.2rem] left-[-1rem] p-3 z-10 bg-indigo`}>
+                <ul className={`navul flex-column z-[60] items-center w-full overflow-hidden max-h-0 opacity-0 transition-height duration-1000 ease-in-out ${isNavOpen ? "max-h-[50rem] opacity-100" : "max-h-0 opacity-0"} border-[1px] border-golden absolute top-[4.2rem] left-[-1rem] p-3 z-10 bg-black`}>
                     <li className="main-ul-li">
                         Shop Now
                     </li>
@@ -44,8 +44,8 @@ const Navbar2 = () => {
                         Contact
                     </li>
                     <li className="flex justify-center text-center">
-                        <ul className="dropdown top-[1.7rem] left-1/2 flex-column justify-center items-center h-auto overflow-hidden bg-indigo transition-height duration-500 ease-in-out w-full">
-                            <div className="border-y-2 border-emerald w-full my-5">
+                        <ul className="dropdown top-[1.7rem] left-1/2 flex-column justify-center items-center h-auto overflow-hidden bg-black transition-height duration-500 ease-in-out w-full">
+                            <div className="border-y-2 border-golden w-full my-5">
                                 {categoriesComponentSet}
                             </div>
                         </ul>

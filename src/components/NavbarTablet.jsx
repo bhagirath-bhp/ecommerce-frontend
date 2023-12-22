@@ -20,7 +20,7 @@ const NavbarTablet = (props) => {
                 <li className="main-ul-li flex relative" onMouseEnter={() => { (!hover) ? setHover(true) : '' }} onMouseLeave={() => { hover ? setHover(false) : "" }}>
                     Categories
                     <IoIosArrowDown className="mt-1 ml-2" />
-                    <ul className={`dropdown z-10 absolute top-[2.5rem] flex-column justify-center items-center max-h-0 opacity-0 overflow-hidden bg-[#653a799c] max-w-[20rem] border-[1px] transition-height duration-[700ms] ease-in-out  ${hover ? "max-h-[30rem] opacity-100" : "max-h-0 opacity-0"}`} >
+                    <ul className={`dropdown z-10 absolute top-[2.5rem] flex-column justify-center items-center max-h-0 opacity-0 overflow-hidden bg-goldenLight drop-shadow-[10px_10px_10px_rgba(0,0,0,1)] max-w-[20rem] border-[1px] transition-height duration-[700ms] ease-in-out  ${hover ? "max-h-[30rem] opacity-100" : "max-h-0 opacity-0"}`} >
                         {props.categoriesComponentSet}
                     </ul>
                 </li>

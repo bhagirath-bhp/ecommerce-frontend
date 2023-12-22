@@ -75,25 +75,25 @@ span.ripple {
 
 /* Navbar */
 .navbar{
-  @apply justify-between items-center py-[10px] px-[30px] bg-indigo text-emerald font-CrimsonText;
+  @apply justify-between items-center py-[10px] px-[30px] bg-black text-golden font-CrimsonText;
 }
 .navbar .main-ul-li{
   @apply mx-4 my-3 p-2 cursor-pointer text-center;
 }
 .navbar .main-ul-li:hover{
-  @apply bg-[#725188]
+  @apply bg-goldenLight
 }
 .dropdown li{
   @apply p-3;
 }
 .dropdown li:hover{
-  @apply bg-[#725188]
+  @apply bg-goldenLight
 }
-.btn-full-emerald{
-  @apply text-indigo font-semibold rounded-lg bg-emerald text-xl px-5 py-2 me-2 mb-2;
+.btn-full-golden{
+  @apply text-black font-semibold rounded-lg bg-golden text-xl px-5 py-2 me-2 mb-2;
 }
-.btn-hollow-emerald{
-  @apply text-indigo rounded-lg border-2 border-emerald  px-5 py-1 me-2 mb-2;
+.btn-hollow-golden{
+  @apply text-black rounded-lg border-2 border-golden  px-5 py-1 me-2 mb-2;
 }
 
 /* Homepage  */
@@ -101,7 +101,7 @@ span.ripple {
   @apply px-10;
 } */
 .lander{
-  @apply font-LucidaFax bg-indigo text-emerald px-10 py-5;
+  @apply font-LucidaFax bg-black text-golden px-10 py-5;
 }
 
 

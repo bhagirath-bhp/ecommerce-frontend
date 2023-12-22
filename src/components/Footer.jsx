@@ -3,8 +3,8 @@ import { AiOutlineYoutube } from "react-icons/ai";
 
 const Footer = () => {
   return (
-    <div className="footer bg-indigo text-white grid tablet:grid-rows-1 grid-cols-2 gap-x-[5rem] p-9">
-        <div className="footer-logo col-span-3 text-4xl font-Julee my-5 text-emerald">Drakina</div>
+    <div className="footer bg-black text-white grid tablet:grid-rows-1 grid-cols-2 gap-x-[5rem] p-9">
+        <div className="footer-logo col-span-3 text-4xl font-Julee my-5 text-golden">Drakina</div>
         <div className="footer-about smMobile:row-[span]">
             <h3 className="font-bold text-2xl">About</h3>
             <p>Step into Drakiana, where magic enchants the everyday. Explore spells, potions, and mystical treasures for an enchanting shopping experience like no other. Embrace the extraordinary with us. ✨ #DrakianaMagic</p>
@@ -27,7 +27,7 @@ const Footer = () => {
                 <li><a href="">Elemental Magic</a></li>
             </ul>
         </div>
-        <div className="footer-socials text-emerald text-xl smMobile:col-span-3 smMobile:mt-[5rem] tablet:col-span-1 tablet:mt-0">
+        <div className="footer-socials text-golden text-xl smMobile:col-span-3 smMobile:mt-[5rem] tablet:col-span-1 tablet:mt-0">
             <h3 className='font-bold text-2xl text-white'>Follow Us</h3>
             <div className="footer-social-items smMobile:flex tablet:block">
                 <div className="social-1 flex m-3">
