@@ -8,7 +8,8 @@ export const productState = atom({
     description: '',
     price: '',
     quantity: '',
-    deliveryTime: '',
+    category: '', // Added category field
     images: [],
+    variantName: '',
   },
 });
