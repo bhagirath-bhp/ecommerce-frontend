@@ -59,7 +59,7 @@ span.ripple {
   position: absolute;
   border-radius: 50%;
   transform: scale(0);
-  animation: ripple 600ms linear;
+  animation: ripple 500ms linear;
   background-color: rgba(255, 255, 255, 0.7);
 }
 
@@ -78,7 +78,7 @@ span.ripple {
   @apply justify-between items-center py-[10px] px-[30px] bg-black text-golden font-CrimsonText;
 }
 .navbar .main-ul-li{
-  @apply mx-4 my-3 p-2 cursor-pointer text-center;
+  @apply mx-4 my-3 p-2 px-3 cursor-pointer text-center rounded-3xl ;
 }
 .navbar .main-ul-li:hover{
   @apply bg-goldenLight
@@ -136,7 +136,7 @@ span.ripple {
   @apply inline font-bold
 }
 .product-dsp .dsp{
-  @apply border-2 px-3 py-2 m-2 flex items-center justify-center max-w-[10rem] text-2xl font-bold border-black rounded-lg;
+  @apply px-3 py-2 m-2 flex items-center justify-center max-w-[10rem] text-2xl font-bold border-black rounded-lg;
 }
 .review-bars .progress-bar{
   @apply max-w-[60%]
