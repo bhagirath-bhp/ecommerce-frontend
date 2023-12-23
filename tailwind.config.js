@@ -8,6 +8,7 @@ module.exports = withMT({
   ],
   theme: {
     screens: {
+      verySmMobile: "250px",
       smMobile: "340px",
       mobile: "640px",
       tablet: "960px",
@@ -23,7 +24,7 @@ module.exports = withMT({
       charcoal: '#1E1E1E',
       slateGray: '#494545',
       golden: '#d69d43',
-      goldenLight: "#7f6d505f"
+      goldenLight: "#bfb09a5f",
     },
     fontSize: {
       xs: '0.2rem',
