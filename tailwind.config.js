@@ -22,8 +22,8 @@ module.exports = withMT({
       amber: '#FFD233',
       charcoal: '#1E1E1E',
       slateGray: '#494545',
-      golden: '#FFD700',
-      goldenLight: "#bcab4e3f"
+      golden: '#d69d43',
+      goldenLight: "#7f6d505f"
     },
     fontSize: {
       xs: '0.2rem',

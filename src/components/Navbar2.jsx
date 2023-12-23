@@ -50,7 +50,7 @@ const Navbar2 = () => {
                             </div>
                         </ul>
                     </li>
-                    <div className="signin mx-4 py-1 hover:bg-[#725188] text-center">
+                    <div className="signin mx-4 py-1 hover:bg-goldenLight text-center">
                         <a href="">Sign in</a>
                     </div>
                 </ul>
