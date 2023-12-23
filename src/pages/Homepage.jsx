@@ -4,6 +4,7 @@ import Product from '../components/Product';
 import Footer from '../components/Footer';
 import RippleButton from '../components/RippleButton';
 import TestimonialCarousel from '../components/TestimonialCarousel';
+
 const Homepage = () => {
   const imgSet = [
     { key: 1, url: "/public/product-image1.png" },

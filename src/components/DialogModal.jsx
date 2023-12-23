@@ -14,7 +14,7 @@ export function DialogModal(props) {
  
   return (
     <div className="dsp m-5">
-      <Button onClick={handleOpen} variant="gradient">
+      <Button onClick={handleOpen} variant="outlined">
         <h3 className="text-base">
           {props.name}
         </h3>

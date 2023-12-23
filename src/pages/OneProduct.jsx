@@ -54,7 +54,7 @@ const ProductPage = () => {
 
             <main className="p-5">
                 <section className="product-details-main grid grid-cols-3 grid-rows-1 mb-5 w-full">
-                    <div className="image-carousel mr-9 mb-9 smMobile:col-start-1 smMobile:col-end-4 tablet:row-start-1 tablet:row-end-3 tablet:col-span-1">
+                    <div className="image-carousel mr-9 smMobile:col-start-1 smMobile:col-end-4 tablet:row-start-1 tablet:row-end-3 tablet:col-span-1">
                         <ImageCarousel urls={productData.carouselImageUrls} />
                     </div>
                     <div className="product-highlights flex my-5 tablet:row-start-1 tablet:col-start-2 tablet:col-end-4 smMobile:row-start-2 smMobile: smMobile:col-start-1 smMobile:col-end-4">

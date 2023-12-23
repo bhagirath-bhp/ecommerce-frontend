@@ -6,7 +6,7 @@ const ImageCarousel = (props) => {
   ))
   return (
     <Carousel
-      className="rounded-xl max-h-[40rem]"
+      className="rounded-xl max-h-[30rem]"
       prevArrow={({ handlePrev }) => (
         <IconButton
           variant="text"
