@@ -9,7 +9,14 @@ const AddProductPage = () => {
   const [categories, setCategories] = useState(['Electronics', 'Books', 'Clothing']); // Initial categories
   const [showAddCategory, setShowAddCategory] = useState(false); // New state for showing the add category popup
   const [isVariant, setIsVariant] = useState(false);
-  const [variantName, setVariantName] = useState('');
+  const [existingProducts, setExistingProducts] = useState([]); // List of existing product names
+  const [selectedVariantProductId, setSelectedVariantProductId] = useState('');
+
+  // useEffect(() => {
+  //   // TODO: Fetch the list of products from the backend
+  //   // setExistingProducts(fetchedProducts);
+  // }, []);
+
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -43,16 +50,18 @@ const AddProductPage = () => {
   const handleVariantChange = (e) => {
     setIsVariant(e.target.checked);
     if (!e.target.checked) {
-      setVariantName(''); // If not a variant, clear the variant name
-      setProduct({ ...product, variantName: '' }); // Also clear it from the product state
+      setSelectedVariantProductId(''); // Reset selected variant product
+      // Update the product state accordingly
+      setProduct({ ...product, variantOfProductId: '' });
     }
   };
 
-  // Function to handle change of the variant name input
-  const handleVariantNameChange = (e) => {
-    setVariantName(e.target.value);
-    setProduct({ ...product, variantName: e.target.value });
+  const handleVariantProductChange = (e) => {
+    setSelectedVariantProductId(e.target.value);
+    // Update the product state to reflect the change
+    setProduct({ ...product, variantOfProductId: e.target.value });
   };
+
 
   return (
     <>
@@ -108,15 +117,25 @@ const AddProductPage = () => {
           <span className="ml-2 text-gray-700">Is this a variant?</span>
         </label>
         {isVariant && (
-          <input
-            className="p-2 border rounded"
-            type="text"
-            name="variantName"
-            placeholder="Variant Name"
-            value={variantName}
-            onChange={handleVariantNameChange}
-          />
-        )}
+        <>
+          <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="variantProduct">
+            Select Base Product for Variant
+          </label>
+          <select
+            id="variantProduct"
+            className="block appearance-none w-full bg-white border border-gray-400 hover:border-gray-500 px-4 py-2 pr-8 rounded shadow leading-tight focus:outline-none focus:shadow-outline"
+            value={selectedVariantProductId}
+            onChange={handleVariantProductChange}
+          >
+            <option value="">Select a product</option>
+            {existingProducts.map((product) => (
+              <option key={product.id} value={product.id}>
+                {product.name}
+              </option>
+            ))}
+          </select>
+        </>
+      )}
           <select
             className="p-2 border rounded"
             name="category"
