@@ -6,6 +6,7 @@ import OneProduct from './pages/OneProduct'
 import AddProductPage from './pages/admin/AddProductPage'
 import SignUpPage from './pages/SignUpPage'
 import LoginPage from './pages/LoginPage'
+import EditProductPage from './pages/admin/EditProductPage'
 
 function App() {
   
@@ -13,7 +14,7 @@ function App() {
     <>
       <BrowserRouter>
         <Routes>
-          <Route index element={<AddProductPage/>} ></Route>
+          <Route index element={<Homepage/>} ></Route>
           <Route path='/product' element={<ProductsPage/>} ></Route>
           <Route path='/oneproduct' element={<OneProduct/>} ></Route>
           <Route path='/signup' element={<SignUpPage/>} ></Route>
