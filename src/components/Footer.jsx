@@ -30,16 +30,15 @@ const Footer = () => {
         <div className="footer-socials text-golden  text-xl smMobile:col-span-3 smMobile:mt-[5rem] tablet:col-span-1 tablet:mt-0">
             <h3 className='font-bold text-2xl text-white'>Follow Us</h3>
             <div className="footer-social-items smMobile:flex tablet:block">
-                {/* <div className="social-1 flex hover:text-white border border-golden p-2 tablet:my-2 smMobile:m-2 rounded hover:bg-golden"> */}
-                <div className="social-1 flex hover:text-white border border-golden p-2 tablet:my-2 smMobile:m-2 rounded hover:bg-golden transition-all ease-linear duration-200">
+                <div className="social-1 leading-[2.2rem] flex hover:text-black border border-golden p-2 tablet:my-2 smMobile:m-2 smMobile:ml-0 rounded hover:bg-golden transition-all ease-linear duration-200 cursor-pointer">
                     <FaInstagram className='icon'/>
                     <span className='ml-3 smMobile:hidden tablet:block'>Instagram</span>
                 </div>
-                <div className="social-2 flex hover:text-white border border-golden p-2 tablet:my-2 smMobile:m-2 rounded hover:bg-golden transition-all ease-linear duration-200">
+                <div className="social-2 leading-[2.2rem] flex hover:text-black border border-golden p-2 tablet:my-2 smMobile:m-2 smMobile:ml-0 rounded hover:bg-golden transition-all ease-linear duration-200 cursor-pointer">
                     <AiOutlineYoutube className='icon'/>
                     <span className='ml-3 smMobile:hidden tablet:block'>Youtube</span>
                 </div>
-                <div className="social-3 flex hover:text-white border border-golden p-2 tablet:my-2 smMobile:m-2 rounded hover:bg-golden transition-all ease-linear duration-200">
+                <div className="social-3 leading-[2.2rem] flex hover:text-black border border-golden p-2 tablet:my-2 smMobile:m-2 smMobile:ml-0 rounded hover:bg-golden transition-all ease-linear duration-200 cursor-pointer">
                     <FaFacebook className='icon'/>
                     <span className='ml-3 smMobile:hidden tablet:block'>Facebook</span>
                 </div>
