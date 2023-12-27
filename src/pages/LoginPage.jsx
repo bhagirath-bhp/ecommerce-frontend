@@ -15,7 +15,8 @@ const LoginPage = () => {
         <div className='loginpage flex flex-col justify-between h-screen'>
             <Navbar />
             <div className="flex justify-center font-Roboto items-center">
-                <div className="bg-white p-8 rounded tablet:w-[60vw] smMobile:w-[90vw]">
+                {/* <div className="bg-white p-8 rounded tablet:w-[60vw] smMobile:w-[90vw]"> */}
+                <div className="bg-white p-8 px-[7rem] rounded tablet:w-[60vw] smMobile:w-[90vw]">
                     <h1 className="text-2xl font-bold font-CrimsonText mb-6 text-center">Login</h1>
 
                     <label className="block mb-2 font-semibold" htmlFor="email">
