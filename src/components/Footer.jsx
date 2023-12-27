@@ -27,20 +27,21 @@ const Footer = () => {
                 <li><a href="">Elemental Magic</a></li>
             </ul>
         </div>
-        <div className="footer-socials text-golden text-xl smMobile:col-span-3 smMobile:mt-[5rem] tablet:col-span-1 tablet:mt-0">
+        <div className="footer-socials text-golden  text-xl smMobile:col-span-3 smMobile:mt-[5rem] tablet:col-span-1 tablet:mt-0">
             <h3 className='font-bold text-2xl text-white'>Follow Us</h3>
             <div className="footer-social-items smMobile:flex tablet:block">
-                <div className="social-1 flex m-3">
-                    <FaInstagram className='icon mr-3'/>
-                    <span className='smMobile:hidden tablet:block'>Instagram</span>
+                {/* <div className="social-1 flex hover:text-white border border-golden p-2 tablet:my-2 smMobile:m-2 rounded hover:bg-golden"> */}
+                <div className="social-1 flex hover:text-white border border-golden p-2 tablet:my-2 smMobile:m-2 rounded hover:bg-golden transition-all ease-linear duration-200">
+                    <FaInstagram className='icon'/>
+                    <span className='ml-3 smMobile:hidden tablet:block'>Instagram</span>
                 </div>
-                <div className="social-2 flex m-3">
-                    <AiOutlineYoutube className='icon mr-3'/>
-                    <span className='smMobile:hidden tablet:block'>Youtube</span>
+                <div className="social-2 flex hover:text-white border border-golden p-2 tablet:my-2 smMobile:m-2 rounded hover:bg-golden transition-all ease-linear duration-200">
+                    <AiOutlineYoutube className='icon'/>
+                    <span className='ml-3 smMobile:hidden tablet:block'>Youtube</span>
                 </div>
-                <div className="social-3 flex m-3">
-                    <FaFacebook className='icon mr-3'/>
-                    <span className='smMobile:hidden tablet:block'>Facebook</span>
+                <div className="social-3 flex hover:text-white border border-golden p-2 tablet:my-2 smMobile:m-2 rounded hover:bg-golden transition-all ease-linear duration-200">
+                    <FaFacebook className='icon'/>
+                    <span className='ml-3 smMobile:hidden tablet:block'>Facebook</span>
                 </div>
             </div>
         </div>
