@@ -1,3 +1,4 @@
+import { Button } from "@material-tailwind/react";
 const RippleButton = (props) => {
     const createRipple = (event) => {
         const button = event.currentTarget;
@@ -22,9 +23,10 @@ const RippleButton = (props) => {
     return (
         <button
             onClick={createRipple}
-            className={`my-5 relative block rounded-lg ${props.buttonStyles} text-xl font-bold leading-normal overflow-hidden`}
+            className={`flex leading-[2.5rem] my-5 relative block rounded-lg ${props.buttonStyles} text-xl font-bold leading-normal overflow-hidden`}
             type={props.type}
         >
+            <Button variant="text" loading={true}> </Button>
             {props.areaLabel}
             <span className="ripple absolute"></span>
         </button>

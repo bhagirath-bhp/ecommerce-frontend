@@ -7,6 +7,7 @@ import RippleButton from "../components/RippleButton";
 import Product from "../components/Product";
 import { DialogModal } from "../components/DialogModal";
 import DspCollection from "../components/DspCollection";
+import ReviewForm from "../components/ReviewForm";
 const ProductPage = () => {
     const productData = {
         name: "Product",
@@ -64,7 +65,7 @@ const ProductPage = () => {
                             <h3 className="text-2xl font-bold my-3">₹489</h3>
                         </div>
                         <div className="product-buttons mx-5 smMobile:hidden tablet:block">
-                            <RippleButton areaLabel="Buy Now" buttonStyles=" px-4 py-2 bg-golden text-black" />
+                            <RippleButton areaLabel="Buy Now" buttonStyles=" px-4 py-2 bg-golden text-black" target="/" state={{name: "jaishreeraam"}} />
                             <RippleButton areaLabel="Add to Cart" buttonStyles=" px-4 py-2 bg-golden text-black" />
                         </div>
                     </div>
@@ -110,6 +111,7 @@ const ProductPage = () => {
                     <section id="reviews" className="mb-5 py-5">
                         <h3 className="text-lg font-bold">Customer Reviews</h3>
                         <ReviewBox />
+                        <ReviewForm/>
                     </section>
                 </section>
                 <section id="related-items max-w-[90vw]">
