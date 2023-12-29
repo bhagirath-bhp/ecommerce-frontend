@@ -30,7 +30,7 @@ const Navbar2 = () => {
                 <a href="#" className="text-3xl mx-9 text-golden">
                     <IoMdCart />
                 </a>
-                <div className="text-3xl text-golden" onClick={()=>{isNavOpen ? setIsNavOpen(false) : setIsNavOpen(true)}}>
+                <div className="text-3xl text-golden cursor-pointer" onClick={()=>{isNavOpen ? setIsNavOpen(false) : setIsNavOpen(true)}}>
                     <HiBars3 />
                 </div>
                 <ul className={`navul flex-column z-[60] items-center w-full overflow-hidden max-h-0 opacity-0 transition-height duration-1000 ease-in-out ${isNavOpen ? "max-h-[50rem] opacity-100" : "max-h-0 opacity-0"} border-[1px] border-golden absolute top-[4.2rem] left-[-1rem] p-3 z-10 bg-black`}>
