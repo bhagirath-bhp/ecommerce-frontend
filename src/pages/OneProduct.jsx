@@ -8,6 +8,7 @@ import Product from "../components/Product";
 import { DialogModal } from "../components/DialogModal";
 import DspCollection from "../components/DspCollection";
 import ReviewForm from "../components/ReviewForm";
+import DropdownSearch from "../components/DropdownSearch";
 const ProductPage = () => {
     const productData = {
         name: "Product",
@@ -21,6 +22,8 @@ const ProductPage = () => {
             { key: 6, name: "DSP 1", details: "Lorem ipsum dolor sit amet." },
             { key: 7, name: "DSP 1", details: "Lorem ipsum dolor sit amet." },
             { key: 8, name: "DSP 1", details: "Lorem ipsum dolor sit amet." },
+            { key: 9, name: "DSP 1", details: "Lorem ipsum dolor sit amet." },
+            { key: 10, name: "DSP 1", details: "Lorem ipsum dolor sit amet." },
         ],
         carouselImageUrls: [
             { key: 1, url: "https://images.unsplash.com/photo-1663564305303-eb4c3cbc8619?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3" },
@@ -72,13 +75,16 @@ const ProductPage = () => {
                     <div className="product-dsp grid tablet:grid-cols-4 grid-rows-3 smMobile:grid-cols-3 verySmMobile:grid-cols-2 tablet:row-start-2 tablet:row-end-3 tablet:col-start-2 tablet:col-end-4 smMobile:col-start-1 smMobile:col-end-4">
                         <DspCollection dspSet={productData.dspSet}/>
                     </div>
-                    <div className="product-buttons tablet:hidden smMobile:flex smMobile:justify-between smMobile:w-[90vw] pr-3">
+                    <div className="dropdown-search col-start-1 col-end-4 verySmMobile:my-[5rem] verySmMobile:mx-[2rem] tablet:my-[3rem]">
+                        <p className="font-semibold text-base mb-3">Select Dragon Spell</p>
+                        <DropdownSearch/>
+                    </div>
+                    <div className="product-buttons tablet:hidden smMobile:flex smMobile:justify-between smMobile:w-[90vw] pr-3 ">
                         <RippleButton areaLabel="Buy Now" buttonStyles="px-4 py-2 bg-golden text-black" />
                         <RippleButton areaLabel="Add to Cart" buttonStyles="px-4 py-2 bg-golden text-black" />
                     </div>
                 </section>
                 <section className="product-details-sub">
-                    {/* Add your DSPs here */}
                     <h3 className="text-lg font-bold">Product Details</h3>
                     <ul className="list-disc list-inside">
                         <li>

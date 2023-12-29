@@ -26,7 +26,7 @@ const RippleButton = (props) => {
             className={`flex leading-[2.5rem] my-5 relative block rounded-lg ${props.buttonStyles} text-xl font-bold leading-normal overflow-hidden`}
             type={props.type}
         >
-            <Button variant="text" loading={true}> </Button>
+            {/* <Button loading={true}> </Button> */}
             {props.areaLabel}
             <span className="ripple absolute"></span>
         </button>
