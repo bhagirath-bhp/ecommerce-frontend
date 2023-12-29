@@ -9,6 +9,7 @@ import LoginPage from './pages/LoginPage'
 import EditProductPage from './pages/admin/EditProductPage'
 import CartPage from './pages/CartPage'
 import AboutPage from './pages/AboutPage'
+import AdminCatalogPage from './pages/admin/AdminCatalogPage'
 
 function App() {
   
@@ -23,8 +24,10 @@ function App() {
           <Route path='/login' element={<LoginPage/>} ></Route>
           <Route path='/cart' element={<CartPage/>} ></Route>
           <Route path='/about' element={<AboutPage/>} ></Route>
-          <Route path='/admin/:authid' element={<AddProductPage/>} ></Route>
-          <Route path='/admin/edit/:authid' element={<EditProductPage/>} ></Route>
+          <Route path='/admin/add-product/:authid' element={<AddProductPage/>} ></Route>
+          <Route path="/admin/edit-product/:authId/:productId" element={<EditProductPage />}></Route>
+          <Route path="/admin/catalog/:authId" element={<AdminCatalogPage />}></Route>
+
         </Routes>
       </BrowserRouter>
 
