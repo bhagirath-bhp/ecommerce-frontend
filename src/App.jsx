@@ -11,6 +11,7 @@ import CartPage from './pages/CartPage'
 import AboutPage from './pages/AboutPage'
 import AdminCatalogPage from './pages/admin/AdminCatalogPage'
 import WishlistPage from './pages/WishlistPage'
+import AllOrdersPage from './pages/AllOrdersPage'
 
 function App() {
   
@@ -26,6 +27,7 @@ function App() {
           <Route path='/cart' element={<CartPage/>} ></Route>
           <Route path='/about' element={<AboutPage/>} ></Route>
           <Route path='/wishlist' element={<WishlistPage/>} ></Route>
+          <Route path='/allorders' element={<AllOrdersPage/>} ></Route>
           <Route path='/admin/add-product/:authid' element={<AddProductPage/>} ></Route>
           <Route path="/admin/edit-product/:authId/:productId" element={<EditProductPage />}></Route>
           <Route path="/admin/catalog/:authId" element={<AdminCatalogPage />}></Route>
