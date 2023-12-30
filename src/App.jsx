@@ -12,7 +12,7 @@ import AboutPage from './pages/AboutPage'
 import AdminCatalogPage from './pages/admin/AdminCatalogPage'
 import WishlistPage from './pages/WishlistPage'
 import AllOrdersPage from './pages/AllOrdersPage'
-
+import OrderDetails from './pages/OrderDetails'
 function App() {
   
   return (
@@ -28,6 +28,7 @@ function App() {
           <Route path='/about' element={<AboutPage/>} ></Route>
           <Route path='/wishlist' element={<WishlistPage/>} ></Route>
           <Route path='/allorders' element={<AllOrdersPage/>} ></Route>
+          <Route path='/orderdetails' element={<OrderDetails/>} ></Route>
           <Route path='/admin/add-product/:authid' element={<AddProductPage/>} ></Route>
           <Route path="/admin/edit-product/:authId/:productId" element={<EditProductPage />}></Route>
           <Route path="/admin/catalog/:authId" element={<AdminCatalogPage />}></Route>
