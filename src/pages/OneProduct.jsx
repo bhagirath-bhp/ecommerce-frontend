@@ -15,7 +15,8 @@ const ProductPage = () => {
     
     const location = useLocation();
     const navigate = useNavigate();
-    // const productId = location.state.productId;
+    // const productId = location.state.productId || 'abc';
+    // const productData1 = 
     const productData = {
         name: "Product",
         price: "$ 1111",
@@ -71,9 +72,11 @@ const ProductPage = () => {
                         <div className="product-text-contents max-w-[70%]">
                             <h2 className="text-2xl font-bold border-b-[1px] border-black">Product 1</h2>
                             <p className="text-gray-700">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus ipsum mauris, viverra a nunc in, congue facilisis erat. In sodales lacus quis nulla laoreet placerat. Morbi sit amet elit suscipit.</p>
-                            <h3 className="text-2xl font-bold my-3 flex">₹489 <RiHeartAddLine className="ml-[2rem] text-3xl cursor-pointer" onClick={()=>{
-                                navigate('/wishlist', {state: {productId: "abc"}})
-                            }}/> </h3>
+                            <h3 className="text-2xl font-bold my-3 flex items-center">
+                                ₹489 
+                                <RiHeartAddLine className="ml-[2rem] text-3xl cursor-pointer" onClick={()=>{navigate('/wishlist', {state: {productId: "abc"}})}}/> 
+                                <p className="w-[50%] border-[1px] rounded-xl font-normal text-base text-center px-5 bg-goldenLight text-golden border-golden ml-[5rem]">Limited Quantities Left</p>
+                            </h3>
                         </div>
                         <div className="product-buttons mx-5 smMobile:hidden tablet:block">
                             <RippleButton areaLabel="Buy Now" buttonStyles=" px-4 py-2 bg-golden text-black" target="/" state={{name: "jaishreeraam"}} />
@@ -84,7 +87,7 @@ const ProductPage = () => {
                         <DspCollection dspSet={productData.dspSet}/>
                     </div>
                     <div className="dropdown-search col-start-1 col-end-4 verySmMobile:my-[5rem] verySmMobile:mx-[2rem] tablet:my-[3rem]">
-                        <p className="font-semibold text-base mb-3">Select Dragon Spell</p>
+                        <p className="font-semibold text-base mb-3">Select Dragon Spell *</p>
                         <DropdownSearch/>
                     </div>
                     <div className="product-buttons tablet:hidden smMobile:flex smMobile:justify-between smMobile:w-[90vw] pr-3 ">
