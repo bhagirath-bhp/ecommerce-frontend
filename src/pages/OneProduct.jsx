@@ -11,8 +11,9 @@ import ReviewForm from "../components/ReviewForm";
 import DropdownSearch from "../components/DropdownSearch";
 import { RiHeartAddLine } from "react-icons/ri";
 import { useLocation, useNavigate } from "react-router-dom";
+import { Button } from "@material-tailwind/react";
 const ProductPage = () => {
-    
+
     const location = useLocation();
     const navigate = useNavigate();
     // const productId = location.state.productId || 'abc';
@@ -58,7 +59,7 @@ const ProductPage = () => {
         { key: 6, title: "Product1", description: "This is a very nice product.", price: 489, url: "/public/product-image2.png" }
     ]
     const productComponentSet = productSet.map((product) => (<Product key={product.key} title={product.title} description={product.description} url={product.url} price={product.price} />))
-    
+
     return (
         <div className="font-sans">
             <Navbar2 />
@@ -73,26 +74,26 @@ const ProductPage = () => {
                             <h2 className="text-2xl font-bold border-b-[1px] border-black">Product 1</h2>
                             <p className="text-gray-700">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus ipsum mauris, viverra a nunc in, congue facilisis erat. In sodales lacus quis nulla laoreet placerat. Morbi sit amet elit suscipit.</p>
                             <h3 className="text-2xl font-bold my-3 flex items-center">
-                                ₹489 
-                                <RiHeartAddLine className="ml-[2rem] text-3xl cursor-pointer" onClick={()=>{navigate('/wishlist', {state: {productId: "abc"}})}}/> 
-                                <p className="w-[50%] border-[1px] rounded-xl font-normal text-base text-center px-5 bg-goldenLight text-golden border-golden ml-[5rem]">Limited Quantities Left</p>
+                                ₹489
+                                <RiHeartAddLine className="ml-[2rem] text-3xl cursor-pointer" onClick={() => { navigate('/wishlist', { state: { productId: "abc" } }) }} />
+                                {/* <p className="w-[50%] border-[1px] rounded-xl font-normal text-base text-center px-5 bg-goldenLight text-golden border-golden ml-[5rem]">Limited Quantities Left</p> */}
                             </h3>
                         </div>
                         <div className="product-buttons mx-5 smMobile:hidden tablet:block">
-                            <RippleButton areaLabel="Buy Now" buttonStyles=" px-4 py-2 bg-golden text-black" target="/" state={{name: "jaishreeraam"}} />
-                            <RippleButton areaLabel="Add to Cart" buttonStyles=" px-4 py-2 bg-golden text-black" />
+                            <Button className="bg-golden text-sm text-black my-2" onClick={() => { navigate('/cart', { state: { productId: "abc" } }) }}>Buy Now</Button>
+                            <Button className="bg-golden text-sm text-black my-2" onClick={() => { navigate('/cart', { state: { productId: "abc" } }) }}>Add to Cart</Button>
                         </div>
                     </div>
                     <div className="product-dsp grid tablet:grid-cols-4 grid-rows-3 smMobile:grid-cols-3 verySmMobile:grid-cols-2 tablet:row-start-2 tablet:row-end-3 tablet:col-start-2 tablet:col-end-4 smMobile:col-start-1 smMobile:col-end-4">
-                        <DspCollection dspSet={productData.dspSet}/>
+                        <DspCollection dspSet={productData.dspSet} />
                     </div>
                     <div className="dropdown-search col-start-1 col-end-4 verySmMobile:my-[5rem] verySmMobile:mx-[2rem] tablet:my-[3rem]">
                         <p className="font-semibold text-base mb-3">Select Dragon Spell *</p>
-                        <DropdownSearch/>
+                        <DropdownSearch />
                     </div>
                     <div className="product-buttons tablet:hidden smMobile:flex smMobile:justify-between smMobile:w-[90vw] pr-3 ">
-                        <RippleButton areaLabel="Buy Now" buttonStyles="px-4 py-2 bg-golden text-black" />
-                        <RippleButton areaLabel="Add to Cart" buttonStyles="px-4 py-2 bg-golden text-black" />
+                        <Button className="bg-golden text-sm text-black my-2" onClick={() => { navigate('/cart', { state: { productId: "abc" } }) }}>Buy Now</Button>
+                        <Button className="bg-golden text-sm text-black my-2" onClick={() => { navigate('/cart', { state: { productId: "abc" } }) }}>Add to Cart</Button>
                     </div>
                 </section>
                 <section className="product-details-sub">
@@ -128,7 +129,7 @@ const ProductPage = () => {
                     <section id="reviews" className="mb-5 py-5">
                         <h3 className="text-lg font-bold">Customer Reviews</h3>
                         <ReviewBox />
-                        <ReviewForm/>
+                        <ReviewForm />
                     </section>
                 </section>
                 <section id="related-items max-w-[90vw]">

@@ -17,9 +17,6 @@ const NavbarMobile = (props) => {
                 <li className="main-ul-li">
                     About Us
                 </li>
-                <li className="main-ul-li">
-                    Contact
-                </li>
                 <li className="flex justify-center text-center">
                     <ul className="dropdown top-[1.7rem] left-1/2 flex-column justify-center items-center h-auto overflow-hidden bg-black transition-height duration-500 ease-in-out w-full">
                         <div className="border-y-2 border-golden w-full my-5">

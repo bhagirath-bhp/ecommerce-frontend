@@ -17,7 +17,7 @@ const ReviewForm = () => {
                 Review
             </label>
             <textarea className="w-full outline-none border border-golden rounded px-3 py-2 mb-4" name="" id="review" cols="30" rows="10"></textarea>
-            <RippleButton areaLabel="Submit" buttonStyles=" px-4 py-2 bg-golden text-black" type="submit" />
+            <Button className="bg-golden text-sm text-black my-2">Submit</Button>
         </div>
     )
 }

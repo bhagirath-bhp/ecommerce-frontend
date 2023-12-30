@@ -5,9 +5,11 @@ import { useRecoilValue } from 'recoil';
 import { ordersState } from '../components/OrdersState';
 import { IoMdCheckmarkCircleOutline, IoMdCloseCircleOutline } from "react-icons/io";
 import Navbar2 from '../components/Navbar2';
-
+import { Button } from '@material-tailwind/react';
+import { useNavigate } from 'react-router-dom';
 const OrderCard = ({ order }) => {
-    // Placeholder functions for button actions
+  // Placeholder functions for button actions
+    const navigate = useNavigate();
     const handleViewItemClick = () => {/* ... */};
     const handleViewOrderDetailsClick = () => {/* ... */};
     const handleBuyAgainClick = () => {/* ... */};
@@ -29,22 +31,19 @@ const OrderCard = ({ order }) => {
           </div>
         </div>
         <div className="mt-4 flex justify-around">
-          <button className="bg-black text-white px-3 py-1 rounded hover:bg-golden transition" onClick={handleViewItemClick}>
-            View Item
-          </button>
-          <button className="bg-black text-white px-3 py-1 rounded hover:bg-golden transition" onClick={handleViewOrderDetailsClick}>
-            View Order Details
-          </button>
+          <Button className="bg-golden text-sm text-black my-2" onClick={()=>{navigate('/orderdetails', {state: {productId: "abc"}})}}>View Order Details</Button>
+          <Button className="bg-golden text-sm text-black my-2" onClick={()=>{navigate('/oneproduct', {state: {productId: "abc"}})}}>View Item</Button>
+
           {order.status === 'delivered' ? (
-            <button className="bg-green-500 text-white px-3 py-1 rounded hover:bg-green-600 transition" onClick={handleBuyAgainClick}>
+            <Button className="text-sm text-white my-2" color='green' onClick={()=>{navigate('/cart', {state: {productId: "abc"}})}}>
               <IoMdCheckmarkCircleOutline className="inline mr-2" />
-              Buy it again
-            </button>
+              Buy Again
+            </Button>
           ) : (
-            <button className="bg-red-500 text-white px-3 py-1 rounded hover:bg-red-600 transition" onClick={handleCancelOrderClick}>
+            <Button className="text-sm text-white my-2" color='red' onClick={()=>{navigate('/cart', {state: {productId: "abc"}})}}>
               <IoMdCloseCircleOutline className="inline mr-2" />
               Cancel Order
-            </button>
+            </Button>
           )}
         </div>
       </div>

@@ -4,7 +4,7 @@ import Product from '../components/Product';
 import Footer from '../components/Footer';
 import RippleButton from '../components/RippleButton';
 import TestimonialCarousel from '../components/TestimonialCarousel';
-
+import { Button } from '@material-tailwind/react';
 const Homepage = () => {
   const imgSet = [
     { key: 1, url: "/public/product-image1.png" },
@@ -43,7 +43,9 @@ const Homepage = () => {
           <div className="landing-para col-span-2 row-span-1 max-w-[60%] py-[50px]">
             <h3 className='font-bold text-5xl'>Discover the Magic of Drakaina's Products</h3>
             <p>Experience the enchantment of our magical products that will transport you to a world of wonder and awe.</p>
-            <RippleButton areaLabel="Shop Now" buttonStyles="bg-golden text-black hover:bg-golden px-5 py-2 me-2 mb-2" />
+            <a href="/products">
+              <Button className="bg-golden text-sm text-black my-[2rem]">Shop Now</Button>
+            </a>
           </div>
           <div className="landing-img col-span-1">
             <img src="/img-tarot1.png" className="scale-y-[0.90]" />
