@@ -10,10 +10,12 @@ import DspCollection from "../components/DspCollection";
 import ReviewForm from "../components/ReviewForm";
 import DropdownSearch from "../components/DropdownSearch";
 import { RiHeartAddLine } from "react-icons/ri";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 const ProductPage = () => {
     
+    const location = useLocation();
     const navigate = useNavigate();
+    // const productId = location.state.productId;
     const productData = {
         name: "Product",
         price: "$ 1111",

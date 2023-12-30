@@ -4,7 +4,7 @@ import { AiOutlineYoutube } from "react-icons/ai";
 const Footer = () => {
   return (
     <div className="footer bg-black text-white grid tablet:grid-rows-1 grid-cols-2 gap-x-[5rem] p-9">
-        <div className="footer-logo col-span-3 text-4xl font-Julee my-5 text-golden">Drakina</div>
+        <div className="footer-logo col-span-3 text-4xl font-Julee my-5 text-golden">Drakaina</div>
         <div className="footer-about smMobile:row-[span]">
             <h3 className="font-bold text-2xl">About</h3>
             <p>Step into Drakiana, where magic enchants the everyday. Explore spells, potions, and mystical treasures for an enchanting shopping experience like no other. Embrace the extraordinary with us. ✨ #DrakianaMagic</p>

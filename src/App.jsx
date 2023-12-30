@@ -20,7 +20,7 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route index element={<Homepage/>} ></Route>
-          <Route path='/product' element={<ProductsPage/>} ></Route>
+          <Route path='/products' element={<ProductsPage/>} ></Route>
           <Route path='/oneproduct' element={<OneProduct/>} ></Route>
           <Route path='/signup' element={<SignUpPage/>} ></Route>
           <Route path='/login' element={<LoginPage/>} ></Route>

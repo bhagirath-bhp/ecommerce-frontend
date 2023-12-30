@@ -6,10 +6,12 @@ const NavbarTablet = (props) => {
     const [hover, setHover] = useState(false);
     return (
         <nav className='navbar smMobile:hidden tablet:flex'>
-            <div className="logo"></div>
+            <div className="logo cursor-pointer" onClick={()=>{window.open('/', "_self")}}></div>
             <ul className="navul flex">
                 <li className="main-ul-li">
-                    Shop Now
+                    <a href="/products">
+                        Shop Now
+                    </a>
                 </li>
                 <li className="main-ul-li">
                     About Us
