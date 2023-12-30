@@ -9,7 +9,11 @@ import { DialogModal } from "../components/DialogModal";
 import DspCollection from "../components/DspCollection";
 import ReviewForm from "../components/ReviewForm";
 import DropdownSearch from "../components/DropdownSearch";
+import { RiHeartAddLine } from "react-icons/ri";
+import { useNavigate } from "react-router-dom";
 const ProductPage = () => {
+    
+    const navigate = useNavigate();
     const productData = {
         name: "Product",
         price: "$ 1111",
@@ -65,7 +69,9 @@ const ProductPage = () => {
                         <div className="product-text-contents max-w-[70%]">
                             <h2 className="text-2xl font-bold border-b-[1px] border-black">Product 1</h2>
                             <p className="text-gray-700">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus ipsum mauris, viverra a nunc in, congue facilisis erat. In sodales lacus quis nulla laoreet placerat. Morbi sit amet elit suscipit.</p>
-                            <h3 className="text-2xl font-bold my-3">₹489</h3>
+                            <h3 className="text-2xl font-bold my-3 flex">₹489 <RiHeartAddLine className="ml-[2rem] text-3xl cursor-pointer" onClick={()=>{
+                                navigate('/wishlist', {state: {productId: "abc"}})
+                            }}/> </h3>
                         </div>
                         <div className="product-buttons mx-5 smMobile:hidden tablet:block">
                             <RippleButton areaLabel="Buy Now" buttonStyles=" px-4 py-2 bg-golden text-black" target="/" state={{name: "jaishreeraam"}} />
