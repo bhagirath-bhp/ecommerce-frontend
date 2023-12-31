@@ -7,7 +7,7 @@ const Footer = () => {
         <div className="footer-logo col-span-3 text-4xl font-Julee my-5 text-golden">Drakaina</div>
         <div className="footer-about smMobile:row-[span]">
             <h3 className="font-bold text-2xl">About</h3>
-            <p>Step into Drakiana, where magic enchants the everyday. Explore spells, potions, and mystical treasures for an enchanting shopping experience like no other. Embrace the extraordinary with us. ✨ #DrakianaMagic</p>
+            <p>Step into Drakaina, where magic enchants the everyday. Explore spells, potions, and mystical treasures for an enchanting shopping experience like no other. Embrace the extraordinary with us. ✨ #DrakainaMagic</p>
         </div>
         <div className="footer-quicklinks mobile:flex smMobile:flex-column gap-[5rem] font-Inter font-thin">
             <ul>
