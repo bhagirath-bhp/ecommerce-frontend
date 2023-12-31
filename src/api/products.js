@@ -15,3 +15,27 @@ export const fetchAllProducts = async() => {
         return null
     }
 }
+
+export const fetchDragonSpells = async() => {
+    const response = await axios.get(`${uri}/category/2`,{
+        headers:{
+            'Authorization' : `Bearer ${Cookies.get('token')}`
+        }
+    })
+    if(response.status == 200){
+        return response.data;
+    }
+    else return null
+}
+
+export const fetchCollections = async() => {
+    const response = await axios.get(`${uri}/collection`,{
+        headers:{
+            'Authorization' : `Bearer ${Cookies.get('token')}`
+        }
+    })
+    if(response.status == 200){
+        return response.data;
+    }
+    else return null
+}

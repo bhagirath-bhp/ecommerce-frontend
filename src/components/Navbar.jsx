@@ -1,7 +1,8 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import "../App.css";
 import NavbarMobile from "./NavbarMobile";
 import NavbarTablet from "./NavbarTablet";
+import { fetchCollections } from "../api/products";
 
 const Navbar = () => {
     const categoriesSet = [
@@ -12,7 +13,19 @@ const Navbar = () => {
         {key: 5, title:"Category 5"},
         {key: 6, title:"Category 6"},
     ]
-    const categoriesComponentSet = categoriesSet.map((category)=>(<li key={category.key}>{category.title}</li>))
+    function capitalizeWords(inputString) {
+        return inputString.replace(/\b\w/g, char => char.toUpperCase());
+    }
+    const [collections,setCollections] = useState([])
+    useEffect(() => {
+        const fetchData = async() => {
+            const data = await fetchCollections()
+            // console.log(data);
+            setCollections(data)
+        }
+        fetchData()
+    },[])
+    const categoriesComponentSet = collections.map((collection)=>(<li key={collection.collectionId}>{capitalizeWords(collection.name)}</li>))
     return (
         <div className="nav">
             <NavbarTablet categoriesComponentSet={categoriesComponentSet}/>
