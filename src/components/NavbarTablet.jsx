@@ -1,12 +1,13 @@
 import { useState } from "react";
 import { IoIosArrowDown } from "react-icons/io";
-
+import UserBadge from "./UserBadge";
 
 const NavbarTablet = (props) => {
     const [hover, setHover] = useState(false);
+    const [user, setUser] = useState(true);
     return (
         <nav className='navbar smMobile:hidden tablet:flex'>
-            <div className="logo cursor-pointer" onClick={()=>{window.open('/', "_self")}}></div>
+            <div className="logo cursor-pointer" onClick={() => { window.open('/', "_self") }}></div>
             <ul className="navul flex">
                 <li className="main-ul-li">
                     <a href="/products">
@@ -26,7 +27,14 @@ const NavbarTablet = (props) => {
                 </li>
             </ul>
             <div className="signin">
-                <a href="">Sign in</a>
+                {
+                    user ? (
+                        <UserBadge/>
+                    )
+                        : (
+                            <a href="">Sign in</a>
+                        )
+                }
             </div>
         </nav>
     )
