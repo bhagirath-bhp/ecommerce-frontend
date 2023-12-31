@@ -55,9 +55,13 @@ const Navbar2 = () => {
                         </ul>
                     </li>
                     <div className={`signin mx-4 py-1 hover:bg-goldenLight text-center`} hidden>
-                        {Cookies.get('token') ? (
+                        {Cookies.get('token') 
+                        ? (
                             <Link to="/login">Profile</Link>
-                        ):<Link to="/login">Sign in</Link>}
+                        )
+                        : (
+                            <Link to="/login">Sign in</Link>
+                        )}
                     </div>
                 </ul>
             </div>
