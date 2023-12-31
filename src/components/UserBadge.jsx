@@ -1,8 +1,9 @@
+import Cookies from "js-cookie";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 
 
-const UserBadge = (props) => {
+const UserBadge = () => {
     const [userCick, setUserClick] = useState(false);
     return (
         <div className="flex items-center md:order-2 flex-col relative text-golden">
@@ -26,7 +27,11 @@ const UserBadge = (props) => {
                         <Link to="/allorders" className="block px-4 py-2 text-sm hover:text-golden hover:bg-goldenLight">Orders</Link>
                     </li>
                     <li>
-                        <Link to="#" className="block px-4 py-2 text-sm hover:text-golden hover:bg-goldenLight" onClick={()=>{props.user(null)}}>Sign out</Link>
+                        <Link to="#" className="block px-4 py-2 text-sm hover:text-golden hover:bg-goldenLight" onClick={() => {
+                            Cookies.remove('token').then(() => {
+                                window.location.reload()
+                            })
+                        }}>Sign out</Link>
                     </li>
                 </ul>
             </div>

@@ -1,8 +1,6 @@
 import { useState } from "react";
 import { IoIosArrowDown } from "react-icons/io";
 import { Link } from "react-router-dom";
-import { useRecoilState } from 'recoil';
-import { userState, isLoggedInState } from './state/RecoilState';
 import Cookies from 'js-cookie'
 import UserBadge from "./UserBadge";
 
@@ -10,7 +8,6 @@ import UserBadge from "./UserBadge";
 
 const NavbarTablet = (props) => {
     const [hover, setHover] = useState(false);
-    const [currentUser, setCurrentUser] = useRecoilState(userState);
     return (
         <nav className='navbar smMobile:hidden tablet:flex'>
             <div className="logo cursor-pointer" onClick={() => { window.open('/', "_self") }}></div>
@@ -34,14 +31,9 @@ const NavbarTablet = (props) => {
             </ul>
             <div className="signin">
                 {Cookies.get('token') ? (
-                    <Link to="/profile">Profile</Link>
-                ) : (
-                    currentUser ? (
-                        <UserBadge user={setCurrentUser} />
-                    )
-                    : (
-                        <Link to="/login" className="mx-4 py-1 hover:bg-goldenLight text-center">Sign in</Link>
-                    )
+                    <UserBadge/>
+                ) :(
+                    <Link to="/login" className="mx-4 py-1 hover:bg-goldenLight text-center">Sign in</Link> 
                 )}
             </div>
         </nav>
