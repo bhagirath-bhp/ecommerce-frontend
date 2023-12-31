@@ -1,5 +1,8 @@
-import { useState } from "react"
-const UserBadge = () => {
+import { useState } from "react";
+import { Link } from "react-router-dom";
+
+
+const UserBadge = (props) => {
     const [userCick, setUserClick] = useState(false);
     return (
         <div className="flex items-center md:order-2 flex-col relative text-golden">
@@ -14,16 +17,16 @@ const UserBadge = () => {
                 </div>
                 <ul className="py-2">
                     <li>
-                        <a href="#" className="block px-4 py-2 text-sm hover:text-golden hover:bg-goldenLight">Dashboard</a>
+                        <Link to="#" className="block px-4 py-2 text-sm hover:text-golden hover:bg-goldenLight">Profile</Link>
                     </li>
                     <li>
-                        <a href="#" className="block px-4 py-2 text-sm hover:text-golden hover:bg-goldenLight">Settings</a>
+                        <Link to="/cart" className="block px-4 py-2 text-sm hover:text-golden hover:bg-goldenLight">Cart</Link>
                     </li>
                     <li>
-                        <a href="#" className="block px-4 py-2 text-sm hover:text-golden hover:bg-goldenLight">Earnings</a>
+                        <Link to="/allorders" className="block px-4 py-2 text-sm hover:text-golden hover:bg-goldenLight">Orders</Link>
                     </li>
                     <li>
-                        <a href="#" className="block px-4 py-2 text-sm hover:text-golden hover:bg-goldenLight">Sign out</a>
+                        <Link to="#" className="block px-4 py-2 text-sm hover:text-golden hover:bg-goldenLight" onClick={()=>{props.user(null)}}>Sign out</Link>
                     </li>
                 </ul>
             </div>
