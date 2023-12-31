@@ -2,14 +2,26 @@ import { useState } from 'react';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 import RippleButton from '../components/RippleButton';
+import { login } from '../api/user';
+import { useNavigate } from 'react-router-dom';
 const LoginPage = () => {
+    const [email,setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [showPasswordWarning, setShowPasswordWarning] = useState(false);
+
+    const navigate = useNavigate()
 
     const handlePasswordChange = (e) => {
         setPassword(e.target.value);
         setShowPasswordWarning(e.target.value.length < 6);
     };
+
+    const handleClick = async(e) => {
+        e.preventDefault()
+        if(await login(email,password)){
+            navigate("/")
+        }
+    }
 
     return (
         <div className='loginpage flex flex-col justify-between h-screen'>
@@ -22,7 +34,7 @@ const LoginPage = () => {
                     <label className="block mb-2 font-semibold" htmlFor="email">
                         E-mail
                     </label>
-                    <input className="w-full outline-none border border-golden rounded px-3 py-2 mb-4" type="email" id="email" name="email" required />
+                    <input className="w-full outline-none border border-golden rounded px-3 py-2 mb-4" type="email" id="email" name="email" value={email} onChange={(e) => setEmail(e.target.value)} required />
 
                     <label className="block mb-2 font-semibold" htmlFor="password">
                         Password
@@ -38,7 +50,9 @@ const LoginPage = () => {
                     />
                     <p className={`text-red-500 top-2 left-2 text-sm ${(showPasswordWarning) ? 'opacity-100' : 'opacity-0'}`}>Password must be at least 6 characters.</p>
 
-                    <RippleButton areaLabel="Login" buttonStyles=" px-4 py-2 bg-golden text-black" type="submit" />
+                    <div onClick={handleClick}>
+                        <RippleButton areaLabel="Login" buttonStyles=" px-4 py-2 bg-golden text-black" type="submit" />
+                    </div>
 
 
                     <div className="text-center mt-4">

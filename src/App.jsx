@@ -29,9 +29,9 @@ function App() {
           <Route path='/wishlist' element={<WishlistPage/>} ></Route>
           <Route path='/allorders' element={<AllOrdersPage/>} ></Route>
           <Route path='/orderdetails' element={<OrderDetails/>} ></Route>
-          <Route path='/admin/add-product/:authid' element={<AddProductPage/>} ></Route>
-          <Route path="/admin/edit-product/:authId/:productId" element={<EditProductPage />}></Route>
-          <Route path="/admin/catalog/:authId" element={<AdminCatalogPage />}></Route>
+          <Route path='/admin/add-product/' element={<AddProductPage/>} ></Route>
+          <Route path="/admin/edit-product/:productId" element={<EditProductPage />}></Route>
+          <Route path="/admin/catalog/" element={<AdminCatalogPage />}></Route>
 
         </Routes>
       </BrowserRouter>

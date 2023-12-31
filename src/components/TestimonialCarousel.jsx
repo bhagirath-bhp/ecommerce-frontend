@@ -4,15 +4,15 @@ import Testimonial from "./Testimonial"
 const TestimonialCarousel = (props) => {
     const cardType = props.type;
     const testimonialSet = [
-        { key: 1, type: "testimonial", name: "Chhota Bheem 1", message: "This is a very nice product.", designation: "CSO @ Dholakpur", url: "/public/product-image1.png" },
-        { key: 2, type: "testimonial", name: "Chhota Bheem 2", message: "This is a very nice product.", designation: "CSO @ Dholakpur", url: "/public/product-image2.png" },
-        { key: 3, type: "testimonial", name: "Chhota Bheem 3", message: "This is a very nice product.", designation: "CSO @ Dholakpur", url: "/public/product-image3.png" },
-        { key: 4, type: "testimonial", name: "Chhota Bheem 4", message: "This is a very nice product.", designation: "CSO @ Dholakpur", url: "/public/product-image4.png" },
-        { key: 5, type: "testimonial", name: "Chhota Bheem 5", message: "This is a very nice product.", designation: "CSO @ Dholakpur", url: "/public/product-image1.png" },
-        { key: 6, type: "testimonial", name: "Chhota Bheem 1", message: "This is a very nice product.", designation: "CSO @ Dholakpur", url: "/public/product-image2.png" },
-        { key: 7, type: "testimonial", name: "Chhota Bheem 2", message: "This is a very nice product.", designation: "CSO @ Dholakpur", url: "/public/product-image3.png" },
-        { key: 8, type: "testimonial", name: "Chhota Bheem 3", message: "This is a very nice product.", designation: "CSO @ Dholakpur", url: "/public/product-image4.png" },
-        { key: 9, type: "testimonial", name: "Chhota Bheem 4", message: "This is a very nice product.", designation: "CSO @ Dholakpur", url: "/public/product-image1.png" },
+        { key: 1, type: "testimonial", name: "Binkal Jethwa", designation: "+917016527864", url: "/public/product-image1.png" },
+        { key: 2, type: "testimonial", name: "Tamanna Gulati", designation: "+919810325359", url: "/public/product-image2.png" },
+        { key: 3, type: "testimonial", name: "Sonal Bhayani", designation: "+919167380080", url: "/public/product-image3.png" },
+        { key: 4, type: "testimonial", name: "Harshala Thorat", designation: "+919004602848", url: "/public/product-image4.png" },
+        // { key: 5, type: "testimonial", name: "Chhota Bheem 5", message: "This is a very nice product.", designation: "CSO @ Dholakpur", url: "/public/product-image1.png" },
+        // { key: 6, type: "testimonial", name: "Chhota Bheem 1", message: "This is a very nice product.", designation: "CSO @ Dholakpur", url: "/public/product-image2.png" },
+        // { key: 7, type: "testimonial", name: "Chhota Bheem 2", message: "This is a very nice product.", designation: "CSO @ Dholakpur", url: "/public/product-image3.png" },
+        // { key: 8, type: "testimonial", name: "Chhota Bheem 3", message: "This is a very nice product.", designation: "CSO @ Dholakpur", url: "/public/product-image4.png" },
+        // { key: 9, type: "testimonial", name: "Chhota Bheem 4", message: "This is a very nice product.", designation: "CSO @ Dholakpur", url: "/public/product-image1.png" },
     ]
     const customerReviewSet = [
         { key: 1, type: "review", date: "12 December 2023", reviewTitle: "Good Product", name: "Chhota Bheem 1", message: "This is a very nice product.", designation: "CSO @ Dholakpur", url: "/public/product-image1.png" },

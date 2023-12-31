@@ -1,6 +1,8 @@
 import { useState } from "react";
 import { IoIosArrowDown } from "react-icons/io";
-import UserBadge from "./UserBadge";
+import { Link } from "react-router-dom";
+import Cookies from 'js-cookie'
+
 
 const NavbarTablet = (props) => {
     const [hover, setHover] = useState(false);
@@ -26,15 +28,12 @@ const NavbarTablet = (props) => {
                     </ul>
                 </li>
             </ul>
-            <div className="signin">
-                {
-                    user ? (
-                        <UserBadge/>
-                    )
-                        : (
-                            <a href="">Sign in</a>
-                        )
-                }
+            <div className={`signin mx-4 py-1 hover:bg-goldenLight text-center`}>
+                {Cookies.get('token') ? (
+                    <Link to="/profile">Profile</Link>
+                ) : (
+                    <Link to="/login">Sign in</Link>
+                )}
             </div>
         </nav>
     )

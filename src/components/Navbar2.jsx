@@ -1,8 +1,11 @@
 import { IoIosSearch, IoMdCart, IoIosArrowRoundBack } from 'react-icons/io';
 import { HiBars3 } from 'react-icons/hi2';
 import { useState } from 'react';
+import Cookies from 'js-cookie'
+import { Link, useNavigate } from 'react-router-dom';
 
 const Navbar2 = () => {
+    const navigate = useNavigate()
     const [isNavOpen, setIsNavOpen] = useState(false);
     const categoriesSet = [
         {key: 1, title:"Category 1"},
@@ -12,12 +15,13 @@ const Navbar2 = () => {
         {key: 5, title:"Category 5"},
         {key: 6, title:"Category 6"},
     ]
+    
     const categoriesComponentSet = categoriesSet.map((category)=>(<li key={category.key}>{category.title}</li>))
     return (
         <nav className="navbar flex">
-            <a href="#" className="text-5xl">
-                <IoIosArrowRoundBack />
-            </a>
+            <div href="#" className="text-5xl">
+                <IoIosArrowRoundBack onClick={() => navigate('/')} />
+            </div>
             <div className="flex items-center space-x-4 w-10/12">
                 <div className="relative w-full flex bg-white rounded-lg">
                     <IoIosSearch className="text-black text-2xl my-2 mx-5" />
@@ -50,8 +54,10 @@ const Navbar2 = () => {
                             </div>
                         </ul>
                     </li>
-                    <div className="signin mx-4 py-1 hover:bg-goldenLight text-center">
-                        <a href="">Sign in</a>
+                    <div className={`signin mx-4 py-1 hover:bg-goldenLight text-center`} hidden>
+                        {Cookies.get('token') ? (
+                            <Link to="/login">Profile</Link>
+                        ):<Link to="/login">Sign in</Link>}
                     </div>
                 </ul>
             </div>
