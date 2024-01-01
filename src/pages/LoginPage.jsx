@@ -4,8 +4,11 @@ import Footer from '../components/Footer';
 import RippleButton from '../components/RippleButton';
 import { login } from '../api/user';
 import { useNavigate } from 'react-router-dom';
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
 const LoginPage = () => {
-    const [email,setEmail] = useState('');
+    const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [showPasswordWarning, setShowPasswordWarning] = useState(false);
 
@@ -16,10 +19,22 @@ const LoginPage = () => {
         setShowPasswordWarning(e.target.value.length < 6);
     };
 
-    const handleClick = async(e) => {
+    const handleClick = async (e) => {
         e.preventDefault()
-        if(await login(email,password)){
-            navigate("/")
+        const response = await login(email, password);
+        console.log(response)
+        if(response.success){
+            toast.success(response.message, {
+                position: toast.POSITION.TOP_RIGHT,
+            });
+            setTimeout(() => {
+                navigate("/")
+            }, 2000);
+        }
+        else{
+            toast.error(response.message, {
+                position: toast.POSITION.TOP_RIGHT,
+            });
         }
     }
 
@@ -52,6 +67,7 @@ const LoginPage = () => {
 
                     <div onClick={handleClick}>
                         <RippleButton areaLabel="Login" buttonStyles=" px-4 py-2 bg-golden text-black" type="submit" />
+                        <ToastContainer autoClose={1000}/>
                     </div>
 
 

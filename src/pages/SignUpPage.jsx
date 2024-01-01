@@ -5,6 +5,8 @@ import RippleButton from '../components/RippleButton';
 import { Button } from '@material-tailwind/react';
 import { Link } from 'react-router-dom';
 import { signup } from '../api/user';
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const SignUpPage = () => {
     const [password, setPassword] = useState('');
@@ -17,7 +19,19 @@ const SignUpPage = () => {
     const handleSignUp = async (event) => {
         event.preventDefault();
         const response = await signup(event.target[0].value, event.target[0].value, event.target[3].value, event.target[4].value, event.target[2].value);
-        console.log(response)
+        if(response.success){
+            toast.success(response.message, {
+                position: toast.POSITION.TOP_RIGHT,
+            });
+            setTimeout(() => {
+                navigate("/")
+            }, 2000);
+        }
+        else{
+            toast.error(response.message, {
+                position: toast.POSITION.TOP_RIGHT,
+            });
+        }
     }
 
     return (
@@ -68,6 +82,7 @@ const SignUpPage = () => {
                     <p className={`text-red-500 top-2 left-2 text-sm ${(showPasswordWarning) ? 'opacity-100' : 'opacity-0'}`}>Password must be at least 6 characters.</p>
 
                     <RippleButton areaLabel="Sign Up" buttonStyles=" px-4 py-2 bg-golden text-black" type="submit"/>
+                    <ToastContainer autoClose={1000}/>
                     {/* <Button className="bg-golden text-sm text-black my-2" >Submit</Button> */}
 
 

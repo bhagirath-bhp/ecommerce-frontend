@@ -6,13 +6,15 @@ const uri = import.meta.env.VITE_APP_URI
 export const login = async(email,password) => {
     try {
         const response = await axios.post(`${uri}/login`,{email,password})
+        console.log(response);
         if(response.status == 200){
             Cookies.set('token',response.data.token)
-            return true
+            return {message: "Logged In Successfully !", success: true}
         }
         return false
     } catch (error) {
-        console.error(error);
+        // console.error(error);
+        return {message: error.response.data, success: false};
     }
 }
 
@@ -21,15 +23,14 @@ export const login = async(email,password) => {
 export const signup = async (first_name, last_name, email, password, phone_number) => {
     try {
         const response = await axios.post(`${uri}/signup`, { first_name, last_name, email, password, phone_number });
-
+        console.log(response);
         if (response.status === 200) {
-            return response.data;
-        } else {
-            return null;
+            return {message: "Signed Up Successfully !", success: true};
         }
+        return false;
     } catch (error) {
-        console.error(error);
-        return null;
+        // console.error(error);
+        return {message: error.response.data, success: false};
     }
 };
 
