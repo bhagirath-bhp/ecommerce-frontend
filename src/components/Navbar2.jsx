@@ -19,7 +19,7 @@ const Navbar2 = () => {
     const categoriesComponentSet = categoriesSet.map((category)=>(<li key={category.key}>{category.title}</li>))
     return (
         <nav className="navbar flex">
-            <div href="#" className="text-5xl">
+            <div href="#" className="text-5xl cursor-pointer">
                 <IoIosArrowRoundBack onClick={() => navigate('/')} />
             </div>
             <div className="flex items-center space-x-4 w-10/12">
