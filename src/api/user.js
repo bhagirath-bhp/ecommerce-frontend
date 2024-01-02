@@ -6,10 +6,9 @@ const uri = import.meta.env.VITE_APP_URI
 export const login = async(email,password) => {
     try {
         const response = await axios.post(`${uri}/login`,{email,password})
-        console.log(response);
         if(response.status == 200){
             Cookies.set('token',response.data.token)
-            return {message: "Logged In Successfully !", success: true}
+            return {message: "Logged In Successfully !", success: true, userId: response.data.userId, token: response.data.token}
         }
         return false
     } catch (error) {

@@ -6,11 +6,14 @@ import { login } from '../api/user';
 import { useNavigate } from 'react-router-dom';
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { userState } from '../components/state/RecoilState';
+import { useSetRecoilState } from 'recoil';
 
 const LoginPage = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [showPasswordWarning, setShowPasswordWarning] = useState(false);
+    const setUser = useSetRecoilState(userState);
 
     const navigate = useNavigate()
 
@@ -22,8 +25,8 @@ const LoginPage = () => {
     const handleClick = async (e) => {
         e.preventDefault()
         const response = await login(email, password);
-        console.log(response)
         if(response.success){
+            setUser({userId: response.userId, token: response.token});
             toast.success(response.message, {
                 position: toast.POSITION.TOP_RIGHT,
             });
