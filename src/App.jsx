@@ -13,6 +13,7 @@ import AdminCatalogPage from './pages/admin/AdminCatalogPage'
 import WishlistPage from './pages/WishlistPage'
 import AllOrdersPage from './pages/AllOrdersPage'
 import OrderDetails from './pages/OrderDetails'
+import AddressPage from './pages/AddressPage'
 function App() {
   
   return (
@@ -28,6 +29,7 @@ function App() {
           <Route path='/about' element={<AboutPage/>} ></Route>
           <Route path='/wishlist' element={<WishlistPage/>} ></Route>
           <Route path='/orders' element={<AllOrdersPage/>} ></Route>
+          <Route path='/address' element={<AddressPage/>} ></Route>
           <Route path='/ordersdetails' element={<OrderDetails/>} ></Route>
           <Route path='/admin/product/add' element={<AddProductPage/>} ></Route>
           <Route path="/admin/product/edit:productId" element={<EditProductPage />}></Route>
