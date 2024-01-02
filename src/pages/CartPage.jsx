@@ -1,14 +1,41 @@
 // CartPage.jsx
-import React from 'react';
-import { useRecoilState } from 'recoil';
+import React, { useEffect } from 'react';
+import { useRecoilState, useRecoilValue } from 'recoil';
 import { cartState } from '../components/CartState';
 import Footer from '../components/Footer'; // Assuming this is the path to your Footer component
 import CartItem from '../components/CartItem'; // Component for individual cart items
 import Navbar2 from '../components/Navbar2';
-
+import { userState } from '../components/state/RecoilState';
+import { getCart } from '../api/cart';
 const CartPage = () => {
   const [cart, setCart] = useRecoilState(cartState);
-
+  const user =  useRecoilValue(userState);
+  useEffect(() => {
+    const getDetails = async () => {
+      try {
+        const response = await getCart(user.userId);
+        const itemExists = cart.some(item => item.id === response.cartitems[0].product.productId);
+  
+        if (!itemExists) {
+          setCart(cart => [
+            ...cart,
+            {
+              id: response.cartitems[0].product.productId,
+              name: response.cartitems[0].product.name,
+              description: response.cartitems[0].product.name,
+              quantity: response.cartitems[0].quantity,
+              total: parseInt(response.cartitems[0].product.price) * response.cartitems[0].quantity
+            }
+          ]);
+        }
+      } catch (error) {
+        console.error('Error fetching cart data:', error);
+      }
+    };
+  
+    getDetails();
+  }, []); 
+  
   // Function to handle changes in quantity
   const handleQuantityChange = (id, newQuantity) => {
     const newCart = cart.map((item) =>

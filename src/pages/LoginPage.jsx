@@ -27,6 +27,7 @@ const LoginPage = () => {
         const response = await login(email, password);
         if(response.success){
             setUser({userId: response.userId, token: response.token});
+
             toast.success(response.message, {
                 position: toast.POSITION.TOP_RIGHT,
             });
