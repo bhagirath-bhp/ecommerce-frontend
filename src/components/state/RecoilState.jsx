@@ -20,3 +20,8 @@ export const userState = atom({
     localStorageEffect('userState')
   ]
 });
+
+export const toastState = atom({
+  key: 'toastState',
+  default: [],
+});

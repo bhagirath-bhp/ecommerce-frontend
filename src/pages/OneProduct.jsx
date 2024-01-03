@@ -12,12 +12,19 @@ import { Button } from "@material-tailwind/react";
 import { RiHeartAddLine } from "react-icons/ri";
 import { getAProductById } from "../api/products";
 import { CircularProgress } from "@mui/material";
+import { addToCart } from "../api/cart";
+import { useRecoilValue, useSetRecoilState } from "recoil";
+import { toastState, userState } from "../components/state/RecoilState";
 
 
 const OneProduct = () => {
     const [productData1, setProductData1] = useState({});
     const [loading, setLoading] = useState(true);
+    const [cartLoading, setCartLoading] = useState(false);
+    const [buyLoading, setBuyLoading] = useState(false);
     const { productId } = useParams();
+    const user = useRecoilValue(userState);
+    const setToastState = useSetRecoilState(toastState);
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -36,13 +43,21 @@ const OneProduct = () => {
     }, [productId]);
 
     useEffect(() => {
-        // This useEffect runs whenever productData1 changes
         console.log('Updated Product Data:', productData1.images, productData.carouselImageUrls);
         if (productData1.images) {
-            setLoading(false);
+            setTimeout(() => {
+                setLoading(false);
+            }, 1000);
         }
-        // Perform other actions that depend on the updated state here
     }, [productData1]);
+    const handleAddToCart = async () => {
+        setCartLoading(true);
+        const response = await addToCart(user.userId, productId)
+        setToastState([response, 'success', 'top-right', productId]);
+        setTimeout(() => {
+            navigate('/cart');
+        }, 1500);
+    } 
 
     const productData = {
         // name: "Product",
@@ -90,88 +105,96 @@ const OneProduct = () => {
         <div className="font-sans">
             <Navbar2 />
             {loading ?
-            (
-                <div className="h-[90vh] w-[98vw] flex justify-center items-center">
-                    <CircularProgress/>
-                </div>
-            )
-            :
-            (<main className="p-5">
-                <section className="product-details-main grid grid-cols-3 grid-rows-1 mb-5 w-full">
-                    <div className="image-carousel mr-9 smMobile:col-start-1 smMobile:col-end-4 tablet:row-start-1 tablet:row-end-3 tablet:col-span-1">
-                        {/* <ImageCarousel urls={productData.carouselImageUrls} /> */}
-                        <ImageCarousel urls={productData1.images} />
+                (
+                    <div className="h-[90vh] w-[98vw] flex justify-center items-center">
+                        <CircularProgress />
                     </div>
-                    <div className="product-highlights flex my-5 tablet:row-start-1 tablet:col-start-2 tablet:col-end-4 smMobile:row-start-2 smMobile: smMobile:col-start-1 smMobile:col-end-4">
-                        <div className="product-text-contents max-w-[70%]">
-                            <h2 className="text-2xl font-bold border-b-[1px] border-black">{productData1.name}</h2>
-                            <p className="text-gray-700">{productData1.description}</p>
-                            <h3 className="text-2xl font-bold my-3 flex items-center">
-                                ₹ {productData1.price}
-                                <RiHeartAddLine className="ml-[2rem] text-3xl cursor-pointer" onClick={() => { navigate('/wishlist', { state: { productId: "abc" } }) }} />
-                                {/* <p className="w-[50%] border-[1px] rounded-xl font-normal text-base text-center px-5 bg-goldenLight text-golden border-golden ml-[5rem]">Limited Quantities Left</p> */}
-                            </h3>
+                )
+                :
+                (<main className="p-5">
+                    <section className="product-details-main grid grid-cols-3 grid-rows-1 mb-5 w-full">
+                        <div className="image-carousel mr-9 smMobile:col-start-1 smMobile:col-end-4 tablet:row-start-1 tablet:row-end-3 tablet:col-span-1">
+                            {/* <ImageCarousel urls={productData.carouselImageUrls} /> */}
+                            <ImageCarousel urls={productData1.images} />
                         </div>
-                        <div className="product-buttons mx-5 smMobile:hidden tablet:block">
+                        <div className="product-highlights flex my-5 tablet:row-start-1 tablet:col-start-2 tablet:col-end-4 smMobile:row-start-2 smMobile: smMobile:col-start-1 smMobile:col-end-4">
+                            <div className="product-text-contents max-w-[70%]">
+                                <h2 className="text-2xl font-bold border-b-[1px] border-black">{productData1.name}</h2>
+                                <p className="text-gray-700">{productData1.description}</p>
+                                <h3 className="text-2xl font-bold my-3 flex items-center">
+                                    ₹ {productData1.price}
+                                    <RiHeartAddLine className="ml-[2rem] text-3xl cursor-pointer" onClick={() => { navigate('/wishlist', { state: { productId: "abc" } }) }} />
+                                    {/* <p className="w-[50%] border-[1px] rounded-xl font-normal text-base text-center px-5 bg-goldenLight text-golden border-golden ml-[5rem]">Limited Quantities Left</p> */}
+                                </h3>
+                            </div>
+                            <div className="product-buttons mx-5 smMobile:hidden tablet:block">
+                                <Button
+                                    className="bg-golden text-sm text-black my-2"
+                                    loading={buyLoading}
+                                    // onClick={handleBuy}
+                                >Buy Now</Button>
+                                <Button
+                                    className="bg-golden text-sm text-black my-2"
+                                    loading={cartLoading}
+                                    onClick={handleAddToCart}
+                                >Add to Cart</Button>
+                            </div>
+                        </div>
+                        <div className="product-dsp grid tablet:grid-cols-4 grid-rows-3 smMobile:grid-cols-3 verySmMobile:grid-cols-2 tablet:row-start-2 tablet:row-end-3 tablet:col-start-2 tablet:col-end-4 smMobile:col-start-1 smMobile:col-end-4">
+                            <DspCollection dspSet={productData1.dspSet} />
+                        </div>
+                        <div className="dropdown-search col-start-1 col-end-4 verySmMobile:my-[5rem] verySmMobile:mx-[2rem] tablet:my-[3rem]">
+                            <p className="font-semibold text-base mb-3">Select Dragon Spell *</p>
+                            <DropdownSearch />
+                        </div>
+                        <div className="product-buttons tablet:hidden smMobile:flex smMobile:justify-between smMobile:w-[90vw] pr-3 ">
                             <Button className="bg-golden text-sm text-black my-2" onClick={() => { navigate('/cart', { state: { productId: "abc" } }) }}>Buy Now</Button>
                             <Button className="bg-golden text-sm text-black my-2" onClick={() => { navigate('/cart', { state: { productId: "abc" } }) }}>Add to Cart</Button>
                         </div>
-                    </div>
-                    <div className="product-dsp grid tablet:grid-cols-4 grid-rows-3 smMobile:grid-cols-3 verySmMobile:grid-cols-2 tablet:row-start-2 tablet:row-end-3 tablet:col-start-2 tablet:col-end-4 smMobile:col-start-1 smMobile:col-end-4">
-                        <DspCollection dspSet={productData1.dspSet} />
-                    </div>
-                    <div className="dropdown-search col-start-1 col-end-4 verySmMobile:my-[5rem] verySmMobile:mx-[2rem] tablet:my-[3rem]">
-                        <p className="font-semibold text-base mb-3">Select Dragon Spell *</p>
-                        <DropdownSearch />
-                    </div>
-                    <div className="product-buttons tablet:hidden smMobile:flex smMobile:justify-between smMobile:w-[90vw] pr-3 ">
-                        <Button className="bg-golden text-sm text-black my-2" onClick={() => { navigate('/cart', { state: { productId: "abc" } }) }}>Buy Now</Button>
-                        <Button className="bg-golden text-sm text-black my-2" onClick={() => { navigate('/cart', { state: { productId: "abc" } }) }}>Add to Cart</Button>
-                    </div>
-                </section>
-                <section className="product-details-sub">
-                    <h3 className="text-lg font-bold">Product Details</h3>
-                    <ul className="list-disc list-inside">
-                        <li>
-                            <h3>Product Dimensions:</h3>
-                            <span>{productData.productDetails.ItemDimensions}</span>
-                            <span>{productData.productDetails.ItemWeight}</span>
-                        </li>
-                        <li>
-                            <h3>Date First Enchanted:</h3> <span>{productData.productDetails.DateFirstEnchanted}</span>
-                        </li>
-                        <li>
-                            <h3>Manufacturer:</h3> <span>{productData.productDetails.Manufacturer}</span>
-                        </li>
-                        <li>
-                            <h3>Item model number:</h3> <span>{productData.productDetails.ItemModelNumber}</span>
-                        </li>
-                        <li>
-                            <h3>Item Weight:</h3> <span>{productData.productDetails.ItemWeight}</span>
-                        </li>
-                        <li>
-                            <h3>Item Dimensions LxWxH:</h3> <span>{productData.productDetails.ItemDimensions}</span>
-                        </li>
-                        <li>
-                            <h3>Net Quantity:</h3> <span>{productData.productDetails.NetQuantity}</span>
-                        </li>
-                        <li>
-                            <h3>Magical Essence:</h3> <span>{productData.productDetails.MagicalEssence}</span>
-                        </li>
-                    </ul>
-                    <section id="reviews" className="mb-5 py-5">
-                        <h3 className="text-lg font-bold">Customer Reviews</h3>
-                        <ReviewBox />
-                        <ReviewForm />
                     </section>
-                </section>
-                <section id="related-items max-w-[90vw]">
-                    <h3 className="text-2xl font-bold">More items you may like in apparel</h3>
-                    <div className="more-products-set noscrollbar flex justify-between w-full my-9 overflow-x-scroll">
-                        {productComponentSet}
-                    </div>
-                </section>
-            </main>)}
+                    <section className="product-details-sub">
+                        <h3 className="text-lg font-bold">Product Details</h3>
+                        <ul className="list-disc list-inside">
+                            <li>
+                                <h3>Product Dimensions:</h3>
+                                <span>{productData.productDetails.ItemDimensions}</span>
+                                <span>{productData.productDetails.ItemWeight}</span>
+                            </li>
+                            <li>
+                                <h3>Date First Enchanted:</h3> <span>{productData.productDetails.DateFirstEnchanted}</span>
+                            </li>
+                            <li>
+                                <h3>Manufacturer:</h3> <span>{productData.productDetails.Manufacturer}</span>
+                            </li>
+                            <li>
+                                <h3>Item model number:</h3> <span>{productData.productDetails.ItemModelNumber}</span>
+                            </li>
+                            <li>
+                                <h3>Item Weight:</h3> <span>{productData.productDetails.ItemWeight}</span>
+                            </li>
+                            <li>
+                                <h3>Item Dimensions LxWxH:</h3> <span>{productData.productDetails.ItemDimensions}</span>
+                            </li>
+                            <li>
+                                <h3>Net Quantity:</h3> <span>{productData.productDetails.NetQuantity}</span>
+                            </li>
+                            <li>
+                                <h3>Magical Essence:</h3> <span>{productData.productDetails.MagicalEssence}</span>
+                            </li>
+                        </ul>
+                        <section id="reviews" className="mb-5 py-5">
+                            <h3 className="text-lg font-bold">Customer Reviews</h3>
+                            <ReviewBox />
+                            <ReviewForm />
+                        </section>
+                    </section>
+                    <section id="related-items max-w-[90vw]">
+                        <h3 className="text-2xl font-bold">More items you may like in apparel</h3>
+                        <div className="more-products-set noscrollbar flex justify-between w-full my-9 overflow-x-scroll">
+                            {productComponentSet}
+                        </div>
+                    </section>
+                </main>)}
             <Footer />
 
         </div>

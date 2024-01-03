@@ -14,6 +14,7 @@ import WishlistPage from './pages/WishlistPage'
 import AllOrdersPage from './pages/AllOrdersPage'
 import OrderDetails from './pages/OrderDetails'
 import AddressPage from './pages/AddressPage'
+import CustomToaster from './components/CustomToaster'
 function App() {
   
   return (
@@ -37,7 +38,7 @@ function App() {
 
         </Routes>
       </BrowserRouter>
-
+      <CustomToaster/>
     </>
   )
 }

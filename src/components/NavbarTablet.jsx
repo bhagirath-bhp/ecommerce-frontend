@@ -33,7 +33,7 @@ const NavbarTablet = (props) => {
                 {Cookies.get('token') ? (
                     <UserBadge/>
                 ) :(
-                    <Link to="/login" className="mx-4 py-1 hover:bg-goldenLight text-center">Sign in</Link> 
+                    <Link to="/login" className="mx-4 main-ul-li hover:bg-goldenLight text-center">Sign in</Link> 
                 )}
             </div>
         </nav>
