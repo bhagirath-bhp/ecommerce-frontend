@@ -15,6 +15,7 @@ import { CircularProgress } from "@mui/material";
 import { addToCart } from "../api/cart";
 import { useRecoilValue, useSetRecoilState } from "recoil";
 import { toastState, userState } from "../components/state/RecoilState";
+import { addToWishlist } from "../api/wishlist";
 
 
 const OneProduct = () => {
@@ -43,7 +44,7 @@ const OneProduct = () => {
     }, [productId]);
 
     useEffect(() => {
-        console.log('Updated Product Data:', productData1.images, productData.carouselImageUrls);
+        // console.log('Updated Product Data:', productData1.images, productData.carouselImageUrls);
         if (productData1.images) {
             setTimeout(() => {
                 setLoading(false);
@@ -58,6 +59,15 @@ const OneProduct = () => {
             navigate('/cart');
         }, 1500);
     } 
+    const handleAddToWishlist = async () => {
+        const response = await addToWishlist(productId, user.userId);
+        console.log(response)
+        setToastState([response, 'success', 'top-right', productId]);
+        setTimeout(() => {
+            navigate('/wishlist');
+        }, 1500);
+    } 
+
 
     const productData = {
         // name: "Product",
@@ -123,7 +133,7 @@ const OneProduct = () => {
                                 <p className="text-gray-700">{productData1.description}</p>
                                 <h3 className="text-2xl font-bold my-3 flex items-center">
                                     ₹ {productData1.price}
-                                    <RiHeartAddLine className="ml-[2rem] text-3xl cursor-pointer" onClick={() => { navigate('/wishlist', { state: { productId: "abc" } }) }} />
+                                    <RiHeartAddLine className="ml-[2rem] text-3xl cursor-pointer" onClick={ handleAddToWishlist } />
                                     {/* <p className="w-[50%] border-[1px] rounded-xl font-normal text-base text-center px-5 bg-goldenLight text-golden border-golden ml-[5rem]">Limited Quantities Left</p> */}
                                 </h3>
                             </div>
