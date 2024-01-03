@@ -2,7 +2,8 @@ import { Carousel, IconButton } from "@material-tailwind/react"
 
 const ImageCarousel = (props) => {
   const imgURLs = [...props.urls];
-  const imageComponentSet = imgURLs.map((img)=>(<img src={img.url} key={img.key} alt="image 1" className="h-full w-full object-cover"/>
+  // const imageComponentSet = imgURLs.map((img)=>(<img src={img.url} key={img.key} alt="image 1" className="h-full w-full object-cover"/>
+  const imageComponentSet = imgURLs.map((img)=>(<img src={img.imageURL} key={Math.random()} alt="image 1" className="h-full w-full object-cover"/>
   ))
   return (
     <Carousel

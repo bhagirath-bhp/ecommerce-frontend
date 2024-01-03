@@ -1,26 +1,52 @@
-import { useState } from "react";
+import React, { useEffect, useState } from "react";
+import { useParams, useNavigate } from "react-router-dom";
 import Navbar2 from "../components/Navbar2";
 import Footer from "../components/Footer";
 import ImageCarousel from "../components/ImageCarousel";
-import ReviewBox from "../components/ReviewBox";
-import RippleButton from "../components/RippleButton";
-import Product from "../components/Product";
-import { DialogModal } from "../components/DialogModal";
 import DspCollection from "../components/DspCollection";
+import ReviewBox from "../components/ReviewBox";
 import ReviewForm from "../components/ReviewForm";
 import DropdownSearch from "../components/DropdownSearch";
-import { RiHeartAddLine } from "react-icons/ri";
-import { useLocation, useNavigate } from "react-router-dom";
+import Product from "../components/Product";
 import { Button } from "@material-tailwind/react";
-const ProductPage = () => {
+import { RiHeartAddLine } from "react-icons/ri";
+import { getAProductById } from "../api/products";
+import { CircularProgress } from "@mui/material";
 
-    const location = useLocation();
+
+const OneProduct = () => {
+    const [productData1, setProductData1] = useState({});
+    const [loading, setLoading] = useState(true);
+    const { productId } = useParams();
     const navigate = useNavigate();
-    // const productId = location.state.productId || 'abc';
-    // const productData1 = 
+
+    useEffect(() => {
+        async function fetchProduct() {
+            try {
+                if (productId) {
+                    const product = await getAProductById(productId);
+                    setProductData1(product);
+                }
+            } catch (error) {
+                console.error('Error fetching product data:', error);
+            }
+        }
+
+        fetchProduct();
+    }, [productId]);
+
+    useEffect(() => {
+        // This useEffect runs whenever productData1 changes
+        console.log('Updated Product Data:', productData1.images, productData.carouselImageUrls);
+        if (productData1.images) {
+            setLoading(false);
+        }
+        // Perform other actions that depend on the updated state here
+    }, [productData1]);
+
     const productData = {
-        name: "Product",
-        price: "$ 1111",
+        // name: "Product",
+        // price: "$ 1111",
         dspSet: [
             { key: 1, name: "DSP 1", details: "Lorem ipsum dolor sit amet." },
             { key: 2, name: "DSP 1", details: "Lorem ipsum dolor sit amet." },
@@ -33,12 +59,12 @@ const ProductPage = () => {
             { key: 9, name: "DSP 1", details: "Lorem ipsum dolor sit amet." },
             { key: 10, name: "DSP 1", details: "Lorem ipsum dolor sit amet." },
         ],
-        carouselImageUrls: [
-            { key: 1, url: "https://images.unsplash.com/photo-1663564305303-eb4c3cbc8619?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3" },
-            { key: 2, url: "https://images.unsplash.com/photo-1663564306837-4ae873fbbc3f?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3" },
-            { key: 3, url: "https://images.unsplash.com/photo-1663564305613-c40450f29903?q=80&w=1887&auto=format&fit=crop&ixlib=rb-4.0.3" },
-            { key: 4, url: "https://images.unsplash.com/photo-1663564307102-6df750b2196b?q=80&w=1887&auto=format&fit=crop&ixlib=rb-4.0.3" }
-        ],
+        // carouselImageUrls: [
+        //     { key: 1, url: "https://images.unsplash.com/photo-1663564305303-eb4c3cbc8619?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3" },
+        //     { key: 2, url: "https://images.unsplash.com/photo-1663564306837-4ae873fbbc3f?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3" },
+        //     { key: 3, url: "https://images.unsplash.com/photo-1663564305613-c40450f29903?q=80&w=1887&auto=format&fit=crop&ixlib=rb-4.0.3" },
+        //     { key: 4, url: "https://images.unsplash.com/photo-1663564307102-6df750b2196b?q=80&w=1887&auto=format&fit=crop&ixlib=rb-4.0.3" }
+        // ],
         productDetails: {
             ProductDimensions: "15 x 15 x 25 cm;1.2 Kilograms",
             DateFirstEnchanted: "21 February 2023",
@@ -57,24 +83,31 @@ const ProductPage = () => {
         { key: 4, title: "Product1", description: "This is a very nice product.", price: 489, url: "/public/product-image4.png" },
         { key: 5, title: "Product1", description: "This is a very nice product.", price: 489, url: "/public/product-image1.png" },
         { key: 6, title: "Product1", description: "This is a very nice product.", price: 489, url: "/public/product-image2.png" }
-    ]
+    ];
     const productComponentSet = productSet.map((product) => (<Product key={product.key} title={product.title} description={product.description} url={product.url} price={product.price} />))
 
     return (
         <div className="font-sans">
             <Navbar2 />
-
-            <main className="p-5">
+            {loading ?
+            (
+                <div className="h-[90vh] w-[90vw] flex justify-center items-center">
+                    <CircularProgress/>
+                </div>
+            )
+            :
+            (<main className="p-5">
                 <section className="product-details-main grid grid-cols-3 grid-rows-1 mb-5 w-full">
                     <div className="image-carousel mr-9 smMobile:col-start-1 smMobile:col-end-4 tablet:row-start-1 tablet:row-end-3 tablet:col-span-1">
-                        <ImageCarousel urls={productData.carouselImageUrls} />
+                        {/* <ImageCarousel urls={productData.carouselImageUrls} /> */}
+                        <ImageCarousel urls={productData1.images} />
                     </div>
                     <div className="product-highlights flex my-5 tablet:row-start-1 tablet:col-start-2 tablet:col-end-4 smMobile:row-start-2 smMobile: smMobile:col-start-1 smMobile:col-end-4">
                         <div className="product-text-contents max-w-[70%]">
-                            <h2 className="text-2xl font-bold border-b-[1px] border-black">Product 1</h2>
-                            <p className="text-gray-700">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus ipsum mauris, viverra a nunc in, congue facilisis erat. In sodales lacus quis nulla laoreet placerat. Morbi sit amet elit suscipit.</p>
+                            <h2 className="text-2xl font-bold border-b-[1px] border-black">{productData1.name}</h2>
+                            <p className="text-gray-700">{productData1.description}</p>
                             <h3 className="text-2xl font-bold my-3 flex items-center">
-                                ₹489
+                                ₹ {productData1.price}
                                 <RiHeartAddLine className="ml-[2rem] text-3xl cursor-pointer" onClick={() => { navigate('/wishlist', { state: { productId: "abc" } }) }} />
                                 {/* <p className="w-[50%] border-[1px] rounded-xl font-normal text-base text-center px-5 bg-goldenLight text-golden border-golden ml-[5rem]">Limited Quantities Left</p> */}
                             </h3>
@@ -85,7 +118,7 @@ const ProductPage = () => {
                         </div>
                     </div>
                     <div className="product-dsp grid tablet:grid-cols-4 grid-rows-3 smMobile:grid-cols-3 verySmMobile:grid-cols-2 tablet:row-start-2 tablet:row-end-3 tablet:col-start-2 tablet:col-end-4 smMobile:col-start-1 smMobile:col-end-4">
-                        <DspCollection dspSet={productData.dspSet} />
+                        <DspCollection dspSet={productData1.dspSet} />
                     </div>
                     <div className="dropdown-search col-start-1 col-end-4 verySmMobile:my-[5rem] verySmMobile:mx-[2rem] tablet:my-[3rem]">
                         <p className="font-semibold text-base mb-3">Select Dragon Spell *</p>
@@ -138,11 +171,11 @@ const ProductPage = () => {
                         {productComponentSet}
                     </div>
                 </section>
-            </main>
+            </main>)}
             <Footer />
 
         </div>
     )
 };
 
-export default ProductPage;
+export default OneProduct;

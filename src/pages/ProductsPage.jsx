@@ -5,6 +5,7 @@ import { useEffect, useState } from 'react';
 import { fetchAllProducts } from '../api/products';
 
 const ProductsPage = () => {
+
   // const products = [
   //   { key: 1, title: "Product1", description: "This is a very nice product.", price: 489, url: "/public/product-image1.png" },
   //   { key: 2, title: "Product1", description: "This is a very nice product.", price: 489, url: "/public/product-image2.png" },
@@ -21,15 +22,16 @@ const ProductsPage = () => {
   // ];
   const [products, setProducts] = useState([])
   useEffect(() => {
-    async function fetchProducts(){
-      const items = await fetchAllProducts()
-      setProducts(items)
+    async function fetchProducts() {
+      const items = await fetchAllProducts();
+      setProducts(items);
     }
-    fetchProducts()
-  },[])
+    fetchProducts();
+  }, [])
   const productsComponentContainer = products.map(product => (
     <Product
       key={product.productId}
+      productId={product.productId}
       title={product.name}
       description={product.description}
       price={product.price}
@@ -48,7 +50,7 @@ const ProductsPage = () => {
           </div>
         </div>
         <div className="products-container flex justify-between flex-wrap">
-          { productsComponentContainer }
+          {productsComponentContainer}
         </div>
       </div>
       <Footer />

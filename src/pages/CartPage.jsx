@@ -1,42 +1,49 @@
-// CartPage.jsx
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useRecoilState, useRecoilValue } from 'recoil';
 import { cartState } from '../components/CartState';
-import Footer from '../components/Footer'; // Assuming this is the path to your Footer component
-import CartItem from '../components/CartItem'; // Component for individual cart items
+import Footer from '../components/Footer';
+import CartItem from '../components/CartItem';
 import Navbar2 from '../components/Navbar2';
 import { userState } from '../components/state/RecoilState';
 import { getCart } from '../api/cart';
+
 const CartPage = () => {
-  const [cart, setCart] = useRecoilState(cartState);
-  const user =  useRecoilValue(userState);
+  // const [cart, setCart] = useRecoilState(cartState);
+  const [cart, setCart] = useState([]);
+  const user = useRecoilValue(userState);
+
   useEffect(() => {
     const getDetails = async () => {
       try {
         const response = await getCart(user.userId);
-        const itemExists = cart.some(item => item.id === response.cartitems[0].product.productId);
-  
-        if (!itemExists) {
-          setCart(cart => [
-            ...cart,
-            {
-              id: response.cartitems[0].product.productId,
-              name: response.cartitems[0].product.name,
-              description: response.cartitems[0].product.name,
-              quantity: response.cartitems[0].quantity,
-              total: parseInt(response.cartitems[0].product.price) * response.cartitems[0].quantity
-            }
-          ]);
+
+
+        if (Array.isArray(response.cartitems) && response.cartitems.length > 0) {
+          const newTotal = parseInt(response.cartitems[0].product.price) * response.cartitems[0].quantity;
+          const itemExists = cart.some(item => item.id === response.cartitems[0].product.productId);
+
+          if (!itemExists) {
+            setCart(prevCart => [
+              ...prevCart,
+              {
+                id: response.cartitems[0].product.productId,
+                name: response.cartitems[0].product.name,
+                description: response.cartitems[0].product.name,
+                price: response.cartitems[0].product.price,
+                quantity: response.cartitems[0].quantity,
+                total: newTotal,
+              }
+            ]);
+          }
         }
       } catch (error) {
         console.error('Error fetching cart data:', error);
       }
     };
-  
+
     getDetails();
-  }, []); 
-  
-  // Function to handle changes in quantity
+  }, [cart]);
+
   const handleQuantityChange = (id, newQuantity) => {
     const newCart = cart.map((item) =>
       item.id === id ? { ...item, quantity: newQuantity, total: newQuantity * item.price } : item
@@ -44,14 +51,13 @@ const CartPage = () => {
     setCart(newCart);
   };
 
-  // Function to handle item deletion
   const handleDelete = (id) => {
     const newCart = cart.filter((item) => item.id !== id);
     setCart(newCart);
   };
 
   const subtotal = cart.reduce((acc, item) => acc + item.total, 0);
-  const deliveryCharges = 50; // Flat delivery charge; this could be dynamic
+  const deliveryCharges = 50; 
   const grandTotal = subtotal + deliveryCharges;
 
   return (

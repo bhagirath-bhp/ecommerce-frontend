@@ -4,15 +4,21 @@ import Cookies from 'js-cookie'
 const uri = import.meta.env.VITE_APP_URI
 
 export const fetchAllProducts = async() => {
-    const response = await axios.get(`${uri}/category/1`,{
-        headers:{
-            'Authorization': `Bearer ${Cookies.get('token')}`
+    try {
+        const response = await axios.get(`${uri}/products`,{
+            headers:{
+                'Authorization': `Bearer ${Cookies.get('token')}`
+            }
+        })
+        if(response.status==200){
+            return response.data
+        }else{
+            return "Found literally nothing!"
         }
-    })
-    if(response.status==200){
-        return response.data
-    }else{
-        return null
+        
+    } catch (error) {
+        console.log(error)
+        return error;
     }
 }
 
@@ -164,7 +170,7 @@ export const getAllProducts = async () => {
 // Get a single product by ID
 export const getAProductById = async (productId) => {
     try {
-        const response = await axios.get(`${uri}/products/${productId}`, {
+        const response = await axios.get(`${uri}/product/${productId}`, {
             headers: {
                 'Authorization': `Bearer ${Cookies.get('token')}`
             }
