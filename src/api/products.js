@@ -3,55 +3,77 @@ import Cookies from 'js-cookie'
 
 const uri = import.meta.env.VITE_APP_URI
 
-export const fetchAllProducts = async() => {
+export const fetchAllProducts = async () => {
     try {
-        const response = await axios.get(`${uri}/products`,{
-            headers:{
+        const response = await axios.get(`${uri}/products`, {
+            headers: {
                 'Authorization': `Bearer ${Cookies.get('token')}`
             }
         })
-        if(response.status==200){
+        if (response.status == 200) {
             return response.data
-        }else{
+        } else {
             return "Found literally nothing!"
         }
-        
+
     } catch (error) {
         console.log(error)
         return error;
     }
 }
 
-export const fetchDragonSpells = async() => {
-    const response = await axios.get(`${uri}/category/2`,{
-        headers:{
-            'Authorization' : `Bearer ${Cookies.get('token')}`
+export const fetchDragonSpells = async () => {
+    const response = await axios.get(`${uri}/category/2`, {
+        headers: {
+            'Authorization': `Bearer ${Cookies.get('token')}`
         }
     })
-    if(response.status == 200){
+    if (response.status == 200) {
         return response.data;
     }
     else return null
 }
 
-export const fetchCollections = async() => {
-    const response = await axios.get(`${uri}/collection`,{
-        headers:{
-            'Authorization' : `Bearer ${Cookies.get('token')}`
+export const fetchCollections = async () => {
+    const response = await axios.get(`${uri}/collection`, {
+        headers: {
+            'Authorization': `Bearer ${Cookies.get('token')}`
         }
     })
-    if(response.status == 200){
+    if (response.status == 200) {
         return response.data;
     }
     else return null
 }
 
-// Add a new product 
-export const addNewProduct = async (productData) => {
+export const addNewProduct = async ({
+    name,
+    categoryId,
+    collectionId,
+    description,
+    quantity,
+    price,
+    images
+}) => {
     try {
-        const response = await axios.post(`${uri}/product/add`, productData, {
+        const formData = new FormData();
+        formData.append('name', name);
+        formData.append('categoryId', categoryId);
+        formData.append('collectionId', collectionId);
+        formData.append('description', description);
+        formData.append('quantity', quantity);
+        formData.append('price', price);
+
+        if (images && images.length > 0) {
+            images.forEach((image, index) => {
+                formData.append(`images[${index}]`, image);
+            });
+        }
+
+        const response = await axios.post(`${uri}/product/add`, formData, {
             headers: {
-                'Authorization': `Bearer ${Cookies.get('token')}`
+                'Authorization': `Bearer ${Cookies.get('token')}`,
+                'Content-Type': 'multipart/form-data',
             }
         });
 
@@ -67,7 +89,7 @@ export const addNewProduct = async (productData) => {
 };
 
 
-// Add a new category
+
 export const addNewCategory = async (categoryName) => {
     try {
         const response = await axios.post(`${uri}/categories`, { categoryName }, {
@@ -87,7 +109,6 @@ export const addNewCategory = async (categoryName) => {
     }
 };
 
-// Get all categories
 export const getAllCategories = async () => {
     try {
         const response = await axios.get(`${uri}/categories`, {
@@ -107,7 +128,6 @@ export const getAllCategories = async () => {
     }
 };
 
-// Add a new collection
 export const addNewCollection = async (collectionName) => {
     try {
         const response = await axios.post(`${uri}/collections`, { name: collectionName }, {
@@ -127,7 +147,6 @@ export const addNewCollection = async (collectionName) => {
     }
 };
 
-// Get all collections
 export const getAllCollections = async () => {
     try {
         const response = await axios.get(`${uri}/collections`, {
@@ -147,7 +166,6 @@ export const getAllCollections = async () => {
     }
 };
 
-// Get all products
 export const getAllProducts = async (page = 1, pageSize = 6, sortBy = 'price', sortOrder = 'ASC') => {
     try {
         const response = await axios.get(`${uri}/products`, {
@@ -174,7 +192,6 @@ export const getAllProducts = async (page = 1, pageSize = 6, sortBy = 'price', s
 };
 
 
-// Get a single product by ID
 export const getAProductById = async (productId) => {
     try {
         const response = await axios.get(`${uri}/product/${productId}`, {
@@ -194,7 +211,6 @@ export const getAProductById = async (productId) => {
     }
 };
 
-// Update a product
 export const updateProduct = async (productId, updatedData) => {
     try {
         const response = await axios.put(`${uri}/products/${productId}`, updatedData, {
@@ -214,7 +230,6 @@ export const updateProduct = async (productId, updatedData) => {
     }
 };
 
-// Delete a product
 export const deleteProductById = async (productId) => {
     try {
         const response = await axios.delete(`${uri}/products/${productId}`, {
@@ -234,7 +249,6 @@ export const deleteProductById = async (productId) => {
     }
 };
 
-// Get products by category ID
 export const getProductsByCategoryId = async (categoryId) => {
     try {
         const response = await axios.get(`${uri}/categories/${categoryId}/products`, {

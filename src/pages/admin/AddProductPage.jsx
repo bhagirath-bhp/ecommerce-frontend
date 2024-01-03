@@ -1,22 +1,35 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useRecoilState } from 'recoil';
 import { productState } from '../../components/admin/productState';
 import AdminNavbar from '../../components/admin/AdminNavbar';
 import AddCategoryPopup from '../../components/admin/AddCategoryPopup';
+import { addNewProduct, getAllCategories, getAllCollections } from '../../api/products';
+import { Button } from '@material-tailwind/react';
 
 const AddProductPage = () => {
   const [product, setProduct] = useRecoilState(productState);
-  const [categories, setCategories] = useState(['Electronics', 'Books', 'Clothing']); // Initial categories
-  const [showAddCategory, setShowAddCategory] = useState(false); // New state for showing the add category popup
-  const [isVariant, setIsVariant] = useState(false);
-  const [existingProducts, setExistingProducts] = useState([]); // List of existing product names
-  const [selectedVariantProductId, setSelectedVariantProductId] = useState('');
+  const [categories, setCategories] = useState([]);
+  const [collections, setCollections] = useState([]);
+  const [showAddCategory, setShowAddCategory] = useState(true);
 
-  // useEffect(() => {
-  //   // TODO: Fetch the list of products from the backend
-  //   // setExistingProducts(fetchedProducts);
-  // }, []);
+  useEffect(() => {
+    const fetchCategories = async () => {
+      const result = await getAllCategories();
+      if (result) {
+        setCategories(result.categories);
+      }
+    };
 
+    const fetchCollections = async () => {
+      const result = await getAllCollections();
+      if (result) {
+        setCollections(result.collections);
+      }
+    };
+
+    fetchCategories();
+    fetchCollections();
+  }, []);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -28,141 +41,141 @@ const AddProductPage = () => {
   };
 
   const handleCategoryChange = (e) => {
-    if (e.target.value === 'add-new') {
-      setShowAddCategory(true);
-    } else {
-      setProduct({ ...product, category: e.target.value });
-    }
+    setProduct({ ...product, categoryId: e.target.value });
   };
 
-  const addNewCategory = (newCategory) => {
-    setCategories([...categories, newCategory]);
-    setProduct({ ...product, category: newCategory });
-    setShowAddCategory(false);
-  };
-
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log(product);
-    // TODO: API call to submit the product data
-  };
 
-  const handleVariantChange = (e) => {
-    setIsVariant(e.target.checked);
-    if (!e.target.checked) {
-      setSelectedVariantProductId(''); // Reset selected variant product
-      // Update the product state accordingly
-      setProduct({ ...product, variantOfProductId: '' });
+    // Call the updated addNewProduct function
+    const result = await addNewProduct(product);
+
+    if (result) {
+      console.log(result); // Log the response if needed
+      // TODO: Handle success, maybe redirect to a product list page
+    } else {
+      // TODO: Handle failure
     }
   };
-
-  const handleVariantProductChange = (e) => {
-    setSelectedVariantProductId(e.target.value);
-    // Update the product state to reflect the change
-    setProduct({ ...product, variantOfProductId: e.target.value });
-  };
-
 
   return (
     <>
       <AdminNavbar />
-      <div className="container mx-auto p-4">
+      <div className="container mx-auto p-[2rem]">
         <h2 className="text-3xl font-semibold mb-4">Add Product</h2>
         <form onSubmit={handleSubmit} className="flex flex-col space-y-4">
-        <input
-          className="p-2 border rounded"
-          type="text"
-          name="name"
-          placeholder="Name of Product"
-          value={product.name}
-          onChange={handleChange}
-        />
-        <textarea
-          className="p-2 border rounded"
-          name="description"
-          placeholder="Description"
-          value={product.description}
-          onChange={handleChange}
-        />
-        <input
-          className="p-2 border rounded"
-          type="text"
-          name="price"
-          placeholder="Price of Product"
-          value={product.price}
-          onChange={handleChange}
-        />
-        <input
-          className="p-2 border rounded"
-          type="number"
-          name="quantity"
-          placeholder="Quantity Available"
-          value={product.quantity}
-          onChange={handleChange}
-        />
-        <input
-          className="p-2 border rounded"
-          type="file"
-          name="images"
-          multiple
-          onChange={handleImageChange}
-        />
-          <label className="inline-flex items-center mt-3">
-          <input
-            type="checkbox"
-            className="form-checkbox h-5 w-5"
-            checked={isVariant}
-            onChange={handleVariantChange}
-          />
-          <span className="ml-2 text-gray-700">Is this a variant?</span>
-        </label>
-        {isVariant && (
-        <>
-          <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="variantProduct">
-            Select Base Product for Variant
-          </label>
-          <select
-            id="variantProduct"
-            className="block appearance-none w-full bg-white border border-gray-400 hover:border-gray-500 px-4 py-2 pr-8 rounded shadow leading-tight focus:outline-none focus:shadow-outline"
-            value={selectedVariantProductId}
-            onChange={handleVariantProductChange}
-          >
-            <option value="">Select a product</option>
-            {existingProducts.map((product) => (
-              <option key={product.id} value={product.id}>
-                {product.name}
-              </option>
-            ))}
-          </select>
-        </>
-      )}
-          <select
-            className="p-2 border rounded"
-            name="category"
-            value={product.category || ''}
-            onChange={handleCategoryChange}
-          >
-            {categories.map((category, index) => (
-              <option key={index} value={category}>
-                {category}
-              </option>
-            ))}
-            <option value="add-new">+ Add New Category</option>
-          </select>
-          {/* ... other inputs ... */}
-          <button
-            className="bg-green-500 text-white p-2 rounded hover:bg-green-600"
-            type="submit"
-          >
+          <div className="mb-2">
+            <label htmlFor="name" className="block text-gray-700 text-sm font-bold mb-2">
+              Product Name
+            </label>
+            <input
+              id="name"
+              className="p-2 border-[1px] border-golden rounded w-full outline-none"
+              type="text"
+              name="name"
+              value={product.name}
+              onChange={handleChange}
+            />
+          </div>
+          <div className="mb-2">
+            <label htmlFor="description" className="block text-gray-700 text-sm font-bold mb-2">
+              Product Description
+            </label>
+            <textarea
+              id="description"
+              className="p-2 border-[1px] border-golden rounded w-full outline-none"
+              name="description"
+              value={product.description}
+              onChange={handleChange}
+            />
+          </div>
+          <div className="mb-2">
+            <label htmlFor="price" className="block text-gray-700 text-sm font-bold mb-2">
+              Product Price
+            </label>
+            <input
+              id="price"
+              className="p-2 border-[1px] border-golden rounded w-full outline-none"
+              type="text"
+              name="price"
+              value={product.price}
+              onChange={handleChange}
+            />
+          </div>
+          <div className="mb-2">
+            <label htmlFor="images" className="block text-gray-700 text-sm font-bold mb-2">
+              Product Images
+            </label>
+            <input
+              id="images"
+              className="p-2 border-[1px] border-golden rounded w-full outline-none"
+              type="file"
+              name="images"
+              multiple
+              onChange={handleImageChange}
+            />
+          </div>
+          <div className="mb-2">
+            <label htmlFor="quantity" className="block text-gray-700 text-sm font-bold mb-2">
+              Quantity Available
+            </label>
+            <input
+              id="quantity"
+              className="p-2 border-[1px] border-golden rounded w-full outline-none"
+              type="number"
+              name="quantity"
+              value={product.quantity}
+              onChange={handleChange}
+            />
+          </div>
+          <div className="mb-2">
+            <label htmlFor="categoryId" className="block text-gray-700 text-sm font-bold mb-2">
+              Select Category
+            </label>
+            <select
+              id="categoryId"
+              className="p-2 border-[1px] border-golden rounded w-full outline-none"
+              name="categoryId"
+              value={product.categoryId}
+              onChange={handleCategoryChange}
+            >
+              <option value="">Select a category</option>
+              {categories.map((category) => (
+                <option key={category.id} value={category.id}>
+                  {category.name}
+                </option>
+              ))}
+            </select>
+          </div>
+          <div className="mb-2">
+            <label htmlFor="collectionId" className="block text-gray-700 text-sm font-bold mb-2">
+              Select Collection
+            </label>
+            <select
+              id="collectionId"
+              className="p-2 border-[1px] border-golden rounded w-full outline-none"
+              name="collectionId"
+              value={product.collectionId}
+              onChange={handleChange}
+            >
+              <option value="">Select a collection</option>
+              {collections.map((collection) => (
+                <option key={collection.id} value={collection.id}>
+                  {collection.name}
+                </option>
+              ))}
+            </select>
+          </div>
+          <Button type='submit'className='bg-golden text-sm'>
             Add Product
-          </button>
+          </Button>
         </form>
         {showAddCategory && (
-  <AddCategoryPopup
-    onAddCategory={addNewCategory} // Changed to match the function name
-    onClose={() => setShowAddCategory(false)}
-  />
-)}
+          <AddCategoryPopup
+            onAddCategory={() => {}} // Placeholder for now
+            onClose={() => setShowAddCategory(false)}
+          />
+        )}
       </div>
     </>
   );
