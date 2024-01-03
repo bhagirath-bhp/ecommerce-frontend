@@ -148,9 +148,15 @@ export const getAllCollections = async () => {
 };
 
 // Get all products
-export const getAllProducts = async () => {
+export const getAllProducts = async (page = 1, pageSize = 6, sortBy = 'price', sortOrder = 'ASC') => {
     try {
         const response = await axios.get(`${uri}/products`, {
+            params: {
+                page: page,
+                pageSize: pageSize,
+                sortBy: sortBy,
+                sortOrder: sortOrder,
+            },
             headers: {
                 'Authorization': `Bearer ${Cookies.get('token')}`
             }
@@ -166,6 +172,7 @@ export const getAllProducts = async () => {
         return null;
     }
 };
+
 
 // Get a single product by ID
 export const getAProductById = async (productId) => {

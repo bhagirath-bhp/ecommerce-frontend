@@ -16,7 +16,7 @@ const CartPage = () => {
     const getDetails = async () => {
       try {
         const response = await getCart(user.userId);
-
+        console.log(response.cartitems)
 
         if (Array.isArray(response.cartitems) && response.cartitems.length > 0) {
           const newTotal = parseInt(response.cartitems[0].product.price) * response.cartitems[0].quantity;

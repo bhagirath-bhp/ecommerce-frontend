@@ -1,34 +1,28 @@
+import { useState, useEffect } from 'react';
 import Product from '../components/Product';
 import Navbar2 from '../components/Navbar2';
 import Footer from '../components/Footer';
-import { useEffect, useState } from 'react';
 import { fetchAllProducts } from '../api/products';
+import { DefaultPagination } from '../components/DefaultPagination';
 
 const ProductsPage = () => {
+  const [products, setProducts] = useState([]);
+  const [pagination, setPagination] = useState({ page: 1, pageSize: 6, totalPages: 1, totalProducts: 1 });
 
-  // const products = [
-  //   { key: 1, title: "Product1", description: "This is a very nice product.", price: 489, url: "/public/product-image1.png" },
-  //   { key: 2, title: "Product1", description: "This is a very nice product.", price: 489, url: "/public/product-image2.png" },
-  //   { key: 3, title: "Product1", description: "This is a very nice product.", price: 489, url: "/public/product-image3.png" },
-  //   { key: 4, title: "Product1", description: "This is a very nice product.", price: 489, url: "/public/product-image4.png" },
-  //   { key: 5, title: "Product1", description: "This is a very nice product.", price: 489, url: "/public/product-image1.png" },
-  //   { key: 6, title: "Product1", description: "This is a very nice product.", price: 489, url: "/public/product-image2.png" },
-  //   { key: 7, title: "Product1", description: "This is a very nice product.", price: 489, url: "/public/product-image1.png" },
-  //   { key: 8, title: "Product1", description: "This is a very nice product.", price: 489, url: "/public/product-image2.png" },
-  //   { key: 9, title: "Product1", description: "This is a very nice product.", price: 489, url: "/public/product-image3.png" },
-  //   { key: 10, title: "Product1", description: "This is a very nice product.", price: 489, url: "/public/product-image4.png" },
-  //   { key: 11, title: "Product1", description: "This is a very nice product.", price: 489, url: "/public/product-image1.png" },
-  //   { key: 12, title: "Product1", description: "This is a very nice product.", price: 489, url: "/public/product-image2.png" }
-  // ];
-  const [products, setProducts] = useState([])
+  async function fetchProducts(pageNumber) {
+    const items = await fetchAllProducts(pageNumber);
+    setPagination(items.pagination);
+    setProducts(items.products);
+  }
   useEffect(() => {
-    async function fetchProducts() {
-      const items = await fetchAllProducts();
-      setProducts(items);
-    }
-    fetchProducts();
-  }, [])
-  const productsComponentContainer = products.map(product => (
+    fetchProducts(1);
+  }, []);
+
+  const handlePageChange = (newPage) => {
+    fetchProducts(newPage);
+  };
+
+  const productsComponentContainer = products.map((product) => (
     <Product
       key={product.productId}
       productId={product.productId}
@@ -37,7 +31,7 @@ const ProductsPage = () => {
       price={product.price}
       url={product.images[0].imageURL}
     />
-  ))
+  ));
 
   return (
     <>
@@ -52,11 +46,18 @@ const ProductsPage = () => {
         <div className="products-container flex justify-between flex-wrap">
           {productsComponentContainer}
         </div>
+        <div className="pagination-container mt-6">
+          <DefaultPagination
+            totalPages={pagination.totalPages}
+            currentPage={pagination.page}
+            onPageChange={handlePageChange}
+            visiblePages={5}
+          />
+        </div>
       </div>
       <Footer />
     </>
   );
-}
+};
 
 export default ProductsPage;
-

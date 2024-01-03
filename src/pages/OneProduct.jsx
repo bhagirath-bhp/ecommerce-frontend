@@ -91,7 +91,7 @@ const OneProduct = () => {
             <Navbar2 />
             {loading ?
             (
-                <div className="h-[90vh] w-[90vw] flex justify-center items-center">
+                <div className="h-[90vh] w-[98vw] flex justify-center items-center">
                     <CircularProgress/>
                 </div>
             )

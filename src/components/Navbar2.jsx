@@ -31,21 +31,18 @@ const Navbar2 = () => {
                         className="bg-white w-full text-black rounded-lg p-2 focus:outline-none "
                     />
                 </div>
-                <a href="#" className="text-3xl mx-9 text-golden">
+                <Link to="/cart" className="text-3xl mx-9 text-golden">
                     <IoMdCart />
-                </a>
+                </Link>
                 <div className="text-3xl text-golden cursor-pointer" onClick={()=>{isNavOpen ? setIsNavOpen(false) : setIsNavOpen(true)}}>
                     <HiBars3 />
                 </div>
                 <ul className={`navul flex-column z-[60] items-center w-full overflow-hidden max-h-0 opacity-0 transition-height duration-1000 ease-in-out ${isNavOpen ? "max-h-[50rem] opacity-100" : "max-h-0 opacity-0"} border-[1px] border-golden absolute top-[4.2rem] left-[-1rem] p-3 z-10 bg-black`}>
-                    <li className="main-ul-li">
-                        Shop Now
+                    <li className="main-ul-li-2">
+                        <Link to="/products">Shop Now</Link>
                     </li>
-                    <li className="main-ul-li">
+                    <li className="main-ul-li-2">
                         About Us
-                    </li>
-                    <li className="main-ul-li">
-                        Contact
                     </li>
                     <li className="flex justify-center text-center">
                         <ul className="dropdown top-[1.7rem] left-1/2 flex-column justify-center items-center h-auto overflow-hidden bg-black transition-height duration-500 ease-in-out w-full">
@@ -54,7 +51,7 @@ const Navbar2 = () => {
                             </div>
                         </ul>
                     </li>
-                    <div className={`signin mx-4 py-1 hover:bg-goldenLight text-center`} hidden>
+                    <div className={`signin mx-4 py-1 hover:bg-goldenLight text-center`} >
                         {Cookies.get('token') 
                         ? (
                             <Link to="/login">Profile</Link>

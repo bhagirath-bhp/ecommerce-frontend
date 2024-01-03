@@ -80,7 +80,10 @@ span.ripple {
 .navbar .main-ul-li{
   @apply mx-4 my-3 p-2 px-3 cursor-pointer text-center rounded-3xl ;
 }
-.navbar .main-ul-li:hover{
+.navbar .main-ul-li-2{
+  @apply mx-4 my-3 p-2 px-3 cursor-pointer text-center ;
+}
+.navbar .main-ul-li:hover, .navbar .main-ul-li-2:hover{
   @apply bg-goldenLight
 }
 .dropdown li{

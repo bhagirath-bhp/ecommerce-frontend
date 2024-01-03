@@ -2,10 +2,11 @@ import Navbar from '../components/Navbar'
 import ImgDiscover from '../components/ImgDiscover'
 import Product from '../components/Product';
 import Footer from '../components/Footer';
-import RippleButton from '../components/RippleButton';
 import TestimonialCarousel from '../components/TestimonialCarousel';
 import { Button } from '@material-tailwind/react';
+import { useNavigate } from 'react-router-dom';
 const Homepage = () => {
+  const navigate = useNavigate();
   const imgSet = [
     { key: 1, url: "/public/product-image1.png" },
     { key: 2, url: "/public/product-image2.png" },
@@ -74,14 +75,14 @@ const Homepage = () => {
               <p>Discover a world of magic with our enchanting products.</p>
             </div>
             <div className="ph-right tablet:block smMobile:hidden">
-              <RippleButton areaLabel="View All" buttonStyles="border-2 border-golden text-black hover:bg-golden px-5 py-1 me-2 mb-2"/>
+              <Button className="bg-golden text-sm text-black my-2" onClick={() => { navigate('/products') }}>View All</Button>
             </div>
           </div>
           <div className="products-container flex justify-evenly flex-wrap">
             {productComponentSet}
           </div>
           <div className="ph-right tablet:hidden smMobile:block">
-            <RippleButton areaLabel="View All" buttonStyles="border-2 border-golden text-black hover:bg-golden px-5 py-1 me-2 mb-2"  />
+            <Button className="bg-golden text-sm text-black my-2" onClick={() => { navigate('/products') }}>View All</Button>
           </div>
         </div>
 

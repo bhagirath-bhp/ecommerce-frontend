@@ -24,7 +24,7 @@ const UserBadge = () => {
                         <Link to="/cart" className="block px-4 py-2 text-sm hover:text-golden hover:bg-goldenLight">Cart</Link>
                     </li>
                     <li>
-                        <Link to="/allorders" className="block px-4 py-2 text-sm hover:text-golden hover:bg-goldenLight">Orders</Link>
+                        <Link to="/orders" className="block px-4 py-2 text-sm hover:text-golden hover:bg-goldenLight">Orders</Link>
                     </li>
                     <li>
                         <Link to="#" className="block px-4 py-2 text-sm hover:text-golden hover:bg-goldenLight" onClick={() => {

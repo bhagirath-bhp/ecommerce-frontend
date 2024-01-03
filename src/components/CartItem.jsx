@@ -3,7 +3,7 @@ const CartItem = ({ item, onQuantityChange, onDelete }) => {
     return (
       <div className="flex flex-col sm:flex-row items-center justify-between bg-white p-4 shadow rounded-lg mb-4">
         {/* Dummy image placeholder */}
-        <img src="path-to-product-image.jpg" alt={item.name} className="w-16 h-16 object-cover rounded mb-4 sm:mb-0 sm:mr-4" />
+        <img src={item.imageURL} alt={item.name} className="w-16 h-16 object-cover rounded mb-4 sm:mb-0 sm:mr-4" />
         <div className="flex-grow">
           <span className="text-lg font-semibold">{item.name}</span>
           <span className="text-sm text-gray-600 block mb-2">{item.description}</span>
