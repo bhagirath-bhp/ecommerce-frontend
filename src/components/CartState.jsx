@@ -5,7 +5,7 @@ export const cartState = atom({
   key: 'cartState',
   default: [
     {
-      id: 1,
+      id: 2,
       name: 'Product 1',
       description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit ...',
       price: 489,

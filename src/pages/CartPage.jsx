@@ -57,8 +57,17 @@ const CartPage = () => {
   };
 
   const subtotal = cart.reduce((acc, item) => acc + item.total, 0);
-  const deliveryCharges = 50; 
+  const deliveryCharges = 50;
   const grandTotal = subtotal + deliveryCharges;
+
+  const cartComponentSet = cart.map((item) => (
+    <CartItem
+      key={item.id}
+      item={item}
+      onQuantityChange={handleQuantityChange}
+      onDelete={handleDelete}
+    />
+  ))
 
   return (
     <div className="flex flex-col h-screen justify-between">
@@ -66,14 +75,7 @@ const CartPage = () => {
       <div className="flex-grow container mx-auto p-4">
         <h1 className="text-2xl font-bold mb-4">Your Cart</h1>
         <div className="space-y-4">
-          {cart.map((item) => (
-            <CartItem
-              key={item.id}
-              item={item}
-              onQuantityChange={handleQuantityChange}
-              onDelete={handleDelete}
-            />
-          ))}
+          { cartComponentSet }
         </div>
         <div className="mt-4 bg-white p-4 shadow rounded-lg">
           <div className="flex justify-between">
