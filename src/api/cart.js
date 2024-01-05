@@ -66,8 +66,8 @@ export const reduceQuantity = async (cartId, productId, quantity) => {
 // Remove from Cart
 export const removeFromCart = async (cartId, productId) => {
     try {
-        const response = await axios.delete(`${uri}/cart/remove`, {
-            data: { cartId, productId },
+        // console.log(Cookies.get('token'))
+        const response = await axios.delete(`${uri}/cart/remove`, { cartId, productId }, {
             headers: {
                 'Authorization': `Bearer ${Cookies.get('token')}`
             }

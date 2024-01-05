@@ -5,54 +5,41 @@ import Footer from '../components/Footer';
 import CartItem from '../components/CartItem';
 import Navbar2 from '../components/Navbar2';
 import { userState } from '../components/state/RecoilState';
-import { getCart } from '../api/cart';
+import { getCart, removeFromCart } from '../api/cart';
+import { transformCartArray } from '../components/handles/utility';
 
 const CartPage = () => {
   // const [cart, setCart] = useRecoilState(cartState);
   const [cart, setCart] = useState([]);
   const user = useRecoilValue(userState);
-
+  
   useEffect(() => {
     const getDetails = async () => {
       try {
         const response = await getCart(user.userId);
-        console.log(response.cartitems)
-
-        if (Array.isArray(response.cartitems) && response.cartitems.length > 0) {
-          const newTotal = parseInt(response.cartitems[0].product.price) * response.cartitems[0].quantity;
-          const itemExists = cart.some(item => item.id === response.cartitems[0].product.productId);
-
-          if (!itemExists) {
-            setCart(prevCart => [
-              ...prevCart,
-              {
-                id: response.cartitems[0].product.productId,
-                name: response.cartitems[0].product.name,
-                description: response.cartitems[0].product.name,
-                price: response.cartitems[0].product.price,
-                quantity: response.cartitems[0].quantity,
-                total: newTotal,
-              }
-            ]);
-          }
-        }
+        const transformedRes = transformCartArray(response.cartitems);
+        
+        setCart(transformedRes);
       } catch (error) {
         console.error('Error fetching cart data:', error);
       }
     };
-
+    
     getDetails();
-  }, [cart]);
-
+  }, []);
+  
   const handleQuantityChange = (id, newQuantity) => {
     const newCart = cart.map((item) =>
-      item.id === id ? { ...item, quantity: newQuantity, total: newQuantity * item.price } : item
+    item.id === id ? { ...item, quantity: newQuantity, total: newQuantity * item.price } : item
     );
     setCart(newCart);
   };
-
-  const handleDelete = (id) => {
-    const newCart = cart.filter((item) => item.id !== id);
+  
+  // removeFromCart
+  const handleDelete = async (id, productId) => {
+    // const newCart = cart.filter((item) => item.id !== id);
+    const response = await removeFromCart(id, productId);
+    console.log(response);
     setCart(newCart);
   };
 
