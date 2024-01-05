@@ -3,8 +3,11 @@ import "../App.css";
 import NavbarMobile from "./NavbarMobile";
 import NavbarTablet from "./NavbarTablet";
 import { fetchCollections } from "../api/products";
+import { useNavigate } from "react-router-dom";
+
 
 const Navbar = () => {
+    const navigate = useNavigate();
     const categoriesSet = [
         {key: 1, title:"Category 1"},
         {key: 2, title:"Category 2"},
@@ -19,8 +22,8 @@ const Navbar = () => {
     const [collections,setCollections] = useState([])
     useEffect(() => {
         const fetchData = async() => {
-            const data = await fetchCollections()
-            // console.log(data);
+            const data = await fetchCollections(navigate)
+            console.log(data);
             setCollections(data)
         }
         fetchData()

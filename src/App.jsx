@@ -15,6 +15,7 @@ import AllOrdersPage from './pages/AllOrdersPage'
 import OrderDetails from './pages/OrderDetails'
 import AddressPage from './pages/AddressPage'
 import CustomToaster from './components/CustomToaster'
+import Error500 from './pages/Error500'
 function App() {
   
   return (
@@ -35,7 +36,7 @@ function App() {
           <Route path='/admin/product/add' element={<AddProductPage/>} ></Route>
           <Route path="/admin/product/edit:productId" element={<EditProductPage />}></Route>
           <Route path="/admin/catalog/" element={<AdminCatalogPage />}></Route>
-
+          <Route path='/error/:eid' element={ <Error500/> } ></Route>
         </Routes>
       </BrowserRouter>
       <CustomToaster/>

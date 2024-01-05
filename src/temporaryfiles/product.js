@@ -3,49 +3,60 @@ import Cookies from 'js-cookie'
 
 const uri = import.meta.env.VITE_APP_URI
 
-export const fetchAllProducts = async () => {
-    const response = await axios
+export const fetchAllProducts = async (navigate) => {
+    await axios
         .get(`${uri}/products`, {
             headers: {
                 'Authorization': `Bearer ${Cookies.get('token')}`
             }
         })
-        .catch((error) => {
-            console.error(error);
+        .then((response) => {
+            if (response.status == 200) {
+                return response.data
+            } else {
+                return "Found literally nothing!"
+            }
         })
-    if (response.status == 200) {
-        return response.data
-    } else {
-        return "Found literally nothing!"
-    }
+        .catch((error) => {
+            navigate("error/500");
+        })
 }
 
 export const fetchDragonSpells = async () => {
-    const response = await axios.get(`${uri}/category/2`, {
-        headers: {
-            'Authorization': `Bearer ${Cookies.get('token')}`
-        }
-    })
-    if (response.status == 200) {
-        return response.data;
-    }
-    else return null
+    await axios
+        .get(`${uri}/category/2`, {
+            headers: {
+                'Authorization': `Bearer ${Cookies.get('token')}`
+            }
+        })
+        .then((response) => {
+            if (response.status == 200) {
+                return response.data;
+            }
+            else return null
+        })
+        .catch((error) => {
+            navigate("error/500");
+        })
 }
 
 export const fetchCollections = async (navigate) => {
-    const response = await axios
+    await axios
         .get(`${uri}/collection`, {
             headers: {
                 'Authorization': `Bearer ${Cookies.get('token')}`
             }
         })
-        .catch((error) => {
-            navigate("/error/500");
+        .then((response) => {
+            if (response.status == 200) {
+                return response.data;
+            }
+            else return null
         })
-    if (response.status == 200) {
-        return response.data;
-    }
-    else return null
+        .catch((error) => {
+            navigate("/error/500")
+        })
+
 }
 
 export const addNewProduct = async ({
@@ -57,140 +68,144 @@ export const addNewProduct = async ({
     price,
     images
 }) => {
-    try {
-        const formData = new FormData();
-        formData.append('name', name);
-        formData.append('categoryId', categoryId);
-        formData.append('collectionId', collectionId);
-        formData.append('description', description);
-        formData.append('quantity', quantity);
-        formData.append('price', price);
+    const formData = new FormData();
+    formData.append('name', name);
+    formData.append('categoryId', categoryId);
+    formData.append('collectionId', collectionId);
+    formData.append('description', description);
+    formData.append('quantity', quantity);
+    formData.append('price', price);
 
-        if (images && images.length > 0) {
-            images.forEach((image, index) => {
-                formData.append(`images[${index}]`, image);
-            });
-        }
+    if (images && images.length > 0) {
+        images.forEach((image, index) => {
+            formData.append(`images[${index}]`, image);
+        });
+    }
 
-        const response = await axios.post(`${uri}/product/add`, formData, {
+
+    await axios
+        .post(`${uri}/product/add`, formData, {
             headers: {
                 'Authorization': `Bearer ${Cookies.get('token')}`,
                 'Content-Type': 'multipart/form-data',
             }
-        });
+        })
+        .then((response) => {
+            if (response.status === 200) {
+                return response.data;
+            } else {
+                return null;
+            }
+        })
+        .catch((error) => {
+            navigate("/error/500");
+        })
 
-        if (response.status === 200) {
-            return response.data;
-        } else {
-            return null;
-        }
-    } catch (error) {
-        console.error(error);
-        return null;
-    }
 };
 
 
 
 export const addNewCategory = async (categoryName) => {
-    try {
-        const response = await axios.post(`${uri}/categories`, { categoryName }, {
+    await axios
+        .post(`${uri}/categories`, { categoryName }, {
             headers: {
                 'Authorization': `Bearer ${Cookies.get('token')}`
             }
-        });
+        })
+        .then((response) => {
+            if (response.status === 200) {
+                return response.data;
+            } else {
+                return null;
+            }
+        }).catch((error) => {
+            navigate("error/500")
+        })
 
-        if (response.status === 200) {
-            return response.data;
-        } else {
-            return null;
-        }
-    } catch (error) {
-        console.error(error);
-        return null;
-    }
 };
 
-export const getAllCategories = async () => {
-    try {
-        const response = await axios.get(`${uri}/categories`, {
+export const getAllCategories = async (navigate) => {
+    await axios
+        .get(`${uri}/categories`, {
             headers: {
                 'Authorization': `Bearer ${Cookies.get('token')}`
             }
-        });
+        })
+        .then((response) => {
+            if (response.status === 200) {
+                return response.data;
+            } else {
+                return null;
+            }
+        })
+        .catch((error) => {
+            navigate("/error/500")
+        })
 
-        if (response.status === 200) {
-            return response.data;
-        } else {
-            return null;
-        }
-    } catch (error) {
-        console.error(error);
-        return null;
-    }
 };
 
 export const addNewCollection = async (collectionName) => {
-    try {
-        const response = await axios.post(`${uri}/collections`, { name: collectionName }, {
+    await axios
+        .post(`${uri}/collections`, { name: collectionName }, {
             headers: {
                 'Authorization': `Bearer ${Cookies.get('token')}`
             }
-        });
+        })
+        .then((response) => {
+            if (response.status === 200) {
+                return response.data;
+            } else {
+                return null;
+            }
+        })
+        .catch((error) => {
+            navigate("/error/500");
+        })
 
-        if (response.status === 200) {
-            return response.data;
-        } else {
-            return null;
-        }
-    } catch (error) {
-        console.error(error);
-        return null;
-    }
 };
 
-export const getAllCollections = async () => {
-    try {
-        const response = await axios.get(`${uri}/collections`, {
+export const getAllCollections = async (navigate) => {
+    await axios
+        .get(`${uri}/collections`, {
             headers: {
                 'Authorization': `Bearer ${Cookies.get('token')}`
             }
-        });
+        })
+        .then((response) => {
+            if (response.status === 200) {
+                return response.data;
+            } else {
+                return null;
+            }
+        })
+        .catch((error) => {
+            navigate("/error/500")
+        })
 
-        if (response.status === 200) {
-            return response.data;
-        } else {
-            return null;
-        }
-    } catch (error) {
-        console.error(error);
-        return null;
-    }
 };
 
 export const getAllProducts = async (page = 1, pageSize = 6, sortBy = 'price', sortOrder = 'ASC') => {
-    try {
-        const response = await axios.get(`${uri}/products`, {
-            params: {
-                page: page,
-                pageSize: pageSize,
-                sortBy: sortBy,
-                sortOrder: sortOrder,
-            },
-            headers: {
-                'Authorization': `Bearer ${Cookies.get('token')}`
-            }
-        });
-
+    await axios.get(`${uri}/products`, {
+        params: {
+            page: page,
+            pageSize: pageSize,
+            sortBy: sortBy,
+            sortOrder: sortOrder,
+        },
+        headers: {
+            'Authorization': `Bearer ${Cookies.get('token')}`
+        }
+    })
+    .then((response)=>{
         if (response.status === 200) {
             return response.data;
         } else {
             return null;
         }
-    } catch (error) {
-        console.error(error);
-        return null;
-    }
+    })
+    .catch((error)=>{
+        navigate("/error/500");
+    })
 };
 
 
