@@ -1,7 +1,7 @@
 import { IoMdArrowDroprightCircle } from "react-icons/io";
 import { useNavigate } from "react-router-dom";
 import { toastState } from "./state/RecoilState";
-import { useRecoilValue, useSetRecoilState } from "recoil";
+import { useSetRecoilState } from "recoil";
 const Product = (props) => {
     const navigate = useNavigate();
     const setToastState = useSetRecoilState(toastState);

@@ -10,7 +10,7 @@ const Error500 = () => {
                     </div>
                 </div>
                 <h1 className="mt-5 text-[36px] font-bold text-slate-800 lg:text-[50px]">Server error</h1>
-                <p className="text-slate-600 mt-5 lg:text-lg">Oops something went wrong. Visit <Link to="/" className="text-blue-gray-900 underline">Home</Link> page or <br/> feel free to contact us if the problem presists.</p>
+                <p className="text-slate-600 mt-5 lg:text-lg">Oops something went wrong. Goto <Link to="/" className="text-blue-700 underline">Home</Link> page or <br/> feel free to contact us if the problem presists.</p>
             </div>
         </div>
     )
