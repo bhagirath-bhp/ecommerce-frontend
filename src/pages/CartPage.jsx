@@ -5,7 +5,7 @@ import Footer from '../components/Footer';
 import CartItem from '../components/CartItem';
 import Navbar2 from '../components/Navbar2';
 import { userState } from '../components/state/RecoilState';
-import { getCart, removeFromCart } from '../api/cart';
+import { getCart, reduceQuantity, removeFromCart } from '../api/cart';
 import { transformCartArray } from '../components/handles/utility';
 
 const CartPage = () => {
@@ -18,7 +18,6 @@ const CartPage = () => {
       try {
         const response = await getCart(user.userId);
         const transformedRes = transformCartArray(response.cartitems);
-        
         setCart(transformedRes);
       } catch (error) {
         console.error('Error fetching cart data:', error);
@@ -28,10 +27,12 @@ const CartPage = () => {
     getDetails();
   }, []);
   
-  const handleQuantityChange = (id, newQuantity) => {
-    const newCart = cart.map((item) =>
-    item.id === id ? { ...item, quantity: newQuantity, total: newQuantity * item.price } : item
-    );
+  const handleQuantityChange = async (id, productId, newQuantity) => {
+    // const newCart = cart.map((item) =>
+    // item.id === id ? { ...item, quantity: newQuantity, total: newQuantity * item.price } : item
+    // );
+    const response = await reduceQuantity(id, productId, newQuantity);
+    console.log(response);
     setCart(newCart);
   };
   

@@ -55,10 +55,11 @@ const OneProduct = () => {
         setCartLoading(true);
         const response = await addToCart(user.userId, productId)
         setToastState([response, 'success', 'top-right', productId]);
+        console.log(response)
         setTimeout(() => {
             navigate('/cart');
         }, 1500);
-    } 
+    }
     const handleAddToWishlist = async () => {
         const response = await addToWishlist(productId, user.userId);
         console.log(response)
@@ -66,7 +67,7 @@ const OneProduct = () => {
         setTimeout(() => {
             navigate('/wishlist');
         }, 1500);
-    } 
+    }
 
 
     const productData = {
@@ -133,7 +134,7 @@ const OneProduct = () => {
                                 <p className="text-gray-700">{productData1.description}</p>
                                 <h3 className="text-2xl font-bold my-3 flex items-center">
                                     ₹ {productData1.price}
-                                    <RiHeartAddLine className="ml-[2rem] text-3xl cursor-pointer" onClick={ handleAddToWishlist } />
+                                    <RiHeartAddLine className="ml-[2rem] text-3xl cursor-pointer" onClick={handleAddToWishlist} />
                                     {/* <p className="w-[50%] border-[1px] rounded-xl font-normal text-base text-center px-5 bg-goldenLight text-golden border-golden ml-[5rem]">Limited Quantities Left</p> */}
                                 </h3>
                             </div>
@@ -141,7 +142,7 @@ const OneProduct = () => {
                                 <Button
                                     className="bg-golden text-sm text-black my-2"
                                     loading={buyLoading}
-                                    // onClick={handleBuy}
+                                // onClick={handleBuy}
                                 >Buy Now</Button>
                                 <Button
                                     className="bg-golden text-sm text-black my-2"
@@ -158,8 +159,16 @@ const OneProduct = () => {
                             <DropdownSearch />
                         </div>
                         <div className="product-buttons tablet:hidden smMobile:flex smMobile:justify-between smMobile:w-[90vw] pr-3 ">
-                            <Button className="bg-golden text-sm text-black my-2" onClick={() => { navigate('/cart', { state: { productId: "abc" } }) }}>Buy Now</Button>
-                            <Button className="bg-golden text-sm text-black my-2" onClick={() => { navigate('/cart', { state: { productId: "abc" } }) }}>Add to Cart</Button>
+                            <Button
+                                className="bg-golden text-sm text-black my-2"
+                                loading={buyLoading}
+                            // onClick={handleBuy}
+                            >Buy Now</Button>
+                            <Button
+                                className="bg-golden text-sm text-black my-2"
+                                loading={cartLoading}
+                                onClick={handleAddToCart}
+                            >Add to Cart</Button>
                         </div>
                     </section>
                     <section className="product-details-sub">

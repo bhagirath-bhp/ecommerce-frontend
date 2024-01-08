@@ -10,12 +10,12 @@ const CartItem = ({ item, onQuantityChange, onDelete }) => {
           <div className="flex items-center justify-between">
             <div className="text-lg font-semibold">₹{item.price}</div>
             <div className="flex items-center">
-              <button onClick={() => onQuantityChange(item.id, Math.max(1, item.quantity - 1))}
+              <button onClick={() => onQuantityChange(item.id, item.productId, Math.max(1, item.quantity - 1))}
                       className="text-lg p-1 border border-gray-300 rounded hover:bg-gray-200">
                 -
               </button>
               <span className="mx-2 text-lg">{item.quantity}</span>
-              <button onClick={() => onQuantityChange(item.id, item.quantity + 1)}
+              <button onClick={() => onQuantityChange(item.id, item.productId, item.quantity + 1)}
                       className="text-lg p-1 border border-gray-300 rounded hover:bg-gray-200">
                 +
               </button>
