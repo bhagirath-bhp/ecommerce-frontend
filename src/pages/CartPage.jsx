@@ -33,7 +33,7 @@ const CartPage = () => {
     // );
     const response = await reduceQuantity(id, productId, newQuantity);
     console.log(response);
-    setCart(newCart);
+    setCart("");
   };
   
   // removeFromCart

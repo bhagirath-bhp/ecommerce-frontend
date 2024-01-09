@@ -56,9 +56,11 @@ const OneProduct = () => {
         const response = await addToCart(user.userId, productId)
         setToastState([response, 'success', 'top-right', productId]);
         console.log(response)
-        setTimeout(() => {
-            navigate('/cart');
-        }, 1500);
+        if(response)
+            setTimeout(() => {
+                navigate('/cart');
+            }, 1500);
+        
     }
     const handleAddToWishlist = async () => {
         const response = await addToWishlist(productId, user.userId);
