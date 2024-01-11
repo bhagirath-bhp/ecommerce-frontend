@@ -6,6 +6,7 @@ import CartItem from '../components/CartItem';
 import Navbar2 from '../components/Navbar2';
 import { userState } from '../components/state/RecoilState';
 import { getCart, reduceQuantity, removeFromCart } from '../api/cart';
+import { addOrder } from '../api/order';
 import { transformCartArray } from '../components/handles/utility';
 
 const CartPage = () => {
@@ -44,6 +45,11 @@ const CartPage = () => {
     setCart(newCart);
   };
 
+  const handleCheckout = async (userId) =>{
+    const response  = await addOrder(userId);
+    console.log(response);
+  }
+
   const subtotal = cart.reduce((acc, item) => acc + item.total, 0);
   const deliveryCharges = 50;
   const grandTotal = subtotal + deliveryCharges;
@@ -78,7 +84,7 @@ const CartPage = () => {
             <span>Grand Total:</span>
             <span>₹{grandTotal}</span>
           </div>
-          <button className="bg-purple-500 text-white p-2 rounded w-full mt-4 hover:bg-purple-600">
+          <button className="bg-purple-500 text-white p-2 rounded w-full mt-4 hover:bg-purple-600" onClick={()=>{handleCheckout(user.userId)}}>
             Check out
           </button>
         </div>

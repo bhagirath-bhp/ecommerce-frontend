@@ -8,7 +8,7 @@ import { DefaultPagination } from '../components/DefaultPagination';
 const ProductsPage = () => {
   const [products, setProducts] = useState([]);
   const [pagination, setPagination] = useState({ page: 1, pageSize: 6, totalPages: 1, totalProducts: 1 });
-
+  console.log(products)
   async function fetchProducts(pageNumber) {
     const items = await fetchAllProducts(pageNumber);
     setPagination(items.pagination);
