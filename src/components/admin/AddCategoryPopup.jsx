@@ -1,13 +1,16 @@
 // AddCategoryPopup.jsx
 import React, { useState } from 'react';
+import { addNewCategory } from '../../api/products';
 
-const AddCategoryPopup = ({ onAddCategory, onClose }) => {
+
+const AddCategoryPopup = ({ onClose }) => {
   const [newCategory, setNewCategory] = useState('');
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    onAddCategory(newCategory);
     setNewCategory(''); // Reset the input field after submission
+    const response = await addNewCategory(e.target[0].value);
+    console.log(response);
   };
 
   return (

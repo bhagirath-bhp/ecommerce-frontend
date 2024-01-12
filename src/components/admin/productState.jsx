@@ -7,9 +7,9 @@ export const productState = atom({
     name: '',
     description: '',
     price: '',
-    quantity: '',
-    category: '', // Added category field
     images: [],
-    variantName: '',
+    quantity: 0,
+    categoryId: '',
+    collectionId: '',
   },
 });

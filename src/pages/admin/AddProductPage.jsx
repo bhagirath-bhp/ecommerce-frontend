@@ -7,23 +7,31 @@ import { addNewProduct, getAllCategories, getAllCollections } from '../../api/pr
 import { Button } from '@material-tailwind/react';
 
 const AddProductPage = () => {
-  const [product, setProduct] = useRecoilState(productState);
-  const [categories, setCategories] = useState([]);
+  const [product, setProduct] = useState({
+    name: '',
+    description: '',
+    price: '',
+    images: [],
+    quantity: 0,
+    categoryId: '',
+    collectionId: '',
+  });
+  const [categories, setCategories] = useState([{ categoryId: null, categoryName: "" }]);
   const [collections, setCollections] = useState([]);
-  const [showAddCategory, setShowAddCategory] = useState(true);
-
+  const [showAddCategory, setShowAddCategory] = useState(false);
   useEffect(() => {
     const fetchCategories = async () => {
       const result = await getAllCategories();
+      // console.log(result)
       if (result) {
-        setCategories(result.categories);
+        setCategories(result);
       }
     };
 
     const fetchCollections = async () => {
       const result = await getAllCollections();
       if (result) {
-        setCollections(result.collections);
+        setCollections(result);
       }
     };
 
@@ -34,6 +42,7 @@ const AddProductPage = () => {
   const handleChange = (e) => {
     const { name, value } = e.target;
     setProduct({ ...product, [name]: value });
+    console.log(product)
   };
 
   const handleImageChange = (e) => {
@@ -45,6 +54,7 @@ const AddProductPage = () => {
   };
 
   const handleSubmit = async (e) => {
+    console.log(e)
     e.preventDefault();
 
     // Call the updated addNewProduct function
@@ -141,11 +151,12 @@ const AddProductPage = () => {
             >
               <option value="">Select a category</option>
               {categories.map((category) => (
-                <option key={category.id} value={category.id}>
-                  {category.name}
+                <option key={category.categoryId} value={category.categoryId}>
+                  {category.categoryName}
                 </option>
               ))}
             </select>
+            <Button className='text-sm my-2 bg-golden' onClick={() => { setShowAddCategory(true) }}>Add Category</Button>
           </div>
           <div className="mb-2">
             <label htmlFor="collectionId" className="block text-gray-700 text-sm font-bold mb-2">
@@ -160,19 +171,19 @@ const AddProductPage = () => {
             >
               <option value="">Select a collection</option>
               {collections.map((collection) => (
-                <option key={collection.id} value={collection.id}>
+                <option key={collection.collectionId} value={collection.collectionId}>
                   {collection.name}
                 </option>
               ))}
             </select>
+            <Button className='text-sm my-2 bg-golden' onClick={() => { setShowAddCategory(true) }}>Add Category</Button>
           </div>
-          <Button type='submit'className='bg-golden text-sm'>
+          <Button type='submit' className='bg-golden text-sm'>
             Add Product
           </Button>
         </form>
         {showAddCategory && (
           <AddCategoryPopup
-            onAddCategory={() => {}} // Placeholder for now
             onClose={() => setShowAddCategory(false)}
           />
         )}

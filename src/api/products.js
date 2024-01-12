@@ -50,12 +50,12 @@ export const fetchCollections = async (navigate) => {
 
 export const addNewProduct = async ({
     name,
+    description,
+    price,
+    images,
+    quantity,
     categoryId,
     collectionId,
-    description,
-    quantity,
-    price,
-    images
 }) => {
     try {
         const formData = new FormData();
@@ -65,12 +65,18 @@ export const addNewProduct = async ({
         formData.append('description', description);
         formData.append('quantity', quantity);
         formData.append('price', price);
+        // formData.append('images', images);
 
-        if (images && images.length > 0) {
-            images.forEach((image, index) => {
-                formData.append(`images[${index}]`, image);
-            });
+        if (images) {
+            if (Array.isArray(images)) {
+                images.forEach((image, index) => {
+                    formData.append(`images[${index}]`, image);
+                });
+            } else {
+                formData.append('images[0]', images);
+            }
         }
+
 
         const response = await axios.post(`${uri}/product/add`, formData, {
             headers: {
@@ -94,7 +100,7 @@ export const addNewProduct = async ({
 
 export const addNewCategory = async (categoryName) => {
     try {
-        const response = await axios.post(`${uri}/categories`, { categoryName }, {
+        const response = await axios.post(`${uri}/category/add`, { categoryName }, {
             headers: {
                 'Authorization': `Bearer ${Cookies.get('token')}`
             }
@@ -113,7 +119,7 @@ export const addNewCategory = async (categoryName) => {
 
 export const getAllCategories = async () => {
     try {
-        const response = await axios.get(`${uri}/categories`, {
+        const response = await axios.get(`${uri}/category`, {
             headers: {
                 'Authorization': `Bearer ${Cookies.get('token')}`
             }
@@ -132,7 +138,7 @@ export const getAllCategories = async () => {
 
 export const addNewCollection = async (collectionName) => {
     try {
-        const response = await axios.post(`${uri}/collections`, { name: collectionName }, {
+        const response = await axios.post(`${uri}/collection/add`, { name: collectionName }, {
             headers: {
                 'Authorization': `Bearer ${Cookies.get('token')}`
             }
@@ -151,7 +157,7 @@ export const addNewCollection = async (collectionName) => {
 
 export const getAllCollections = async () => {
     try {
-        const response = await axios.get(`${uri}/collections`, {
+        const response = await axios.get(`${uri}/collection`, {
             headers: {
                 'Authorization': `Bearer ${Cookies.get('token')}`
             }
