@@ -8,11 +8,17 @@ import { userState } from '../components/state/RecoilState';
 import { getCart, reduceQuantity, removeFromCart } from '../api/cart';
 import { addOrder } from '../api/order';
 import { transformCartArray } from '../components/handles/utility';
+import { useNavigate } from 'react-router-dom';
+import { loadStripe } from '@stripe/stripe-js';
+
+
 
 const CartPage = () => {
   // const [cart, setCart] = useRecoilState(cartState);
   const [cart, setCart] = useState([]);
   const user = useRecoilValue(userState);
+  const navigate = useNavigate();
+  const stripePromise = loadStripe('ypk_test_51BTUDGJAJfZb9HEBwDg86TN1KNprHjkfipXmEDMb0gSCassK5T3ZfxsAbcgKVmAIXF7oZ6ItlZZbXO6idTHE67IM007EwQ4uN3');
   
   useEffect(() => {
     const getDetails = async () => {
@@ -45,9 +51,23 @@ const CartPage = () => {
     setCart(newCart);
   };
 
-  const handleCheckout = async (userId) =>{
-    const response  = await addOrder(userId);
-    console.log(response);
+  const handleCheckout = async () =>{
+    const session  = await addOrder(user.userId);
+    // navigate('/checkout', {state: response.id});
+    const stripe = await stripePromise;
+
+
+    // const session = await response.json();
+
+    // Redirect to Checkout page
+    const result = await stripe.redirectToCheckout({
+      sessionId: session.id,
+    });
+
+    if (result.error) {
+      console.error(result.error.message);
+    }
+    // console.log(response);
   }
 
   const subtotal = cart.reduce((acc, item) => acc + item.total, 0);

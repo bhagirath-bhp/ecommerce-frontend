@@ -6,7 +6,7 @@ const uri = import.meta.env.VITE_APP_URI
 // Add Order
 export const addOrder = async (userId) => {
     try {
-        const response = await axios.post(`${uri}/order/add`, { userId }, {
+        const response = await axios.post(`${uri}/orders/add`, { userId }, {
             headers: {
                 'Authorization': `Bearer ${Cookies.get('token')}`
             }
