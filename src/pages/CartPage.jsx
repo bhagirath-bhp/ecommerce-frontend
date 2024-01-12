@@ -18,7 +18,7 @@ const CartPage = () => {
   const [cart, setCart] = useState([]);
   const user = useRecoilValue(userState);
   const navigate = useNavigate();
-  const stripePromise = loadStripe('ypk_test_51BTUDGJAJfZb9HEBwDg86TN1KNprHjkfipXmEDMb0gSCassK5T3ZfxsAbcgKVmAIXF7oZ6ItlZZbXO6idTHE67IM007EwQ4uN3');
+  const stripePromise = loadStripe(process.env.STRIPE_PK);
   
   useEffect(() => {
     const getDetails = async () => {
