@@ -206,7 +206,7 @@ const OneProduct = () => {
                         <section id="reviews" className="mb-5 py-5">
                             <h3 className="text-lg font-bold">Customer Reviews</h3>
                             <ReviewBox />
-                            <ReviewForm />
+                            <ReviewForm productId={productId} userId={user.userId}/>
                         </section>
                     </section>
                     <section id="related-items max-w-[90vw]">
