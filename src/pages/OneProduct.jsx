@@ -173,7 +173,7 @@ const OneProduct = () => {
                             >Add to Cart</Button>
                         </div>
                     </section>
-                    <section className="product-details-sub">
+                    {/* <section className="product-details-sub">
                         <h3 className="text-lg font-bold">Product Details</h3>
                         <ul className="list-disc list-inside">
                             <li>
@@ -208,7 +208,7 @@ const OneProduct = () => {
                             <ReviewBox />
                             <ReviewForm productId={productId} userId={user.userId}/>
                         </section>
-                    </section>
+                    </section> */}
                     <section id="related-items max-w-[90vw]">
                         <h3 className="text-2xl font-bold">More items you may like in apparel</h3>
                         <div className="more-products-set noscrollbar flex justify-between w-full my-9 overflow-x-scroll">
