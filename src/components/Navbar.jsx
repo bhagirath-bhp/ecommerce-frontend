@@ -4,6 +4,7 @@ import NavbarMobile from "./NavbarMobile";
 import NavbarTablet from "./NavbarTablet";
 import { fetchCollections } from "../api/products";
 import { useNavigate } from "react-router-dom";
+import { capitalizeWords } from "../scripts/utilScripts";
 
 
 const Navbar = () => {
@@ -16,9 +17,7 @@ const Navbar = () => {
         {key: 5, title:"Category 5"},
         {key: 6, title:"Category 6"},
     ]
-    function capitalizeWords(inputString) {
-        return inputString.replace(/\b\w/g, char => char.toUpperCase());
-    }
+    
     const [collections,setCollections] = useState([])
     useEffect(() => {
         const fetchData = async() => {
