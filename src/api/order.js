@@ -22,3 +22,19 @@ export const addOrder = async (userId) => {
         return null;
     }
 };
+
+export const getAllOrdersForAUser = async (userId) => {
+    const response = await axios
+        .get(`${uri}/orders/${userId}`, {
+            headers: {
+                'Authorization': `Bearer ${Cookies.get('token')}`
+            }
+        })
+        .catch((error)=>{
+            console.log(error);
+        })
+    if(response.status===200){
+        return response.data;
+    }
+
+}

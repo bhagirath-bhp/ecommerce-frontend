@@ -1,5 +1,5 @@
 // pages/AllOrdersPage.jsx
-import React from 'react';
+import React, { useState } from 'react';
 import Footer from '../components/Footer';
 import { useRecoilValue } from 'recoil';
 import { ordersState } from '../components/OrdersState';
@@ -7,69 +7,69 @@ import { IoMdCheckmarkCircleOutline, IoMdCloseCircleOutline } from "react-icons/
 import Navbar2 from '../components/Navbar2';
 import { Button } from '@material-tailwind/react';
 import { useNavigate } from 'react-router-dom';
-const OrderCard = ({ order }) => {
-  // Placeholder functions for button actions
-    const navigate = useNavigate();
-    const handleViewItemClick = () => {/* ... */};
-    const handleViewOrderDetailsClick = () => {/* ... */};
-    const handleBuyAgainClick = () => {/* ... */};
-    const handleCancelOrderClick = () => {/* ... */};
-  
-    return (
-      <div className="bg-white p-4 rounded-lg shadow-md mb-6">
-        <div className="flex justify-between">
-          <div>
-            <h3 className="font-semibold">{order.productName}</h3>
-            <p className="text-sm text-gray-600">{order.description}</p>
-          </div>
-          <div className="flex items-center">
-            <img
-              src={order.imageUrl}
-              alt={order.productName}
-              className="w-20 h-20 object-cover rounded-lg"
-            />
-          </div>
-        </div>
-        <div className="mt-4 flex justify-around">
-          <Button className="bg-golden text-sm text-black my-2" onClick={()=>{navigate('/orderdetails', {state: {productId: "abc"}})}}>View Order Details</Button>
-          <Button className="bg-golden text-sm text-black my-2" onClick={()=>{navigate('/oneproduct', {state: {productId: "abc"}})}}>View Item</Button>
+import OrderCard from '../components/OrderCard';
+import { useEffect } from 'react';
+import { getAllOrdersForAUser } from '../api/order';
+import { userState } from '../components/state/RecoilState';
+import { DefaultPagination } from '../components/DefaultPagination';
 
-          {order.status === 'delivered' ? (
-            <Button className="text-sm text-white my-2" color='green' onClick={()=>{navigate('/cart', {state: {productId: "abc"}})}}>
-              <IoMdCheckmarkCircleOutline className="inline mr-2" />
-              Buy Again
-            </Button>
-          ) : (
-            <Button className="text-sm text-white my-2" color='red' onClick={()=>{navigate('/cart', {state: {productId: "abc"}})}}>
-              <IoMdCloseCircleOutline className="inline mr-2" />
-              Cancel Order
-            </Button>
-          )}
+
+const AllOrdersPage = () => {
+  // const orders = useRecoilValue(ordersState);
+  const [orders, setOrders] = useState();
+  const [ordersComponentSet, setOrdersComponentSet] = useState();
+  const [pagination, setPagination] = useState({ page: 1, pageSize: 6, totalPages: 1, totalProducts: 1 });
+  const user = useRecoilValue(userState);
+  async function fetchOrders() {
+    const myOrders = await getAllOrdersForAUser(user.userId);
+    setOrders(myOrders);
+  }
+  useEffect(() => {
+    fetchOrders();
+  }, [])
+  useEffect(()=>{
+    const orderItemsComponentSet = (orderSet) => {
+      return orderSet
+        ? orderSet.orderitems.map((item) => (
+          <OrderCard
+            key={Math.random()}
+            order={{
+              productName: item.product.name,
+              price: item.price,
+              imgUrl: (item.imgUrl) || "/noimg.jpg",
+              description: (item.description) || "Lorem ipsum dolor sit amet consectetur adipisicing elit. Itaque, explicabo!"
+            }} />
+        ))
+        :
+        <p>Something Went Wrong</p>
+    }
+    const ordersComponentSetHold = (orders)
+      ? orders.map((orderSet) => (
+        <div key={orderSet.orderId} className='border-b-[1px] border-gray-400 my-[3rem] py-[2rem] w-full'>
+          {
+            orderItemsComponentSet(orderSet)
+          }
+  
         </div>
+      ))
+      : (
+        <p>No orders found</p>
+      )
+      setOrdersComponentSet(ordersComponentSetHold);
+  }, [orders])
+  
+
+
+  return (
+    <>
+      <Navbar2 />
+      <div className="w-full mx-auto py-8 px-[5rem]">
+        <h1 className="text-2xl font-bold mb-6">Your Orders</h1>
+        {ordersComponentSet}
       </div>
-    );
-  };
-  
-  const AllOrdersPage = () => {
-    const orders = useRecoilValue(ordersState);
-  
-    return (
-      <>
-        <Navbar2 />
-        <div className="max-w-2xl mx-auto py-8 px-4">
-          <h1 className="text-2xl font-bold mb-6">Your Orders</h1>
-          {orders.map((order, index) => (
-            <div key={order.id}>
-              <h2 className="text-lg font-semibold my-4">
-                {order.status === 'delivered' ? 'Delivered' : 'Delivery by'} {order.date}
-              </h2>
-              <OrderCard order={order} />
-            </div>
-          ))}
-        </div>
-        <Footer />
-      </>
-    );
-  };
-  
-  export default AllOrdersPage;
+      <Footer />
+    </>
+  );
+};
+
+export default AllOrdersPage;

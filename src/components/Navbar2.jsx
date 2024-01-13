@@ -23,7 +23,6 @@ const Navbar2 = () => {
     useEffect(() => {
         const fetchData = async () => {
             const data = await fetchCollections(navigate)
-            console.log(data);
             setCollections(data)
         }
         fetchData()
