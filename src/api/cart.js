@@ -46,7 +46,7 @@ export const getCart = async (userId) => {
 // Reduce Quantity
 export const reduceQuantity = async (cartId, productId, quantity) => {
     try {
-        const response = await axios.put(`${uri}/cart/reduce`, { "cartId": cartId, "productId": productId, "quantity": quantity }, {
+        const response = await axios.post(`${uri}/cart/reduce`, { "cartId": cartId, "productId": productId, "quantity": quantity }, {
             headers: {
                 'Authorization': `Bearer ${Cookies.get('token')}`
             }

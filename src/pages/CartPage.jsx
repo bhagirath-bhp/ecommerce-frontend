@@ -18,12 +18,14 @@ const CartPage = () => {
   const [cart, setCart] = useState([]);
   const user = useRecoilValue(userState);
   const navigate = useNavigate();
-  const stripePromise = loadStripe(process.env.STRIPE_PK);
+  // const stripePromise = loadStripe(import.meta.env.STRIPE_PK);
+  const stripePromise = loadStripe("pk_test_51OXop6SFzZIS5qGqgbs1PEpCo62ySuI5EtEN5eOc0y0MCSWNQnN7o22a1W0mLp0kMvuUQks3ZY9gvzFJkpU22Dsn006mmxIQs6");
   
   useEffect(() => {
     const getDetails = async () => {
       try {
         const response = await getCart(user.userId);
+        console.log(response)
         const transformedRes = transformCartArray(response.cartitems);
         setCart(transformedRes);
       } catch (error) {
@@ -35,17 +37,18 @@ const CartPage = () => {
   }, []);
   
   const handleQuantityChange = async (id, productId, newQuantity) => {
-    // const newCart = cart.map((item) =>
-    // item.id === id ? { ...item, quantity: newQuantity, total: newQuantity * item.price } : item
-    // );
     const response = await reduceQuantity(id, productId, newQuantity);
-    console.log(response);
-    setCart("");
+    if(response=="changed the quantity"){
+      const newCart = cart.map((item) =>
+        item.id === id ? { ...item, quantity: newQuantity, total: newQuantity * item.price } : item
+      );
+      setCart(newCart);
+    }
   };
   
   // removeFromCart
   const handleDelete = async (id, productId) => {
-    // const newCart = cart.filter((item) => item.id !== id);
+    const newCart = cart.filter((item) => item.id !== id);
     const response = await removeFromCart(id, productId);
     console.log(response);
     setCart(newCart);
@@ -53,12 +56,7 @@ const CartPage = () => {
 
   const handleCheckout = async () =>{
     const session  = await addOrder(user.userId);
-    // navigate('/checkout', {state: response.id});
     const stripe = await stripePromise;
-
-
-    // const session = await response.json();
-
     // Redirect to Checkout page
     const result = await stripe.redirectToCheckout({
       sessionId: session.id,
