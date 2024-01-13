@@ -7,10 +7,10 @@ const Testimonial = (props) => {
     return (
         (cardType==="testimonial") ?
         (<div className="testimonial min-w-[400px] bg-goldenLight rounded-lg mx-5 py-5">
-            <div className="testimonial-author flex justify my-5">
-                <div className="testimonial-author-img mx-5">
+            <div className="testimonial-author flex justify m-5">
+                {/* <div className="testimonial-author-img mx-5">
                     <img src={props.url} alt="" className='h-[50px] w-[50px] rounded-full border-[1px] p-[2px]' />
-                </div>
+                </div> */}
                 <div className="testimonial-author-detail">
                     <h3 className='font-bold text-xl'>{props.name}</h3>
                     <p>{props.designation}</p>
@@ -20,13 +20,13 @@ const Testimonial = (props) => {
         </div>)
         :
         (<div className="testimonial min-w-[400px] rounded-lg mx-5 py-5">
-        <div className="testimonial-author flex justify my-5">
-            <div className="testimonial-author-img mx-5">
+        <div className="testimonial-author flex justify m-5">
+            {/* <div className="testimonial-author-img mx-5">
                 <img src={props.url} alt="" className='h-[50px] w-[50px] rounded-full border-[1px] p-[2px]' />
-            </div>
+            </div> */}
             <div className="testimonial-author-detail">
                 <h3 className='font-bold text-xl'>{props.name}</h3>
-                <p className="font-bold">{props.reviewTitle}</p>
+                {/* <p className="font-bold">{props.reviewTitle}</p> */}
                 <Rating value={4} readonly/>
                 <p>Reviewed on {props.date} </p>
             </div>
