@@ -141,11 +141,11 @@ const OneProduct = () => {
                                 </h3>
                             </div>
                             <div className="product-buttons mx-5 smMobile:hidden tablet:block">
-                                <Button
+                                {/* <Button
                                     className="bg-golden text-sm text-black my-2"
                                     loading={buyLoading}
                                 // onClick={handleBuy}
-                                >Buy Now</Button>
+                                >Buy Now</Button> */}
                                 <Button
                                     className="bg-golden text-sm text-black my-2"
                                     loading={cartLoading}
@@ -161,11 +161,11 @@ const OneProduct = () => {
                             <DropdownSearch />
                         </div>
                         <div className="product-buttons tablet:hidden smMobile:flex smMobile:justify-between smMobile:w-[90vw] pr-3 ">
-                            <Button
+                            {/* <Button
                                 className="bg-golden text-sm text-black my-2"
                                 loading={buyLoading}
                             // onClick={handleBuy}
-                            >Buy Now</Button>
+                            >Buy Now</Button> */}
                             <Button
                                 className="bg-golden text-sm text-black my-2"
                                 loading={cartLoading}
