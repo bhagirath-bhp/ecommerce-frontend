@@ -20,7 +20,6 @@ const ProductsPage = () => {
   const handlePageChange = (newPage) => {
     fetchProducts(newPage);
   };
-
   const productsComponentContainer = products.map((product) => (
     <Product
       key={product.productId}
@@ -28,14 +27,14 @@ const ProductsPage = () => {
       title={product.name}
       description={product.description}
       price={product.price}
-      url={product.images[0].imageURL}
+      url={product.images[0]?.imageURL || "/noimg.jpg"}
     />
   ));
 
   return (
     <>
       <Navbar2 />
-      <div className="products flex-column justify-between items-center min-h-screen p-9">
+      <div className="products flex-column justify-evenly items-center min-h-screen p-9">
         <div className="products-head flex justify-between w-full">
           <div className="mb-9 font-Chivo text-black ">
             <h3 className='font-bold text-5xl'>Enchantments</h3>

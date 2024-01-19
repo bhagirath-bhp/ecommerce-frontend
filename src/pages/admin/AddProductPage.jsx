@@ -42,11 +42,11 @@ const AddProductPage = () => {
   const handleChange = (e) => {
     const { name, value } = e.target;
     setProduct({ ...product, [name]: value });
-    console.log(product)
   };
 
   const handleImageChange = (e) => {
     setProduct({ ...product, images: e.target.files });
+    console.log(product.images)
   };
 
   const handleCategoryChange = (e) => {
@@ -54,7 +54,6 @@ const AddProductPage = () => {
   };
 
   const handleSubmit = async (e) => {
-    console.log(e)
     e.preventDefault();
 
     // Call the updated addNewProduct function

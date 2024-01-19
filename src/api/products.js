@@ -60,31 +60,45 @@ export const addNewProduct = async ({
     try {
         const formData = new FormData();
         formData.append('name', name);
-        formData.append('categoryId', categoryId);
+        // formData.append('categoryId', categoryId);
         formData.append('collectionId', collectionId);
         formData.append('description', description);
         formData.append('quantity', quantity);
         formData.append('price', price);
-        // formData.append('images', images);
-
-        if (images) {
-            if (Array.isArray(images)) {
-                images.forEach((image, index) => {
-                    formData.append(`images[${index}]`, image);
-                });
-            } else {
-                formData.append('images[0]', images);
-            }
+        formData.append('images', images);
+        console.log(images);
+        // if (images) {
+        //     images = Object.values(images);
+        //     // console.log(images)
+        //     if (Array.isArray(images) && images.length >= 2) {
+        //         images.forEach((image, index) => {
+        //             // console.log(image)
+        //             // formData.append(`images[${index}]`, image);
+        //             formData.append(`images[${index}]`, image);
+        //         });
+        //     } else {
+        //         formData.append('images', images);
+        //     }
+        // }
+        for (var pair of formData.entries()) {
+            console.log(pair[0]+ ', ' + pair[1]); 
         }
-
-
-        const response = await axios.post(`${uri}/product/add`, formData, {
+        const response = await axios.post(`${uri}/product/add`, {
+            name,
+            description,
+            price,
+            images,
+            quantity,
+            categoryId,
+            collectionId,
+        }, {
             headers: {
                 'Authorization': `Bearer ${Cookies.get('token')}`,
                 'Content-Type': 'multipart/form-data',
             }
         });
 
+        // console.log("formData: " ,formData);
         if (response.status === 200) {
             return response.data;
         } else {

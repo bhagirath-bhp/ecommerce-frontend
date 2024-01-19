@@ -9,7 +9,7 @@ import { getWishlist } from '../api/wishlist';
 import { userState } from '../components/state/RecoilState';
 
 const WishlistPage = () => {
-  const [cart, setCart] = useRecoilState(cartState);
+  // const [cart, setCart] = useRecoilState(cartState);
   const user = useRecoilValue(userState);
   const [wishlist, setWishlist] = useState([]);
 
@@ -42,7 +42,7 @@ const WishlistPage = () => {
           ? { ...item, quantity: item.quantity + 1, total: (item.quantity + 1) * item.price }
           : item
       );
-      setCart(updatedCart);
+      // setCart(updatedCart);
     } else {
       const newItem = {
         ...wishlistItem,

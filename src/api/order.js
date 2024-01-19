@@ -11,7 +11,6 @@ export const addOrder = async (userId) => {
                 'Authorization': `Bearer ${Cookies.get('token')}`
             }
         });
-
         if (response.status === 200) {
             return response.data;
         } else {
