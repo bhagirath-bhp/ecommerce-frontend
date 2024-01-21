@@ -1,15 +1,14 @@
-// AddCategoryPopup.jsx
+// AddCollectionPopup.jsx
 import React, { useState } from 'react';
-import { addNewCategory } from '../../api/products';
+import { addNewCollection } from '../../api/products';
 
-
-const AddCategoryPopup = ({ onClose }) => {
-  const [newCategory, setNewCategory] = useState('');
+const AddCollectionPopup = ({ onClose }) => {
+  const [newCollection, setNewCollection] = useState('');
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setNewCategory(''); // Reset the input field after submission
-    const response = await addNewCategory(e.target[0].value);
+    setNewCollection(''); // Reset the input field after submission
+    const response = await addNewCollection(e.target[0].value);
     console.log(response);
   };
 
@@ -20,9 +19,9 @@ const AddCategoryPopup = ({ onClose }) => {
           <input
             className="p-2 border rounded"
             type="text"
-            placeholder="Category Name"
-            value={newCategory}
-            onChange={(e) => setNewCategory(e.target.value)}
+            placeholder="Collection Name"
+            value={newCollection}
+            onChange={(e) => setNewCollection(e.target.value)}
             required
           />
           <div className="flex justify-end space-x-2">
@@ -37,7 +36,7 @@ const AddCategoryPopup = ({ onClose }) => {
               type="submit"
               className="bg-green-500 text-white p-2 rounded hover:bg-green-600"
             >
-              Add Category
+              Add Collection
             </button>
           </div>
         </form>
@@ -46,4 +45,4 @@ const AddCategoryPopup = ({ onClose }) => {
   );
 };
 
-export default AddCategoryPopup;
+export default AddCollectionPopup;

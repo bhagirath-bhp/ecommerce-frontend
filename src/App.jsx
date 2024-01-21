@@ -20,7 +20,7 @@ import CustomToaster from './components/CustomToaster'
 import AddProductPage from './pages/admin/AddProductPage'
 import EditProductPage from './pages/admin/EditProductPage'
 import AdminCatalogPage from './pages/admin/AdminCatalogPage'
-import AllOrdersAdminPage from './pages/admin/AllOrdersPage'
+import AllOrdersAdminPage from './pages/admin/AllOrdersAdminPage'
 
 
 function App() {

@@ -30,8 +30,14 @@ const LoginPage = () => {
             toast.success(response.message, {
                 position: toast.POSITION.TOP_RIGHT,
             });
+            console.log(response.role);
             setTimeout(() => {
-                navigate("/")
+                if(response.role==="admin"){
+                    navigate("/admin/orders")
+                }
+                else{
+                    navigate("/")
+                }
             }, 2000);
         }
         else{

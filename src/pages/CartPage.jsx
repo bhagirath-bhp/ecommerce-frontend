@@ -19,7 +19,7 @@ const CartPage = () => {
   const user = useRecoilValue(userState);
   const navigate = useNavigate();
   // const stripePromise = loadStripe(import.meta.env.STRIPE_PK);
-  const stripePromise = loadStripe("pk_test_51OXop6SFzZIS5qGqgbs1PEpCo62ySuI5EtEN5eOc0y0MCSWNQnN7o22a1W0mLp0kMvuUQks3ZY9gvzFJkpU22Dsn006mmxIQs6");
+  // const stripePromise = loadStripe("pk_test_51OXop6SFzZIS5qGqgbs1PEpCo62ySuI5EtEN5eOc0y0MCSWNQnN7o22a1W0mLp0kMvuUQks3ZY9gvzFJkpU22Dsn006mmxIQs6");
   
   useEffect(() => {
     const getDetails = async () => {
@@ -55,18 +55,10 @@ const CartPage = () => {
   };
 
   const handleCheckout = async () =>{
-    const session  = await addOrder(user.userId);
-    const stripe = await stripePromise;
-    // Redirect to Checkout page
-    // const result = await stripe.redirectToCheckout({
-    //   sessionId: session.id,
-    // });
-    console.log(session);
-
-    if (result.error) {
-      console.error(result.error.message);
-    }
-    // console.log(response);
+    // const session  = await addOrder(user.userId);
+    // const stripe = await stripePromise;
+    // console.log(session);
+    navigate("/address")
   }
 
   const subtotal = cart.reduce((acc, item) => acc + item.total, 0);

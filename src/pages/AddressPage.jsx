@@ -1,15 +1,37 @@
 // AddressPage.jsx
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 import AddressForm from '../components/AddressForm';
-import { useRecoilState } from 'recoil';
-import { addressListState } from '../components/AddressListState';
+import { loadStripe } from '@stripe/stripe-js';
+import { addOrder } from '../api/order';
+import { useRecoilState, useRecoilValue } from 'recoil';
+import { addressListState, userState } from '../components/state/RecoilState';
+import { getAddress } from '../api/user';
+
 
 const AddressPage = () => {
   const [addresses, setAddresses] = useRecoilState(addressListState);
   const [addingNewAddress, setAddingNewAddress] = useState(false);
   const [selectedAddress, setSelectedAddress] = useState(null);
+  const user = useRecoilValue(userState);
+  const stripePromise = loadStripe("pk_test_51OXop6SFzZIS5qGqgbs1PEpCo62ySuI5EtEN5eOc0y0MCSWNQnN7o22a1W0mLp0kMvuUQks3ZY9gvzFJkpU22Dsn006mmxIQs6");
+
+  useEffect(()=>{
+    async function fetchAddress(){
+      const response  = await getAddress(user.userId);
+      console.log(response, addresses)
+      if(response){
+        if(Array.isArray(response)){
+          response.forEach((addressdata)=>{
+            handleAddAddress(addressdata)
+          })
+        }
+        handleAddAddress(response[0]);
+      }
+    }
+    fetchAddress();
+  }, [user])
 
   const handleAddAddress = (newAddress) => {
     setAddresses([...addresses, newAddress]);
@@ -20,8 +42,11 @@ const AddressPage = () => {
     setSelectedAddress(index);
   };
 
-  const handleCheckout = () => {
+  const handleCheckout = async () => {
     // Implement your checkout logic here
+    const session  = await addOrder(user.userId);
+    const stripe = await stripePromise;
+    console.log(session);
     console.log("Proceeding to checkout with address: ", addresses[selectedAddress]);
   };
 
@@ -47,7 +72,7 @@ const AddressPage = () => {
             addresses.map((address, index) => (
               <div key={index} className="mb-4">
                 <div className={`p-4 rounded ${selectedAddress === index ? 'border-2 border-gold' : 'border border-gold'}`}>
-                  <p>{address.fullname}</p>
+                  {/* <p>{address.fullname}</p> */}
                   <p>{address.addressLine1}</p>
                   <p>{address.addressLine2}</p>
                   <p>{address.city}, {address.state}, {address.country}</p>

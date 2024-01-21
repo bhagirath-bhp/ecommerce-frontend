@@ -5,8 +5,12 @@ import Footer from '../components/Footer';
 import TestimonialCarousel from '../components/TestimonialCarousel';
 import { Button } from '@material-tailwind/react';
 import { useNavigate } from 'react-router-dom';
+import { getFiveRandomProducts } from '../api/products';
+import { useEffect, useState } from 'react';
+
 const Homepage = () => {
   const navigate = useNavigate();
+  const [productSet, setProductSet] = useState([]);
   const imgSet = [
     { key: 1, url: "/public/product-image1.png" },
     { key: 2, url: "/public/product-image2.png" },
@@ -17,19 +21,26 @@ const Homepage = () => {
     { key: 7, url: "/public/product-image3.png" },
     { key: 8, url: "/public/product-image4.png" },
   ];
-  const productSet = [
-    { key: 1, title: "Product1", description: "This is a very nice product.", price: 489, url: "/public/product-image1.png" },
-    { key: 2, title: "Product1", description: "This is a very nice product.", price: 489, url: "/public/product-image2.png" },
-    { key: 3, title: "Product1", description: "This is a very nice product.", price: 489, url: "/public/product-image3.png" },
-    { key: 4, title: "Product1", description: "This is a very nice product.", price: 489, url: "/public/product-image4.png" },
-    { key: 5, title: "Product1", description: "This is a very nice product.", price: 489, url: "/public/product-image1.png" },
-    { key: 6, title: "Product1", description: "This is a very nice product.", price: 489, url: "/public/product-image2.png" }
-  ]
+
   
-  
-  const imgComponentSet = imgSet.map(img => { return <ImgDiscover key={img.key} url={img.url} className='img-rect' /> });
-  const productComponentSet = productSet.map((product) => (<Product key={product.key} title={product.title} description={product.description} url={product.url} price={product.price} />))
-  
+
+  useEffect(()=>{
+    async function fetchProducts(){
+      const response = await getFiveRandomProducts();
+      console.log(response)
+      if(response){
+        if(Array.isArray(response)){
+          response.forEach((product)=>{
+            setProductSet(...productSet, product);
+          })
+        }
+        setProductSet(response);
+      }
+    }
+    fetchProducts();
+  }, [])
+  const imgComponentSet = imgSet.map(img => { return <ImgDiscover key={img.key} url={img.url || "noimg.jpg"} className='img-rect' /> });
+  const productComponentSet = productSet.map((product)=>(<Product key={product.productId} productId={product.productId} name={product.name} description={product.description} price={product.price}  url={product.url || "noimg.jpg"}/>))
   return (
     <div>
       {/* Navbar */}

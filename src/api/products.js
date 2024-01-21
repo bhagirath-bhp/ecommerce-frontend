@@ -61,25 +61,25 @@ export const addNewProduct = async ({
         const formData = new FormData();
         formData.append('name', name);
         // formData.append('categoryId', categoryId);
-        formData.append('collectionId', collectionId);
+        formData.append('collectionId', parseInt(collectionId));
         formData.append('description', description);
         formData.append('quantity', quantity);
         formData.append('price', price);
         formData.append('images', images);
         console.log(images);
-        // if (images) {
-        //     images = Object.values(images);
-        //     // console.log(images)
-        //     if (Array.isArray(images) && images.length >= 2) {
-        //         images.forEach((image, index) => {
-        //             // console.log(image)
-        //             // formData.append(`images[${index}]`, image);
-        //             formData.append(`images[${index}]`, image);
-        //         });
-        //     } else {
-        //         formData.append('images', images);
-        //     }
-        // }
+        if (images) {
+            images = Object.values(images);
+            // console.log(images)
+            if (Array.isArray(images) && images.length >= 2) {
+                images.forEach((image, index) => {
+                    // console.log(image)
+                    // formData.append(`images[${index}]`, image);
+                    formData.append(`images[${index}]`, image);
+                });
+            } else {
+                formData.append('images', images);
+            }
+        }
         for (var pair of formData.entries()) {
             console.log(pair[0]+ ', ' + pair[1]); 
         }
@@ -89,7 +89,7 @@ export const addNewProduct = async ({
             price,
             images,
             quantity,
-            categoryId,
+            // categoryId,
             collectionId,
         }, {
             headers: {
@@ -289,3 +289,21 @@ export const getProductsByCategoryId = async (categoryId) => {
         return null;
     }
 };
+export const getFiveRandomProducts = async () => {
+    const response = await axios
+        .get(`${uri}/products/random`, {
+            headers: {
+                'Authorization': `Bearer ${Cookies.get('token')}`
+            }
+        })
+        .catch((error)=>{
+            console.log(error)
+        })
+
+    if (response.status === 200) {
+        return response.data;
+    } else {
+        return null;
+    }
+};
+

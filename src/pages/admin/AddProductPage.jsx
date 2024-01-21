@@ -2,10 +2,9 @@ import React, { useState, useEffect } from 'react';
 import { useRecoilState } from 'recoil';
 import { productState } from '../../components/admin/productState';
 import AdminNavbar from '../../components/admin/AdminNavbar';
-import AddCategoryPopup from '../../components/admin/AddCategoryPopup';
-import { addNewProduct, getAllCategories, getAllCollections } from '../../api/products';
+import AddCollectionPopup from '../../components/admin/AddCollectionPopup';
+import { addNewCollection, addNewProduct, getAllCategories, getAllCollections } from '../../api/products';
 import { Button } from '@material-tailwind/react';
-
 const AddProductPage = () => {
   const [product, setProduct] = useState({
     name: '',
@@ -18,7 +17,7 @@ const AddProductPage = () => {
   });
   const [categories, setCategories] = useState([{ categoryId: null, categoryName: "" }]);
   const [collections, setCollections] = useState([]);
-  const [showAddCategory, setShowAddCategory] = useState(false);
+  const [showAddCollection, setShowAddCollection] = useState(false);
   useEffect(() => {
     const fetchCategories = async () => {
       const result = await getAllCategories();
@@ -138,26 +137,6 @@ const AddProductPage = () => {
             />
           </div>
           <div className="mb-2">
-            <label htmlFor="categoryId" className="block text-gray-700 text-sm font-bold mb-2">
-              Select Category
-            </label>
-            <select
-              id="categoryId"
-              className="p-2 border-[1px] border-golden rounded w-full outline-none"
-              name="categoryId"
-              value={product.categoryId}
-              onChange={handleCategoryChange}
-            >
-              <option value="">Select a category</option>
-              {categories.map((category) => (
-                <option key={category.categoryId} value={category.categoryId}>
-                  {category.categoryName}
-                </option>
-              ))}
-            </select>
-            <Button className='text-sm my-2 bg-golden' onClick={() => { setShowAddCategory(true) }}>Add Category</Button>
-          </div>
-          <div className="mb-2">
             <label htmlFor="collectionId" className="block text-gray-700 text-sm font-bold mb-2">
               Select Collection
             </label>
@@ -175,15 +154,15 @@ const AddProductPage = () => {
                 </option>
               ))}
             </select>
-            <Button className='text-sm my-2 bg-golden' onClick={() => { setShowAddCategory(true) }}>Add Category</Button>
+            <Button className='text-sm my-2 bg-golden' onClick={() => { setShowAddCollection(true) }}>Add Collection</Button>
           </div>
           <Button type='submit' className='bg-golden text-sm'>
             Add Product
           </Button>
         </form>
-        {showAddCategory && (
-          <AddCategoryPopup
-            onClose={() => setShowAddCategory(false)}
+        {showAddCollection && (
+          <AddCollectionPopup
+            onClose={() => setShowAddCollection(false)}
           />
         )}
       </div>

@@ -1,8 +1,8 @@
 // AddressForm.jsx
 import React, { useState, useEffect } from 'react';
-import { useRecoilState } from 'recoil';
-import { countryState, stateOptionsState } from './AddressState';
-import { addressListState } from './AddressListState';
+import { useRecoilState, useRecoilValue } from 'recoil';
+import { addressListState, countryState, stateOptionsState, userState } from './state/RecoilState';
+import { addAddress } from '../api/user';
 
 const AddressForm = ({ onSubmit }) => {
   const [address, setAddress] = useState({
@@ -19,6 +19,7 @@ const AddressForm = ({ onSubmit }) => {
   const [country, setCountry] = useRecoilState(countryState);
   const [stateOptions, setStateOptions] = useRecoilState(stateOptionsState);
   const [addresses, setAddresses] = useRecoilState(addressListState);
+  const user = useRecoilValue(userState);
 
   useEffect(() => {
     if (country) {
@@ -31,9 +32,13 @@ const AddressForm = ({ onSubmit }) => {
     setAddress({ ...address, [name]: value });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    setAddresses([...addresses, address]);
+    const response = await addAddress(address.addressLine1, address.addressLine2, address.city, address.country, address.pincode, user.userId);
+    console.log(response);
+    if(response){
+      setAddresses([...addresses, address]);
+    }
     onSubmit(address);
   };
 
