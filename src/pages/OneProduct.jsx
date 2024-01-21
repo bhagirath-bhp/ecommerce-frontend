@@ -10,7 +10,7 @@ import DropdownSearch from "../components/DropdownSearch";
 import Product from "../components/Product";
 import { Button } from "@material-tailwind/react";
 import { RiHeartAddLine } from "react-icons/ri";
-import { getAProductById } from "../api/products";
+import { getAProductById, getFiveRandomProducts } from "../api/products";
 import { CircularProgress } from "@mui/material";
 import { addToCart } from "../api/cart";
 import { useRecoilValue, useSetRecoilState } from "recoil";
@@ -20,6 +20,7 @@ import { addToWishlist } from "../api/wishlist";
 
 const OneProduct = () => {
     const [productData1, setProductData1] = useState({});
+    const [recommendedProductSet, setRecommendedProductSet] = useState([]);
     const [loading, setLoading] = useState(true);
     const [cartLoading, setCartLoading] = useState(false);
     const [buyLoading, setBuyLoading] = useState(false);
@@ -27,7 +28,7 @@ const OneProduct = () => {
     const user = useRecoilValue(userState);
     const setToastState = useSetRecoilState(toastState);
     const navigate = useNavigate();
-
+    
     useEffect(() => {
         async function fetchProduct() {
             try {
@@ -40,10 +41,22 @@ const OneProduct = () => {
                 console.error('Error fetching product data:', error);
             }
         }
-
+        async function fetchRecommendedProductSet(){
+            const response = await getFiveRandomProducts();
+            if(response){
+                if(Array.isArray(response)){
+                    response.forEach((product)=>{
+                        setRecommendedProductSet(...recommendedProductSet, product);
+                    })
+                }
+                else{
+                    setRecommendedProductSet(response);
+                }
+            }
+        }
         fetchProduct();
+        fetchRecommendedProductSet();
     }, [productId]);
-
     useEffect(() => {
         if (productData1.images) {
             setTimeout(() => {
@@ -113,6 +126,8 @@ const OneProduct = () => {
         { key: 6, title: "Product1", description: "This is a very nice product.", price: 489, url: "/public/product-image2.png" }
     ];
     const productComponentSet = productSet.map((product) => (<Product key={product.key} title={product.title} description={product.description} url={product.url} price={product.price} />))
+    // console.log(recommendedProductSet)
+    // const productComponentSet = recommendedProductSet.map((product) => (<Product key={product.productId} name={product.name} description={product.description} url={product.url || "noimg.jpg"} price={product.price} />))
 
     return (
         <div className="font-sans">

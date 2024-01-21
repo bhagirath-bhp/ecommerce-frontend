@@ -27,7 +27,7 @@ const AddressPage = () => {
             handleAddAddress(addressdata)
           })
         }
-        handleAddAddress(response[0]);
+        handleAddAddress(response);
       }
     }
     fetchAddress();
