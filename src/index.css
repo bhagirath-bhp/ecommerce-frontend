@@ -69,7 +69,9 @@ span.ripple {
     opacity: 0;
   }
 }
-
+.btn-gold{
+  @apply text-sm bg-golden
+}
 
 
 

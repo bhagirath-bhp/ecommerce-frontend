@@ -7,25 +7,30 @@ import { cartState } from '../components/CartState';
 import { FaHeart } from 'react-icons/fa';
 import { getWishlist } from '../api/wishlist';
 import { userState } from '../components/state/RecoilState';
+import { Button } from '@material-tailwind/react';
+import { addToCart } from '../api/cart';
+
 
 const WishlistPage = () => {
   // const [cart, setCart] = useRecoilState(cartState);
   const user = useRecoilValue(userState);
   const [wishlist, setWishlist] = useState([]);
+  const [cartLoading, setCartLoading] = useState(false);
 
   useEffect(() => {
     const getDetails = async () => {
       try {
         const response = await getWishlist(user.userId);
-        setWishlist((prevWishlist) => [
-          ...prevWishlist,
-          {
-            id: response.wishlistId,
-            title: response[0].product.name,
-            description: response[0].product.description,
-            price: response[0].product.price,
-          },
-        ]);
+        console.log(response)
+        // setWishlist((prevWishlist) => [
+        //   ...prevWishlist,
+        //   {
+        //     id: response.wishlistId,
+        //     title: response[0].product.name,
+        //     description: response[0].product.description,
+        //     price: response[0].product.price,
+        //   },
+        // ]);
       } catch (error) {
         console.error('Error fetching cart data:', error);
       }
@@ -34,24 +39,18 @@ const WishlistPage = () => {
     getDetails();
   }, []);
 
-  const addToCart = (wishlistItem) => {
-    const existingItem = cart.find((item) => item.id === wishlistItem.id);
-    if (existingItem) {
-      const updatedCart = cart.map((item) =>
-        item.id === wishlistItem.id
-          ? { ...item, quantity: item.quantity + 1, total: (item.quantity + 1) * item.price }
-          : item
-      );
-      // setCart(updatedCart);
-    } else {
-      const newItem = {
-        ...wishlistItem,
-        quantity: 1,
-        total: wishlistItem.price,
-      };
-      setCart([...cart, newItem]);
-    }
-  };
+  const handleAddToCart = async (productId) => {
+    // setCartLoading(true);
+    // const response = await addToCart(user.userId, item.id)
+    // setToastState([response, 'success', 'top-right', productId]);
+    // console.log(response)
+    // if (response)
+    //   setTimeout(() => {
+    //     navigate('/cart');
+    //   }, 1500);
+    console.log(productId)
+
+  }
 
   const removeFromWishlist = (itemId) => {
     const newWishlist = wishlist.filter((item) => item.id !== itemId);
@@ -64,17 +63,15 @@ const WishlistPage = () => {
       <h2 className="text-xl font-bold">{item.title}</h2>
       <p>{item.description}</p>
       <div className="flex justify-between items-center">
-        <button
-          onClick={() => addToCart(item)}
-          className="bg-black text-golden px-4 py-2 rounded border border-gold hover:bg-opacity-80 transition duration-200"
-        >
-          Add to Cart
-        </button>
+        <Button
+          className="bg-golden text-sm text-black my-2"
+          loading={cartLoading}
+          onClick={()=>{handleAddToCart(item.id)}}
+        >Add to Cart</Button>
         <FaHeart
           onClick={() => removeFromWishlist(item.id)}
-          className={`text-gold text-2xl cursor-pointer ${
-            wishlist.some((wItem) => wItem.id === item.id) ? 'filled' : ''
-          }`}
+          className={`text-gold text-2xl cursor-pointer ${wishlist.some((wItem) => wItem.id === item.id) ? 'filled' : ''
+            }`}
         />
       </div>
     </div>
@@ -87,7 +84,7 @@ const WishlistPage = () => {
           <h1 className="text-3xl font-bold text-gold mb-6">Your Wishlist</h1>
           {wishlist.length > 0 ? (
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-              { wishlistComponentSet }
+              {wishlistComponentSet}
             </div>
           ) : (
             <p className="text-gold">No items in your wishlist yet.</p>

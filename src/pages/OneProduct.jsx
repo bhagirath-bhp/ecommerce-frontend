@@ -34,6 +34,7 @@ const OneProduct = () => {
                 if (productId) {
                     const product = await getAProductById(productId);
                     setProductData1(product);
+                    console.log(productData1)
                 }
             } catch (error) {
                 console.error('Error fetching product data:', error);
@@ -44,7 +45,6 @@ const OneProduct = () => {
     }, [productId]);
 
     useEffect(() => {
-        // console.log('Updated Product Data:', productData1.images, productData.carouselImageUrls);
         if (productData1.images) {
             setTimeout(() => {
                 setLoading(false);
