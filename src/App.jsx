@@ -3,21 +3,24 @@ import './App.css'
 import Homepage from './pages/Homepage'
 import ProductsPage from './pages/ProductsPage'
 import OneProduct from './pages/OneProduct'
-import AddProductPage from './pages/admin/AddProductPage'
 import SignUpPage from './pages/SignUpPage'
 import LoginPage from './pages/LoginPage'
-import EditProductPage from './pages/admin/EditProductPage'
 import CartPage from './pages/CartPage'
 import AboutPage from './pages/AboutPage'
-import AdminCatalogPage from './pages/admin/AdminCatalogPage'
 import WishlistPage from './pages/WishlistPage'
 import AllOrdersPage from './pages/AllOrdersPage'
 import OrderDetails from './pages/OrderDetails'
 import AddressPage from './pages/AddressPage'
-import CustomToaster from './components/CustomToaster'
 import Error500 from './pages/Error500'
 import SuccessPage from './pages/SucessPage'
 import ProfilePage from './pages/ProfilePage'
+
+import CustomToaster from './components/CustomToaster'
+
+import AddProductPage from './pages/admin/AddProductPage'
+import EditProductPage from './pages/admin/EditProductPage'
+import AdminCatalogPage from './pages/admin/AdminCatalogPage'
+import AllOrdersAdminPage from './pages/admin/AllOrdersPage'
 
 
 function App() {
@@ -43,6 +46,7 @@ function App() {
           <Route path='/error/:eid' element={ <Error500/> } ></Route>
           <Route path='/success' element={ <SuccessPage/> } ></Route>
           <Route path='/profile' element={ <ProfilePage/> } ></Route>
+          <Route path='/admin/orders' element={<AllOrdersAdminPage/>} ></Route>
         </Routes>
       </BrowserRouter>
       <CustomToaster/>

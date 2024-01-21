@@ -6,3 +6,6 @@
   width: 84px;
   height: 83px;
 }
+td, th{
+  text-align: center;
+}
