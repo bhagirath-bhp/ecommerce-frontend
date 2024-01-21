@@ -24,6 +24,7 @@ const OneProduct = () => {
     const [loading, setLoading] = useState(true);
     const [cartLoading, setCartLoading] = useState(false);
     const [buyLoading, setBuyLoading] = useState(false);
+    const [isDsp, setIsDsp] = useState(false);
     const { productId } = useParams();
     const user = useRecoilValue(userState);
     const setToastState = useSetRecoilState(toastState);
@@ -35,7 +36,11 @@ const OneProduct = () => {
                 if (productId) {
                     const product = await getAProductById(productId);
                     setProductData1(product);
-                    console.log(productData1)
+                    if(product.name.substring(0, 3) === "DSP"){
+                        setIsDsp(true);
+                    }else{
+                        setIsDsp(false)
+                    }    
                 }
             } catch (error) {
                 console.error('Error fetching product data:', error);
@@ -169,11 +174,11 @@ const OneProduct = () => {
                             </div>
                         </div>
                         <div className="product-dsp grid tablet:grid-cols-4 grid-rows-3 smMobile:grid-cols-3 verySmMobile:grid-cols-2 tablet:row-start-2 tablet:row-end-3 tablet:col-start-2 tablet:col-end-4 smMobile:col-start-1 smMobile:col-end-4">
-                            <DspCollection dspSet={productData1.dspSet} />
+                            <DspCollection dspSet={productData.dspSet} state={isDsp}/>
                         </div>
                         <div className="dropdown-search col-start-1 col-end-4 verySmMobile:my-[5rem] verySmMobile:mx-[2rem] tablet:my-[3rem]">
                             <p className="font-semibold text-base mb-3">Select Dragon Spell *</p>
-                            <DropdownSearch />
+                            {isDsp && <DropdownSearch />}
                         </div>
                         <div className="product-buttons tablet:hidden smMobile:flex smMobile:justify-between smMobile:w-[90vw] pr-3 ">
                             {/* <Button
