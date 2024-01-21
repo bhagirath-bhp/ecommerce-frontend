@@ -36,7 +36,8 @@ const OneProduct = () => {
                 if (productId) {
                     const product = await getAProductById(productId);
                     setProductData1(product);
-                    if(product.name.substring(0, 3) === "DSP"){
+                    console.log(product.name.substring(1, 4))
+                    if(product.name.substring(1, 4) === "DSP"){
                         setIsDsp(true);
                     }else{
                         setIsDsp(false)
@@ -95,15 +96,15 @@ const OneProduct = () => {
         // price: "$ 1111",
         dspSet: [
             { key: 1, name: "DSP 1", details: "Lorem ipsum dolor sit amet." },
-            { key: 2, name: "DSP 1", details: "Lorem ipsum dolor sit amet." },
-            { key: 3, name: "DSP 1", details: "Lorem ipsum dolor sit amet." },
-            { key: 4, name: "DSP 1", details: "Lorem ipsum dolor sit amet." },
-            { key: 5, name: "DSP 1", details: "Lorem ipsum dolor sit amet." },
-            { key: 6, name: "DSP 1", details: "Lorem ipsum dolor sit amet." },
-            { key: 7, name: "DSP 1", details: "Lorem ipsum dolor sit amet." },
-            { key: 8, name: "DSP 1", details: "Lorem ipsum dolor sit amet." },
-            { key: 9, name: "DSP 1", details: "Lorem ipsum dolor sit amet." },
-            { key: 10, name: "DSP 1", details: "Lorem ipsum dolor sit amet." },
+            { key: 2, name: "DSP 2", details: "Lorem ipsum dolor sit amet." },
+            { key: 3, name: "DSP 3", details: "Lorem ipsum dolor sit amet." },
+            { key: 4, name: "DSP 4", details: "Lorem ipsum dolor sit amet." },
+            { key: 5, name: "DSP 5", details: "Lorem ipsum dolor sit amet." },
+            { key: 6, name: "DSP 6", details: "Lorem ipsum dolor sit amet." },
+            { key: 7, name: "DSP 7", details: "Lorem ipsum dolor sit amet." },
+            { key: 8, name: "DSP 8", details: "Lorem ipsum dolor sit amet." },
+            { key: 9, name: "DSP 9", details: "Lorem ipsum dolor sit amet." },
+            { key: 9, name: "DSP 10", details: "Lorem ipsum dolor sit amet." },
         ],
         // carouselImageUrls: [
         //     { key: 1, url: "https://images.unsplash.com/photo-1663564305303-eb4c3cbc8619?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3" },
@@ -176,10 +177,11 @@ const OneProduct = () => {
                         <div className="product-dsp grid tablet:grid-cols-4 grid-rows-3 smMobile:grid-cols-3 verySmMobile:grid-cols-2 tablet:row-start-2 tablet:row-end-3 tablet:col-start-2 tablet:col-end-4 smMobile:col-start-1 smMobile:col-end-4">
                             <DspCollection dspSet={productData.dspSet} state={isDsp}/>
                         </div>
-                        <div className="dropdown-search col-start-1 col-end-4 verySmMobile:my-[5rem] verySmMobile:mx-[2rem] tablet:my-[3rem]">
-                            <p className="font-semibold text-base mb-3">Select Dragon Spell *</p>
-                            {isDsp && <DropdownSearch />}
-                        </div>
+                        {isDsp &&<div className="dropdown-search col-start-1 col-end-4 verySmMobile:my-[5rem] verySmMobile:mx-[2rem] tablet:my-[3rem]">
+                                    <p className="font-semibold text-base mb-3">Select Dragon Spell *</p>
+                                    <DropdownSearch />
+                                </div>
+                        }
                         <div className="product-buttons tablet:hidden smMobile:flex smMobile:justify-between smMobile:w-[90vw] pr-3 ">
                             {/* <Button
                                 className="bg-golden text-sm text-black my-2"

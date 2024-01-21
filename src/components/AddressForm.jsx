@@ -35,7 +35,7 @@ const AddressForm = ({ onSubmit }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     const response = await addAddress(address.addressLine1, address.addressLine2, address.city, address.country, address.pincode, user.userId);
-    console.log(response);
+    // console.log(response);
     if(response){
       setAddresses([...addresses, address]);
     }

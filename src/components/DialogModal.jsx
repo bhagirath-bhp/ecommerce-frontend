@@ -6,12 +6,17 @@ import {
   DialogBody,
   DialogFooter,
 } from "@material-tailwind/react";
- 
+import { search } from "../api/products";
+
 export function DialogModal(props) {
   const [open, setOpen] = React.useState(false);
- 
+  const handleSubmit = async () => {
+    const response = search('D');
+    console.log(response)
+    
+  }
   const handleOpen = () => setOpen(!open);
- 
+
   return (
     <div className="dsp m-5">
       <Button onClick={handleOpen} variant="outlined">
@@ -33,9 +38,9 @@ export function DialogModal(props) {
           >
             <h3 className="text-base">Cancel</h3>
           </Button>
-          {/* <Button variant="gradient" color="green" onClick={handleOpen}>
+          <Button className="text-sm" color="green" onClick={handleSubmit}>
             <span>Confirm</span>
-          </Button> */}
+          </Button>
         </DialogFooter>
       </Dialog>
     </div>

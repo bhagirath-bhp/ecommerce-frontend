@@ -3,7 +3,7 @@ import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 import RippleButton from '../components/RippleButton';
 import { Button } from '@material-tailwind/react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { signup } from '../api/user';
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -11,7 +11,8 @@ import "react-toastify/dist/ReactToastify.css";
 const SignUpPage = () => {
     const [password, setPassword] = useState('');
     const [showPasswordWarning, setShowPasswordWarning] = useState(false);
-
+    const navigate = useNavigate();
+    
     const handlePasswordChange = (e) => {
         setPassword(e.target.value);
         setShowPasswordWarning(e.target.value.length < 6);

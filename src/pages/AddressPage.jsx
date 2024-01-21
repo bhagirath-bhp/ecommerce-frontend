@@ -3,11 +3,11 @@ import React, { useEffect, useState } from 'react';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 import AddressForm from '../components/AddressForm';
-import { loadStripe } from '@stripe/stripe-js';
 import { addOrder } from '../api/order';
 import { useRecoilState, useRecoilValue } from 'recoil';
 import { addressListState, userState } from '../components/state/RecoilState';
 import { getAddress } from '../api/user';
+import { useNavigate } from 'react-router-dom';
 
 
 const AddressPage = () => {
@@ -15,19 +15,22 @@ const AddressPage = () => {
   const [addingNewAddress, setAddingNewAddress] = useState(false);
   const [selectedAddress, setSelectedAddress] = useState(null);
   const user = useRecoilValue(userState);
-  const stripePromise = loadStripe("pk_test_51OXop6SFzZIS5qGqgbs1PEpCo62ySuI5EtEN5eOc0y0MCSWNQnN7o22a1W0mLp0kMvuUQks3ZY9gvzFJkpU22Dsn006mmxIQs6");
+  const navigate = useNavigate();
 
   useEffect(()=>{
     async function fetchAddress(){
       const response  = await getAddress(user.userId);
-      console.log(response, addresses)
+      console.log(response, addresses);
       if(response){
         if(Array.isArray(response)){
           response.forEach((addressdata)=>{
             handleAddAddress(addressdata)
+            // setAddresses(...addresses, addressdata);
           })
         }
-        handleAddAddress(response);
+        else{
+          setAddresses(response);
+        }
       }
     }
     fetchAddress();
@@ -45,8 +48,8 @@ const AddressPage = () => {
   const handleCheckout = async () => {
     // Implement your checkout logic here
     const session  = await addOrder(user.userId);
-    const stripe = await stripePromise;
-    console.log(session);
+    // navigate(`${session.url}`);
+    window.location.replace(session.url);
     console.log("Proceeding to checkout with address: ", addresses[selectedAddress]);
   };
 
@@ -61,6 +64,31 @@ const AddressPage = () => {
     }
   };
 
+  const addressComponentSet = addresses.map((address, index) => (
+    <div key={index} className="mb-4">
+      <div className={`p-4 rounded ${selectedAddress === index ? 'border-2 border-gold' : 'border border-gold'}`}>
+        {/* <p>{address.fullname}</p> */}
+        <p>{address.address_line_1}</p>
+        <p>{address.address_line_2}</p>
+        <p>{address.city}, {address.state}, {address.country.countryName}</p>
+        <p>{address.zipCode}</p>
+        {address.landmark && <p>Landmark: {address.landmark}</p>}
+        <button
+          onClick={() => handleSelectAddress(index)}
+          className={`py-2 px-8 rounded ${selectedAddress === index ? 'bg-golden text-black' : 'text-gold border border-gold'}`}
+        >
+          Use this address
+        </button>
+        &nbsp;&nbsp;&nbsp;
+        <button
+            onClick={() => handleDeleteAddress(index)}
+            className="bg-red-600 text-white py-2 px-8 rounded hover:bg-red-700 transition duration-300"
+          >
+            Delete
+          </button>
+      </div>
+    </div>
+  ))
 
   return (
     <>
@@ -68,32 +96,9 @@ const AddressPage = () => {
       <div className="min-h-screen text-gold p-4">
         <div className="container mx-auto">
           <h1 className="text-3xl font-bold mb-6">Your Addresses</h1>
-          {addresses.length > 0 ? (
-            addresses.map((address, index) => (
-              <div key={index} className="mb-4">
-                <div className={`p-4 rounded ${selectedAddress === index ? 'border-2 border-gold' : 'border border-gold'}`}>
-                  {/* <p>{address.fullname}</p> */}
-                  <p>{address.addressLine1}</p>
-                  <p>{address.addressLine2}</p>
-                  <p>{address.city}, {address.state}, {address.country}</p>
-                  <p>{address.pincode}</p>
-                  {address.landmark && <p>Landmark: {address.landmark}</p>}
-                  <button
-                    onClick={() => handleSelectAddress(index)}
-                    className={`py-2 px-8 rounded ${selectedAddress === index ? 'bg-golden text-black' : 'text-gold border border-gold'}`}
-                  >
-                    Use this address
-                  </button>
-                  &nbsp;&nbsp;&nbsp;
-                  <button
-                      onClick={() => handleDeleteAddress(index)}
-                      className="bg-red-600 text-white py-2 px-8 rounded hover:bg-red-700 transition duration-300"
-                    >
-                      Delete
-                    </button>
-                </div>
-              </div>
-            ))
+          {
+          addresses.length > 0 ? (
+            addressComponentSet
           ) : !addingNewAddress && (
             <p>No addresses yet. Please add one.</p>
           )}

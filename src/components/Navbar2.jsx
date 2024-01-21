@@ -41,6 +41,22 @@ const Navbar2 = () => {
                         placeholder="Search..."
                         className="bg-white w-full text-black rounded-lg p-2 focus:outline-none "
                     />
+                    {/* <div className="search-items absolute left-[15%] top-[2.5rem] font-Roboto">
+                        <div className="item bg-white border-y-2 w-full flex justify-center items-center flex-col p-[2rem]">
+                            <div className='flex w-full justify-between'>
+                                <p className="name text-2xl font-bold text-left">Item1</p>
+                                <p className="name text-2xl font-bold text-left">$198</p>
+                            </div>
+                            <p className="desc">Lorem ipsum dolor sit amet consectetur adipisicing elit. Ducimus, dignissimos.</p>
+                        </div>
+                        <div className="item bg-white w-full flex justify-center items-center flex-col p-[2rem]">
+                            <div className='flex w-full justify-between'>
+                                <p className="name text-2xl font-bold text-left">Item1</p>
+                                <p className="name text-2xl font-bold text-left">$198</p>
+                            </div>
+                            <p className="desc">Lorem ipsum dolor sit amet consectetur adipisicing elit. Ducimus, dignissimos.</p>
+                        </div>
+                    </div> */}
                 </div>
                 <Link to="/cart" className="text-3xl mx-9 text-golden">
                     <IoMdCart />

@@ -307,3 +307,8 @@ export const getFiveRandomProducts = async () => {
     }
 };
 
+export const search = async (query) => {
+    const response = await axios.get(`${uri}/products/search`, {query});
+    console.log(response);
+}
+
