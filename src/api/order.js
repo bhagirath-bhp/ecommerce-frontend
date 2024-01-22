@@ -37,3 +37,18 @@ export const getAllOrdersForAUser = async (userId) => {
     }
 
 }
+
+export const getAllOrdersForAdmin = async () => {
+    const response = await axios
+        .get(`${uri}/admin/orders/`, {
+            headers: {
+                'Authorization': `Bearer ${Cookies.get('token')}`
+            }
+        })
+        .catch((error)=>{
+            console.log(error);
+        })
+    if(response.status===200){
+        return response.data;
+    }
+}

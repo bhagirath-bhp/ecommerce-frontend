@@ -8,18 +8,21 @@ import { DefaultPagination } from '../components/DefaultPagination';
 const ProductsPage = () => {
   const [products, setProducts] = useState([]);
   const [pagination, setPagination] = useState({ page: 1, pageSize: 6, totalPages: 1, totalProducts: 1 });
-  async function fetchProducts(pageNumber) {
-    const items = await fetchAllProducts(pageNumber);
+
+  async function fetchProducts(paginationObject) {
+    const items = await fetchAllProducts(paginationObject);
     setPagination(items.pagination);
     setProducts(items.products);
   }
+
   useEffect(() => {
-    fetchProducts(1);
+    fetchProducts({ page: 1, pageSize: 6 });
   }, []);
 
   const handlePageChange = (newPage) => {
-    fetchProducts(newPage);
+    fetchProducts({ ...pagination, page: newPage });
   };
+
   const productsComponentContainer = products.map((product) => (
     <Product
       key={product.productId}
