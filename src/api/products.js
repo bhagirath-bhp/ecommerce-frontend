@@ -3,9 +3,9 @@ import Cookies from 'js-cookie'
 
 const uri = import.meta.env.VITE_APP_URI
 
-export const fetchAllProducts = async () => {
+export const fetchAllProducts = async (pagination) => {
     const response = await axios
-        .get(`${uri}/products`, {
+        .get(`${uri}/products?page=${pagination.page}`, {
             headers: {
                 'Authorization': `Bearer ${Cookies.get('token')}`
             }
