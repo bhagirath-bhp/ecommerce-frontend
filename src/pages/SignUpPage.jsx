@@ -19,7 +19,7 @@ const SignUpPage = () => {
     };
     const handleSignUp = async (event) => {
         event.preventDefault();
-        const response = await signup(event.target[0].value, event.target[0].value, event.target[3].value, event.target[4].value, event.target[2].value);
+        const response = await signup(event.target[0].value, event.target[1].value, event.target[4].value, event.target[5].value, event.target[3].value);
         if(response.success){
             toast.success(response.message, {
                 position: toast.POSITION.TOP_RIGHT,
@@ -43,10 +43,14 @@ const SignUpPage = () => {
                 <form className="bg-white p-8 px-[7rem] rounded tablet:w-[60vw] smMobile:w-[90vw]" onSubmit={ handleSignUp }>
                     <h1 className="text-2xl font-bold font-CrimsonText mb-6 text-center">Create Account</h1>
 
-                    <label className="block mb-2 font-semibold" htmlFor="name">
-                        Your Name
+                    <label className="block mb-2 font-semibold" htmlFor="fname">
+                        First Name
                     </label>
-                    <input className="w-full outline-none border border-golden rounded px-3 py-2 mb-4" type="text" id="name" name="name" required />
+                    <input className="w-full outline-none border border-golden rounded px-3 py-2 mb-4" type="text" id="fname" name="name" required />
+                    <label className="block mb-2 font-semibold" htmlFor="lname">
+                        Last Name
+                    </label>
+                    <input className="w-full outline-none border border-golden rounded px-3 py-2 mb-4" type="text" id="lname" name="name" required />
 
                     <label className="block mb-2 font-semibold" htmlFor="mobile">
                         Mobile Number

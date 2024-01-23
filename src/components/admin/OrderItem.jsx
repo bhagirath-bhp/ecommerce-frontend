@@ -17,7 +17,7 @@ const OrderItem = ({order}) => {
                 1
             </td>
             <td className="px-6 py-4 font-semibold text-gray-900 dark:text-white">
-                
+                {order.user.first_name}
             </td>
             <td className="px-6 py-4">
                 <p>2</p>

@@ -14,16 +14,15 @@ const AllOrdersAdminPage = () => {
         const response = await getAllOrdersForAdmin(page);
         setOrders(response.orders);
         setPagination(response.pagination);
-        console.log(response)
     }
-    const handlePageChange = () => {
-        fetchOrders(pagination.page);
+    const handlePageChange = (newpage) => {
+        fetchOrders(newpage);
     }
     useEffect(() => {
         fetchOrders(1);
     }, [])
 
-    const ordersComponentSet = orders.map((orderItem)=>( <OrderItem key={Math.random()} order={orderItem}/> ))
+    const ordersComponentSet = orders.map((orderItem)=>( <OrderItem key={Math.random()} order={orderItem}/>  ))
     return (
         <div className="relative overflow-x-auto shadow-md sm:rounded-lg">
             <AdminNavbar />

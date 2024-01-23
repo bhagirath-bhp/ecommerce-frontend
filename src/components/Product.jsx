@@ -16,7 +16,7 @@ const Product = (props) => {
                 }
             }}>
             <div className="product-img w-full h-[261px] overflow-hidden">
-                <img src={props.url} alt={props.name} className='w-full h-full object-cover' />
+                <img src={props.url} alt={props.name} height={300} width={400} className='w-full h-full object-cover' />
             </div>
             <div className="product-details px-5 pt-5">
                 <h3 className="product-title font-bold text-[20px]">{props.name}</h3>
