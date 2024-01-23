@@ -29,7 +29,7 @@ const OneProduct = () => {
     const user = useRecoilValue(userState);
     const setToastState = useSetRecoilState(toastState);
     const navigate = useNavigate();
-    
+
     useEffect(() => {
         async function fetchProduct() {
             try {
@@ -37,25 +37,25 @@ const OneProduct = () => {
                     const product = await getAProductById(productId);
                     setProductData1(product);
                     console.log(product.name.substring(1, 4))
-                    if(product.name.substring(1, 4) === "DSP"){
+                    if (product.name.substring(1, 4) === "DSP") {
                         setIsDsp(true);
-                    }else{
+                    } else {
                         setIsDsp(false)
-                    }    
+                    }
                 }
             } catch (error) {
                 console.error('Error fetching product data:', error);
             }
         }
-        async function fetchRecommendedProductSet(){
+        async function fetchRecommendedProductSet() {
             const response = await getFiveRandomProducts();
-            if(response){
-                if(Array.isArray(response)){
-                    response.forEach((product)=>{
+            if (response) {
+                if (Array.isArray(response)) {
+                    response.forEach((product) => {
                         setRecommendedProductSet(...recommendedProductSet, product);
                     })
                 }
-                else{
+                else {
                     setRecommendedProductSet(response);
                 }
             }
@@ -75,11 +75,11 @@ const OneProduct = () => {
         const response = await addToCart(user.userId, productId)
         setToastState([response, 'success', 'top-right', productId]);
         console.log(response)
-        if(response)
+        if (response)
             setTimeout(() => {
                 navigate('/cart');
             }, 1500);
-        
+
     }
     const handleAddToWishlist = async () => {
         const response = await addToWishlist(productId, user.userId);
@@ -175,12 +175,12 @@ const OneProduct = () => {
                             </div>
                         </div>
                         <div className="product-dsp grid tablet:grid-cols-4 grid-rows-3 smMobile:grid-cols-3 verySmMobile:grid-cols-2 tablet:row-start-2 tablet:row-end-3 tablet:col-start-2 tablet:col-end-4 smMobile:col-start-1 smMobile:col-end-4">
-                            <DspCollection dspSet={productData.dspSet} state={isDsp}/>
+                            <DspCollection dspSet={productData.dspSet} state={isDsp} />
                         </div>
-                        {isDsp &&<div className="dropdown-search col-start-1 col-end-4 verySmMobile:my-[5rem] verySmMobile:mx-[2rem] tablet:my-[3rem]">
-                                    <p className="font-semibold text-base mb-3">Select Dragon Spell *</p>
-                                    <DropdownSearch />
-                                </div>
+                        {isDsp && <div className="dropdown-search col-start-1 col-end-4 verySmMobile:my-[5rem] verySmMobile:mx-[2rem] tablet:my-[3rem]">
+                            <p className="font-semibold text-base mb-3">Select Dragon Spell *</p>
+                            <DropdownSearch />
+                        </div>
                         }
                         <div className="product-buttons tablet:hidden smMobile:flex smMobile:justify-between smMobile:w-[90vw] pr-3 ">
                             {/* <Button
@@ -225,12 +225,12 @@ const OneProduct = () => {
                                 <h3>Magical Essence:</h3> <span>{productData.productDetails.MagicalEssence}</span>
                             </li>
                         </ul>
-                        <section id="reviews" className="mb-5 py-5">
-                            <h3 className="text-lg font-bold">Customer Reviews</h3>
-                            <ReviewBox />
-                            <ReviewForm productId={productId} userId={user.userId}/>
-                        </section>
                     </section> */}
+                    <section id="reviews" className="mb-5 py-5">
+                        <h3 className="text-lg font-bold">Customer Reviews</h3>
+                        <ReviewBox />
+                        <ReviewForm productId={productId} userId={user.userId} />
+                    </section>
                     <section id="related-items max-w-[90vw]">
                         <h3 className="text-2xl font-bold">More items you may like in apparel</h3>
                         <div className="more-products-set noscrollbar flex justify-between w-full my-9 overflow-x-scroll">

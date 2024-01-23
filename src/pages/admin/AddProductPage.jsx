@@ -1,10 +1,13 @@
-import React, { useState, useEffect } from 'react';
-import { useRecoilState } from 'recoil';
+import { useState, useEffect } from 'react';
+import { useRecoilState, useRecoilValue } from 'recoil';
 import { productState } from '../../components/admin/productState';
 import AdminNavbar from '../../components/admin/AdminNavbar';
 import AddCollectionPopup from '../../components/admin/AddCollectionPopup';
 import { addNewCollection, addNewProduct, getAllCategories, getAllCollections } from '../../api/products';
 import { Button } from '@material-tailwind/react';
+import { userState } from '../../components/state/RecoilState';
+
+
 const AddProductPage = () => {
   const [product, setProduct] = useState({
     name: '',
@@ -18,24 +21,31 @@ const AddProductPage = () => {
   const [categories, setCategories] = useState([{ categoryId: null, categoryName: "" }]);
   const [collections, setCollections] = useState([]);
   const [showAddCollection, setShowAddCollection] = useState(false);
+  const user = useRecoilValue(userState);
+
   useEffect(() => {
-    const fetchCategories = async () => {
-      const result = await getAllCategories();
-      // console.log(result)
-      if (result) {
-        setCategories(result);
-      }
-    };
-
-    const fetchCollections = async () => {
-      const result = await getAllCollections();
-      if (result) {
-        setCollections(result);
-      }
-    };
-
-    fetchCategories();
-    fetchCollections();
+    console.log(user)
+    if(user.role==="admin"){
+      const fetchCategories = async () => {
+        const result = await getAllCategories();
+        // console.log(result)
+        if (result) {
+          setCategories(result);
+        }
+      };
+  
+      const fetchCollections = async () => {
+        const result = await getAllCollections();
+        if (result) {
+          setCollections(result);
+        }
+      };
+  
+      fetchCategories();
+      fetchCollections();
+    }else{
+      window.location.replace("/")
+    }
   }, []);
 
   const handleChange = (e) => {

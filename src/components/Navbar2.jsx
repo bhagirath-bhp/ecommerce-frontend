@@ -5,10 +5,13 @@ import Cookies from 'js-cookie'
 import { Link, useNavigate } from 'react-router-dom';
 import { fetchCollections } from '../api/products';
 import { capitalizeWords } from '../scripts/utilScripts';
+import { userState } from './state/RecoilState';
+import { useRecoilState } from 'recoil';
 
 const Navbar2 = () => {
     const navigate = useNavigate()
     const [isNavOpen, setIsNavOpen] = useState(false);
+    const [user, setUser] = useRecoilState(userState);
     const categoriesSet = [
         { key: 1, title: "Category 1" },
         { key: 2, title: "Category 2" },
@@ -61,7 +64,7 @@ const Navbar2 = () => {
                 <Link to="/cart" className="text-3xl mx-9 text-golden">
                     <IoMdCart />
                 </Link>
-                <div className="text-3xl text-golden cursor-pointer" onClick={()=>{isNavOpen ? setIsNavOpen(false) : setIsNavOpen(true)}}>
+                <div className="text-3xl text-golden cursor-pointer" onClick={() => { isNavOpen ? setIsNavOpen(false) : setIsNavOpen(true) }}>
                     <HiBars3 />
                 </div>
                 <ul className={`navul flex-column items-center w-full overflow-hidden max-h-0 opacity-0 transition-height duration-1000 ease-in-out ${isNavOpen ? "max-h-[50rem] opacity-100" : "max-h-0 opacity-0"} border-[1px] border-golden absolute top-[4.3rem] left-0 p-3 z-[999] bg-black`}>
@@ -92,12 +95,14 @@ const Navbar2 = () => {
                                 <li className='w-full'>
                                     <Link to="/orders" className="block px-4 py-2 text-center hover:text-golden hover:bg-goldenLight">Orders</Link>
                                 </li>
-                                <li  className='w-full'>
-                                    <Link to="#" className="block px-4 py-2 text-center hover:text-golden hover:bg-goldenLight" onClick={() => {
-                                        Cookies.remove('token').then(() => {
-                                            window.location.reload()
-                                        })
-                                    }}>Sign out</Link>
+                                <li className='w-full'>
+                                    <Link
+                                        to="#"
+                                        className="block px-4 py-2 text-center hover:text-golden hover:bg-goldenLight"
+                                        onClick={() => {
+                                            Cookies.remove('token')
+                                        }}
+                                    >Sign out</Link>
                                 </li>
                             </ul>
                         ) : (

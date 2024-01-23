@@ -1,10 +1,16 @@
 import Cookies from "js-cookie";
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { userState } from "./state/RecoilState";
+import { useSetRecoilState } from "recoil";
+
+
 
 
 const UserBadge = () => {
     const [userCick, setUserClick] = useState(false);
+    const setUser = useSetRecoilState(userState);
+    const navigate = useNavigate();
     return (
         <div className="flex items-center md:order-2 flex-col relative text-golden">
             <button type="button" className="flex text-sm rounded-full focus:ring-1 focus:ring-golden" id="user-menu-button" onClick={() => { (userCick) ? setUserClick(false) : setUserClick(true) }}>
@@ -27,11 +33,14 @@ const UserBadge = () => {
                         <Link to="/orders" className="block px-4 py-2 text-sm hover:text-golden hover:bg-goldenLight">Orders</Link>
                     </li>
                     <li>
-                        <Link to="#" className="block px-4 py-2 text-sm hover:text-golden hover:bg-goldenLight" onClick={() => {
-                            Cookies.remove('token').then(() => {
-                                window.location.reload()
-                            })
-                        }}>Sign out</Link>
+                        <Link
+                            to="#"
+                            className="block px-4 py-2 text-sm hover:text-golden hover:bg-goldenLight"
+                            onClick={() => {
+                                Cookies.remove('token')
+                                setUser(false);
+                                window.location.replace("/")
+                            }}>Sign out</Link>
                     </li>
                 </ul>
             </div>

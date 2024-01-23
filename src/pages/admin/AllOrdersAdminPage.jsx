@@ -10,14 +10,14 @@ const AllOrdersAdminPage = () => {
     const [pagination, setPagination] = useState({ page: 1, pageSize: 6, totalPages: 1, totalProducts: 1 });
 
 
-    async function fetchOrders() {
-        const response = await getAllOrdersForAdmin();
+    async function fetchOrders(page) {
+        const response = await getAllOrdersForAdmin(page);
         setOrders(response.orders);
         setPagination(response.pagination);
         console.log(response)
     }
-    const handlePageChange = (newpage) => {
-        fetchOrders(newpage);
+    const handlePageChange = () => {
+        fetchOrders(pagination.page);
     }
     useEffect(() => {
         fetchOrders(1);

@@ -38,9 +38,9 @@ export const getAllOrdersForAUser = async (userId) => {
 
 }
 
-export const getAllOrdersForAdmin = async () => {
+export const getAllOrdersForAdmin = async (page) => {
     const response = await axios
-        .get(`${uri}/admin/orders/`, {
+        .get(`${uri}/admin/orders?page=${page}`, {
             headers: {
                 'Authorization': `Bearer ${Cookies.get('token')}`
             }
