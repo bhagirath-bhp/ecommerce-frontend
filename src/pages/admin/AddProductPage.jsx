@@ -1,11 +1,12 @@
 import { useState, useEffect } from 'react';
-import { useRecoilState, useRecoilValue } from 'recoil';
+import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil';
 import { productState } from '../../components/admin/productState';
 import AdminNavbar from '../../components/admin/AdminNavbar';
 import AddCollectionPopup from '../../components/admin/AddCollectionPopup';
 import { addNewCollection, addNewProduct, getAllCategories, getAllCollections } from '../../api/products';
 import { Button } from '@material-tailwind/react';
-import { userState } from '../../components/state/RecoilState';
+import { toastState, userState } from '../../components/state/RecoilState';
+
 
 
 const AddProductPage = () => {
@@ -21,6 +22,8 @@ const AddProductPage = () => {
   const [categories, setCategories] = useState([{ categoryId: null, categoryName: "" }]);
   const [collections, setCollections] = useState([]);
   const [showAddCollection, setShowAddCollection] = useState(false);
+  const setToastState = useSetRecoilState(toastState);
+  const [isBtnLoading, setIsBtnLoading] = useState(false);
   const user = useRecoilValue(userState);
 
   useEffect(() => {
@@ -63,14 +66,26 @@ const AddProductPage = () => {
   };
 
   const handleSubmit = async (e) => {
+    setIsBtnLoading(true)
     e.preventDefault();
 
     // Call the updated addNewProduct function
     const result = await addNewProduct(product);
 
     if (result) {
-      console.log(result); // Log the response if needed
-      // TODO: Handle success, maybe redirect to a product list page
+      setIsBtnLoading(false);
+      setProduct({
+        name: '',
+        description: '',
+        price: '',
+        images: [],
+        quantity: 0,
+        categoryId: '',
+        collectionId: '',
+      });
+      setCollections([]);
+      setToastState([result, 'success', 'top-right']);
+
     } else {
       // TODO: Handle failure
     }
@@ -166,7 +181,7 @@ const AddProductPage = () => {
             </select>
             <Button className='text-sm my-2 bg-golden' onClick={() => { setShowAddCollection(true) }}>Add Collection</Button>
           </div>
-          <Button type='submit' className='bg-golden text-sm'>
+          <Button type='submit' className='bg-golden text-sm' loading={isBtnLoading}>
             Add Product
           </Button>
         </form>
