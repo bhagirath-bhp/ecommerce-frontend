@@ -14,18 +14,14 @@ import { loadStripe } from '@stripe/stripe-js';
 
 
 const CartPage = () => {
-  // const [cart, setCart] = useRecoilState(cartState);
   const [cart, setCart] = useState([]);
   const user = useRecoilValue(userState);
   const navigate = useNavigate();
-  // const stripePromise = loadStripe(import.meta.env.STRIPE_PK);
-  // const stripePromise = loadStripe("pk_test_51OXop6SFzZIS5qGqgbs1PEpCo62ySuI5EtEN5eOc0y0MCSWNQnN7o22a1W0mLp0kMvuUQks3ZY9gvzFJkpU22Dsn006mmxIQs6");
   
   useEffect(() => {
     const getDetails = async () => {
       try {
         const response = await getCart(user.userId);
-        console.log(response)
         const transformedRes = transformCartArray(response.cartitems);
         setCart(transformedRes);
       } catch (error) {
@@ -55,16 +51,12 @@ const CartPage = () => {
   };
 
   const handleCheckout = async () =>{
-    // const session  = await addOrder(user.userId);
-    // const stripe = await stripePromise;
-    // console.log(session);
     navigate("/address")
   }
 
   const subtotal = cart.reduce((acc, item) => acc + item.total, 0);
   const deliveryCharges = 50;
   const grandTotal = subtotal + deliveryCharges;
-
   const cartComponentSet = cart.map((item) => (
     <CartItem
       key={item.id}

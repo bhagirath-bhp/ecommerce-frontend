@@ -104,7 +104,7 @@ const OneProduct = () => {
             { key: 7, name: "DSP 7", details: "Lorem ipsum dolor sit amet." },
             { key: 8, name: "DSP 8", details: "Lorem ipsum dolor sit amet." },
             { key: 9, name: "DSP 9", details: "Lorem ipsum dolor sit amet." },
-            { key: 9, name: "DSP 10", details: "Lorem ipsum dolor sit amet." },
+            { key: 10, name: "DSP 10", details: "Lorem ipsum dolor sit amet." },
         ],
         // carouselImageUrls: [
         //     { key: 1, url: "https://images.unsplash.com/photo-1663564305303-eb4c3cbc8619?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3" },

@@ -9,28 +9,23 @@ import { getWishlist } from '../api/wishlist';
 import { userState } from '../components/state/RecoilState';
 import { Button } from '@material-tailwind/react';
 import { addToCart } from '../api/cart';
+import { transformWishlistArray } from '../components/handles/utility';
+import WishlistItem from '../components/WishlistItem';
 
 
 const WishlistPage = () => {
   // const [cart, setCart] = useRecoilState(cartState);
   const user = useRecoilValue(userState);
   const [wishlist, setWishlist] = useState([]);
-  const [cartLoading, setCartLoading] = useState(false);
 
   useEffect(() => {
     const getDetails = async () => {
       try {
         const response = await getWishlist(user.userId);
         console.log(response)
-        // setWishlist((prevWishlist) => [
-        //   ...prevWishlist,
-        //   {
-        //     id: response.wishlistId,
-        //     title: response[0].product.name,
-        //     description: response[0].product.description,
-        //     price: response[0].product.price,
-        //   },
-        // ]);
+        const transformedRes = transformWishlistArray(response)
+        console.log(transformedRes)
+        setWishlist(transformedRes);
       } catch (error) {
         console.error('Error fetching cart data:', error);
       }
@@ -39,18 +34,7 @@ const WishlistPage = () => {
     getDetails();
   }, []);
 
-  const handleAddToCart = async (productId) => {
-    // setCartLoading(true);
-    // const response = await addToCart(user.userId, item.id)
-    // setToastState([response, 'success', 'top-right', productId]);
-    // console.log(response)
-    // if (response)
-    //   setTimeout(() => {
-    //     navigate('/cart');
-    //   }, 1500);
-    console.log(productId)
 
-  }
 
   const removeFromWishlist = (itemId) => {
     const newWishlist = wishlist.filter((item) => item.id !== itemId);
@@ -58,23 +42,7 @@ const WishlistPage = () => {
   };
 
   const wishlistComponentSet = wishlist.map((item) => (
-    <div key={item.id} className="p-4 border border-gold rounded bg-white">
-      <img src={item.imageUrl} alt={item.title} className="w-full h-64 object-cover mb-4" />
-      <h2 className="text-xl font-bold">{item.title}</h2>
-      <p>{item.description}</p>
-      <div className="flex justify-between items-center">
-        <Button
-          className="bg-golden text-sm text-black my-2"
-          loading={cartLoading}
-          onClick={()=>{handleAddToCart(item.id)}}
-        >Add to Cart</Button>
-        <FaHeart
-          onClick={() => removeFromWishlist(item.id)}
-          className={`text-gold text-2xl cursor-pointer ${wishlist.some((wItem) => wItem.id === item.id) ? 'filled' : ''
-            }`}
-        />
-      </div>
-    </div>
+    <WishlistItem item={item} key={Math.random()}/>
   ))
   return (
     <>
