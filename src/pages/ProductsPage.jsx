@@ -21,7 +21,7 @@ const ProductsPage = () => {
   }, []);
 
   const handlePageChange = (newPage) => {
-    fetchProducts({ ...pagination, page: newPage });
+    fetchProducts(newPage);
   };
 
   const productsComponentContainer = products.map((product) => (
@@ -41,11 +41,11 @@ const ProductsPage = () => {
       <div className="products flex-column justify-evenly items-center min-h-screen p-9">
         <div className="products-head flex justify-between w-full">
           <div className="mb-9 font-Chivo text-black ">
-            <h3 className='font-bold text-5xl'>Enchantments</h3>
+            <h3 className='font-bold smMobile:text-3xl tablet:text-5xl'>Enchantments</h3>
             <p>Discover a world of magic with our enchanting products.</p>
           </div>
         </div>
-        <div className="products-container flex justify-between flex-wrap">
+        <div className="products-container flex justify-evenly gap-[10%] flex-wrap">
           {productsComponentContainer}
         </div>
         <div className="pagination-container mt-6">

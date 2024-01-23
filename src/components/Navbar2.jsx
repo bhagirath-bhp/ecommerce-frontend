@@ -3,15 +3,19 @@ import { HiBars3 } from 'react-icons/hi2';
 import { useEffect, useState } from 'react';
 import Cookies from 'js-cookie'
 import { Link, useNavigate } from 'react-router-dom';
-import { fetchCollections } from '../api/products';
+import { fetchCollections, search } from '../api/products';
 import { capitalizeWords } from '../scripts/utilScripts';
 import { userState } from './state/RecoilState';
 import { useRecoilState } from 'recoil';
+import SearchItem from './SearchItem';
+
 
 const Navbar2 = () => {
     const navigate = useNavigate()
     const [isNavOpen, setIsNavOpen] = useState(false);
-    const [user, setUser] = useRecoilState(userState);
+    const [searchText, setSearchText] = useState('');
+    const [searchTimeout, setSearchTimeout] = useState(null);
+    const [searchItems, setSearcchItems] = useState([]);
     const categoriesSet = [
         { key: 1, title: "Category 1" },
         { key: 2, title: "Category 2" },
@@ -30,7 +34,21 @@ const Navbar2 = () => {
         }
         fetchData()
     }, [])
+
+    const handleSearchChange = (e) => {
+        setSearchText(e.target.value);
+
+        clearTimeout(searchTimeout);
+
+        const newTimeout = setTimeout(async () => {
+            const response = await search(searchText);
+            setSearcchItems(response)
+        }, 500);
+        setSearchTimeout(newTimeout);
+
+    }
     const categoriesComponentSet = collections.map((collection) => (<li key={collection.collectionId}>{capitalizeWords(collection.name)}</li>))
+    const searchItemsComponentSet = searchItems.map((searchItem) => (<SearchItem key={searchItem.productId} productId={searchItem.productId} name={searchItem.name} price={searchItem.price}/>))
     return (
         <nav className="navbar flex">
             <div href="#" className="text-5xl cursor-pointer">
@@ -38,28 +56,16 @@ const Navbar2 = () => {
             </div>
             <div className="flex items-center w-10/12">
                 <div className="relative w-full flex">
-                    <IoIosSearch className="text-black text-2xl my-2 mx-5" />
+                    {/* <IoIosSearch className="text-black text-2xl my-2 mx-5" /> */}
                     <input
                         type="text"
                         placeholder="Search..."
                         className="bg-white w-full text-black rounded-lg p-2 focus:outline-none "
+                        onChange={handleSearchChange}
                     />
-                    {/* <div className="search-items absolute left-[15%] top-[2.5rem] font-Roboto">
-                        <div className="item bg-white border-y-2 w-full flex justify-center items-center flex-col p-[2rem]">
-                            <div className='flex w-full justify-between'>
-                                <p className="name text-2xl font-bold text-left">Item1</p>
-                                <p className="name text-2xl font-bold text-left">$198</p>
-                            </div>
-                            <p className="desc">Lorem ipsum dolor sit amet consectetur adipisicing elit. Ducimus, dignissimos.</p>
-                        </div>
-                        <div className="item bg-white w-full flex justify-center items-center flex-col p-[2rem]">
-                            <div className='flex w-full justify-between'>
-                                <p className="name text-2xl font-bold text-left">Item1</p>
-                                <p className="name text-2xl font-bold text-left">$198</p>
-                            </div>
-                            <p className="desc">Lorem ipsum dolor sit amet consectetur adipisicing elit. Ducimus, dignissimos.</p>
-                        </div>
-                    </div> */}
+                    <div className="search-items absolute top-[2.5rem] font-Roboto border-y-[1px] border-black w-full max-h-[50vh] overflow-y-scroll z-[100]">
+                        {searchItemsComponentSet}
+                    </div>
                 </div>
                 <Link to="/cart" className="text-3xl mx-9 text-golden">
                     <IoMdCart />

@@ -50,7 +50,7 @@ export function DefaultPagination({ totalPages, currentPage, onPageChange, visib
     <div className="flex justify-center items-center gap-4">
       <Button
         variant="text"
-        className="flex items-center gap-2 text-sm"
+        className="flex items-center smMobile:gap-1 tablet:gap-2 text-sm"
         onClick={prev}
         disabled={active === 1}
       >
