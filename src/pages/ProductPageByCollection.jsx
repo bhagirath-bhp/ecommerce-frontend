@@ -2,27 +2,21 @@ import { useState, useEffect } from 'react';
 import Product from '../components/Product';
 import Navbar2 from '../components/Navbar2';
 import Footer from '../components/Footer';
-import { fetchAllProducts } from '../api/products';
-import { DefaultPagination } from '../components/DefaultPagination';
-
-const ProductsPage = () => {
+import { getProductsByCollectionId } from '../api/products';
+import { useParams } from 'react-router-dom';
+const ProductPageByCollection = () => {
   const [products, setProducts] = useState([]);
-  const [pagination, setPagination] = useState({ page: 1, pageSize: 6, totalPages: 1, totalProducts: 1 });
+   const collectionId = useParams();
 
-  async function fetchProducts(page) {
-    const items = await fetchAllProducts(page);
-    console.log(items)
-    setPagination(items.pagination);
+  async function fetchProducts (collectionId) {
+    const items = await getProductsByCollectionId(collectionId);
     setProducts(items.products);
   }
 
   useEffect(() => {
-    fetchProducts(pagination.page);
+    fetchProducts(collectionId);
   }, []);
 
-  const handlePageChange = (newPage) => {
-    fetchProducts(newPage);
-  };
 
   const productsComponentContainer = products.map((product) => (
     <Product
@@ -48,18 +42,10 @@ const ProductsPage = () => {
         <div className="products-container flex justify-evenly gap-[10%] flex-wrap">
           {productsComponentContainer}
         </div>
-        <div className="pagination-container mt-6">
-          <DefaultPagination
-            totalPages={pagination.totalPages}
-            currentPage={pagination.page}
-            onPageChange={handlePageChange}
-            visiblePages={5}
-          />
-        </div>
       </div>
       <Footer />
     </>
   );
 };
 
-export default ProductsPage;
+export default ProductPageByCollection;

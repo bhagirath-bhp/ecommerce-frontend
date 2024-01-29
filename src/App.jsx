@@ -14,6 +14,7 @@ import AddressPage from './pages/AddressPage'
 import Error500 from './pages/Error500'
 import SuccessPage from './pages/SucessPage'
 import ProfilePage from './pages/ProfilePage'
+import ProductPageByCollection from './pages/ProductPageByCollection'
 
 import CustomToaster from './components/CustomToaster'
 
@@ -31,6 +32,7 @@ function App() {
         <Routes>
           <Route index element={<Homepage/>} ></Route>
           <Route path='/products' element={<ProductsPage/>} ></Route>
+          <Route path='/collection/:collectionId' element={<ProductPageByCollection/>} ></Route>
           <Route path="/product/:productId" element={<OneProduct />} />
           <Route path='/signup' element={<SignUpPage/>} ></Route>
           <Route path='/login' element={<LoginPage/>} ></Route>

@@ -1,6 +1,19 @@
 import { Button } from "@material-tailwind/react"
+import { useState } from "react"
 
 const OrderProductItem = ({id, name, quantity, price}) => {
+    const [btnState, setBtnState] = useState("Remove");
+    const [btnColor, setBtnColor] = useState("golden")
+    const handleClick = () => {
+        if(btnState==="Remove"){
+            setBtnState("Confirm?")
+            setBtnColor("green");
+        }
+        else{
+            setBtnState("Remove")
+            setBtnColor("golden");
+        }
+    }
     return (
         <tr className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
             <td className="p-4">
@@ -15,8 +28,8 @@ const OrderProductItem = ({id, name, quantity, price}) => {
             <td className="px-6 py-4 font-semibold text-gray-900 dark:text-white">
                 ${price}
             </td>
-            <td className="px-6 py-4">
-                <Button className="btn-gold">Hello</Button>
+            <td className="w-[15rem] py-4">
+                <Button className="btn-gold" onClick={handleClick}>{btnState}</Button>
             </td>
         </tr>
     )

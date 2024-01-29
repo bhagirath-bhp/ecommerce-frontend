@@ -19,7 +19,7 @@ const Product = (props) => {
                 <img src={props.url} alt={props.name} className='max-h-[300px] max-w-[400px] object-cover' />
             </div>
             <div className="product-details px-5 pt-5">
-                <h3 className="product-title font-bold text-[20px]">{props.name}</h3>
+                <h3 className="product-title font-bold text-[20px]">{props.name.slice(0, 35) + '....'}</h3>
                 <p className="product-description">{props.description.slice(0, 50) + '....'}</p>
                 <p className="my-5 border-[1px] rounded-xl font-normal text-base text-center px-5 bg-goldenLight text-golden border-golden">Limited Quantities Left</p>
             </div>

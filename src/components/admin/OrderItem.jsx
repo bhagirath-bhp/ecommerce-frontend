@@ -20,10 +20,10 @@ const OrderItem = ({order}) => {
                 {order.user.first_name}
             </td>
             <td className="px-6 py-4">
-                <p>2</p>
+                <p>{orderItems.length || 1}</p>
             </td>
             <td className="px-6 py-4 font-semibold text-gray-900 dark:text-white">
-                $599
+                {order.totalAmount || 199}
             </td>
             <td className="px-6 py-4">
                 <div className="dsp m-5">

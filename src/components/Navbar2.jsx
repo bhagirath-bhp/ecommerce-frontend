@@ -47,23 +47,33 @@ const Navbar2 = () => {
         setSearchTimeout(newTimeout);
 
     }
-    const categoriesComponentSet = collections.map((collection) => (<li key={collection.collectionId}>{capitalizeWords(collection.name)}</li>))
-    const searchItemsComponentSet = searchItems.map((searchItem) => (<SearchItem key={searchItem.productId} productId={searchItem.productId} name={searchItem.name} price={searchItem.price}/>))
+    const collectionsComponentSet = collections.map(
+        (collection) => (
+            <li
+                key={collection.collectionId}
+                onClick={() => {
+                    if (!!collection.collectionId) {
+                        navigate(`/collection/${collection.collectionId}`);
+                    } else {
+                        setToastState(['Something went wrong!', 'error', 'top-right']);
+                    }
+                }}>{capitalizeWords(collection.name)}</li>))
+    const searchItemsComponentSet = searchItems.map((searchItem) => (<SearchItem key={searchItem.productId} productId={searchItem.productId} name={searchItem.name} price={searchItem.price} />))
     return (
         <nav className="navbar flex">
             <div href="#" className="text-5xl cursor-pointer">
                 <IoIosArrowRoundBack onClick={() => navigate('/')} />
             </div>
             <div className="flex items-center w-10/12">
-                <div className="relative w-full flex">
+                <div className="relative w-[80%] flex">
                     {/* <IoIosSearch className="text-black text-2xl my-2 mx-5" /> */}
                     <input
                         type="text"
                         placeholder="Search..."
-                        className="bg-white w-full text-black rounded-lg p-2 focus:outline-none "
+                        className="bg-white w-[80%] text-black rounded-lg p-2 focus:outline-none "
                         onChange={handleSearchChange}
                     />
-                    <div className="search-items absolute top-[2.5rem] font-Roboto border-y-[1px] border-black w-full max-h-[50vh] overflow-y-scroll z-[100]">
+                    <div className="search-items absolute top-[2.5rem] font-Roboto border-y-[1px] border-black w-[80%] max-h-[50vh] overflow-y-scroll z-[100]">
                         {searchItemsComponentSet}
                     </div>
                 </div>
@@ -85,7 +95,7 @@ const Navbar2 = () => {
                     <li className="flex justify-center text-center">
                         <ul className="dropdown top-[1.7rem] left-1/2 flex-column justify-center items-center h-auto overflow-hidden bg-black transition-height duration-500 ease-in-out w-full">
                             <div className="border-y-2 border-golden w-full my-5">
-                                {categoriesComponentSet}
+                                {collectionsComponentSet}
                             </div>
                         </ul>
                     </li>

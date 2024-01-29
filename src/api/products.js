@@ -289,6 +289,24 @@ export const getProductsByCategoryId = async (categoryId) => {
         return null;
     }
 };
+export const getProductsByCollectionId = async (collectionId) => {
+    try {
+        const response = await axios.get(`${uri}/collection/${collectionId}`, {
+            headers: {
+                'Authorization': `Bearer ${Cookies.get('token')}`
+            }
+        });
+
+        if (response.status === 200) {
+            return response.data;
+        } else {
+            return null;
+        }
+    } catch (error) {
+        console.error(error);
+        return null;
+    }
+};
 export const getFiveRandomProducts = async () => {
     const response = await axios
         .get(`${uri}/products/random`, {
