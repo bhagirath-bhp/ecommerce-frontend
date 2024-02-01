@@ -11,7 +11,7 @@ import { search } from "../api/products";
 export function DialogModal(props) {
   const [open, setOpen] = React.useState(false);
   const handleSubmit = async () => {
-    const response = search('D');
+    const response = search('');
     console.log(response)
     
   }

@@ -131,7 +131,7 @@ const OneProduct = () => {
         { key: 5, title: "Product1", description: "This is a very nice product.", price: 489, url: "/public/product-image1.png" },
         { key: 6, title: "Product1", description: "This is a very nice product.", price: 489, url: "/public/product-image2.png" }
     ];
-    const productComponentSet = productSet.map((product) => (<Product key={product.key} title={product.title} description={product.description} url={product.url} price={product.price} />))
+    const productComponentSet = productSet.map((product) => (<Product key={product.key} name={product.title} description={product.description} url={product.url} price={product.price} />))
     // console.log(recommendedProductSet)
     // const productComponentSet = recommendedProductSet.map((product) => (<Product key={product.productId} name={product.name} description={product.description} url={product.url || "noimg.jpg"} price={product.price} />))
 
@@ -228,7 +228,7 @@ const OneProduct = () => {
                     </section> */}
                     <section id="reviews" className="mb-5 py-5">
                         <h3 className="text-lg font-bold">Customer Reviews</h3>
-                        <ReviewBox />
+                        <ReviewBox productId={productId} />
                         <ReviewForm productId={productId} userId={user.userId} />
                     </section>
                     <section id="related-items max-w-[90vw]">

@@ -13,17 +13,18 @@ const ReviewForm = (props) => {
 
     const handleSubmit = async () => {
         if (!reviewText.trim()) {
-            alert("Please enter a review before submitting.");
+            setToastState("Please enter a review before submitting.");
             return;
         }
         const response = await addReview(props.userId , props.productId, rated, reviewText);
-        if (response.status===200) {
-            setToastState([response.data, 'success', 'top-right']);
+        if (response) {
+            setToastState([response, 'success', 'top-right']);
 
             setRated(4);
-            setReviewText("");
+            // setReviewText("");
         } else {
-            alert("Error submitting the review. Please try again later.");
+            setToastState("Error submitting the review. Please try again later.");
+            console.log(response)
         }
     };
 

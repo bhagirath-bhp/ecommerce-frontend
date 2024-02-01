@@ -1,7 +1,7 @@
 import { Progress, Rating } from "@material-tailwind/react";
 import TestimonialCarousel from "./TestimonialCarousel";
 
-const ReviewBox = () => {
+const ReviewBox = ({productId}) => {
     return (
         <div className="grid grid-rows-1 grid-cols-3">
             <div className="review-stats py-5">
@@ -43,7 +43,7 @@ const ReviewBox = () => {
                 </div>
             </div>
             <div className="review-cards tablet:col-start-2 tablet:col-end-5 smMobile:col-span-4 overflow-hidden">
-                <TestimonialCarousel type="review"/>
+                <TestimonialCarousel type="review" productId={productId}/>
             </div>
         </div>
     )

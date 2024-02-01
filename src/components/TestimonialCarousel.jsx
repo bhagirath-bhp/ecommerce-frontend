@@ -1,7 +1,19 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import Testimonial from "./Testimonial"
+import { getRatingsForAProduct } from '../api/reviews';
+
 
 const TestimonialCarousel = (props) => {
+    const [reviewSet, setReviewSet] = useState([]);
+    const fetchReviews = async (productId) => {
+        const response = await getRatingsForAProduct(productId);
+        setReviewSet(response.ratings);
+    }
+
+    useEffect(()=>{
+        fetchReviews(props.productId);
+    }, []);
+
     const cardType = props.type;
     const testimonialSet = [
         { key: 1, type: "testimonial", name: "Binkal Jethwa", designation: "+917016527864", url: "/public/product-image1.png" },
@@ -26,7 +38,7 @@ const TestimonialCarousel = (props) => {
         { key: 9, type: "review", date: "12 December 2023", reviewTitle: "Good Product", name: "Chhota Bheem 4", message: "This is a very nice product.", designation: "CSO @ Dholakpur", url: "/public/product-image1.png" },
     ]
     const testimonialComponentSet = testimonialSet.map((testimonial) => (<Testimonial key={testimonial.key} type={testimonial.type} name={testimonial.name} message={testimonial.message} url={testimonial.url} designation={testimonial.designation} />))
-    const customerReviewComponentSet = customerReviewSet.map((testimonial) => (<Testimonial key={testimonial.key} type={testimonial.type} date={testimonial.date} reviewTitle={testimonial.reviewTitle} name={testimonial.name} message={testimonial.message} url={testimonial.url} designation={testimonial.designation} />))
+    const customerReviewComponentSet = reviewSet.map((testimonial) => (<Testimonial key={testimonial.reviewId} type={testimonial.type} date={testimonial.date} reviewTitle={testimonial.reviewTitle} name={testimonial.user.first_name + testimonial.user.last_name} message={testimonial.comment} url={testimonial.url} designation={testimonial.designation} />))
 
     return (
         (cardType==="testimonial") ?
@@ -36,8 +48,10 @@ const TestimonialCarousel = (props) => {
                 </div>
             </div>)
         :
-            (<div className="testimonial-container blur-mask noscrollbar my-9">
-                <div className="testimonial-inner flex w-fit gap-[1rem] scroll-animation-left">
+            // (<div className="testimonial-container blur-mask noscrollbar my-9">
+            (<div className="testimonial-container noscrollbar my-9">
+                {/* <div className="testimonial-inner flex w-fit gap-[1rem] scroll-animation-left"> */}
+                <div className="testimonial-inner flex w-fit gap-[1rem] ">
                     {customerReviewComponentSet}
                 </div>
             </div>)
