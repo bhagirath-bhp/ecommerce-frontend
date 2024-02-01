@@ -23,7 +23,7 @@ const RippleButton = (props) => {
     return (
         <button
             onClick={createRipple}
-            className={`flex leading-[2.5rem] my-5 relative block rounded-lg ${props.buttonStyles} text-xl font-bold leading-normal overflow-hidden`}
+            className={`flex leading-[2.5rem] my-5 relative rounded-lg ${props.buttonStyles} text-xl font-bold leading-normal overflow-hidden`}
             type={props.type}
         >
             {/* <Button loading={true}> </Button> */}

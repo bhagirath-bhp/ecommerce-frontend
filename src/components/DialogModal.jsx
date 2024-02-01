@@ -7,13 +7,22 @@ import {
   DialogFooter,
 } from "@material-tailwind/react";
 import { search } from "../api/products";
+import { useNavigate } from "react-router-dom";
+import { useSetRecoilState } from "recoil";
+import { toastState } from './state/RecoilState';
 
 export function DialogModal(props) {
   const [open, setOpen] = React.useState(false);
+  const navigate = useNavigate();
+  const setToast = useSetRecoilState(toastState)
   const handleSubmit = async () => {
-    const response = search('');
-    console.log(response)
-    
+    const response = await search(props.name);
+    if (response.length>0 && response[0].productId) {
+      window.location.replace(`/product/${response[0].productId}`)
+    }
+    else {
+      setToast(['No product found', 'error', 'top-right', props.productId]);
+    }
   }
   const handleOpen = () => setOpen(!open);
 
