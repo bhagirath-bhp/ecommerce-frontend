@@ -7,8 +7,8 @@ import { useState } from "react";
 const OrderItem = ({order}) => {
     const [open, setOpen] = useState(false);
     const handleOpen = () => setOpen(!open);
-
-
+    
+    
     const orderItems = order.orderitems;
     const orderItemComponentSet = orderItems.map((data)=>( <OrderProductItem key={Math.random()} id={data.id} name={data.product.name} quantity={data.quantity} price={data.price}/> ))
     return (
@@ -20,10 +20,10 @@ const OrderItem = ({order}) => {
                 {order.user.first_name}
             </td>
             <td className="px-6 py-4">
-                <p>{orderItems.length || 1}</p>
+                <p>{orderItems.length}</p>
             </td>
             <td className="px-6 py-4 font-semibold text-gray-900 dark:text-white">
-                {order.totalAmount || 199}
+                {order.totalAmount}
             </td>
             <td className="px-6 py-4">
                 <div className="dsp m-5">
@@ -48,9 +48,9 @@ const OrderItem = ({order}) => {
                                         <th scope="col" className="px-6 py-3 text-sm">
                                             Price
                                         </th>
-                                        <th scope="col" className="px-6 py-3 text-sm">
+                                        {/* <th scope="col" className="px-6 py-3 text-sm">
                                             Action
-                                        </th>
+                                        </th> */}
                                     </tr>
                                 </thead>
                                 <tbody>

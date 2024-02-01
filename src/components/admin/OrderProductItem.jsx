@@ -28,9 +28,9 @@ const OrderProductItem = ({id, name, quantity, price}) => {
             <td className="px-6 py-4 font-semibold text-gray-900 dark:text-white">
                 ${price}
             </td>
-            <td className="w-[15rem] py-4">
+            {/* <td className="w-[15rem] py-4">
                 <Button className="btn-gold" onClick={handleClick}>{btnState}</Button>
-            </td>
+            </td> */}
         </tr>
     )
 }

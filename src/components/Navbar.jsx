@@ -27,7 +27,7 @@ const Navbar = () => {
         }
         fetchData()
     },[])
-    const categoriesComponentSet = collections.map((collection)=>(<li key={collection.collectionId}>{capitalizeWords(collection.name)}</li>))
+    const categoriesComponentSet = collections.map((collection)=>(<li key={collection.collectionId} onClick={()=>{navigate(`/collection/${collection.collectionId}`)}}>{capitalizeWords(collection.name)}</li>))
     return (
         <div className="nav">
             <NavbarTablet categoriesComponentSet={categoriesComponentSet}/>

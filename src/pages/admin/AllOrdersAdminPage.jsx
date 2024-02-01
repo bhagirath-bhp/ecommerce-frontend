@@ -13,7 +13,6 @@ const AllOrdersAdminPage = () => {
     async function fetchOrders(page) {
         const response = await getAllOrdersForAdmin(page);
         setOrders(response.orders);
-        console.log(response)
         setPagination(response.pagination);
     }
     const handlePageChange = (newpage) => {
