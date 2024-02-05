@@ -22,7 +22,7 @@ const AllOrdersAdminPage = () => {
         fetchOrders(1);
     }, [])
 
-    const ordersComponentSet = orders.map((orderItem)=>( <OrderItem key={Math.random()} order={orderItem}/>  ))
+    const ordersComponentSet = orders.map((orderItem, index)=>( <OrderItem key={Math.random()} index={index} order={orderItem}/>  ))
     return (
         <div className="relative overflow-x-auto shadow-md sm:rounded-lg">
             <AdminNavbar />

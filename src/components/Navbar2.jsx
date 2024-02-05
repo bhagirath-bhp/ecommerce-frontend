@@ -113,6 +113,9 @@ const Navbar2 = () => {
                                     <Link to="/cart" className="block px-4 py-2 text-center hover:text-golden hover:bg-goldenLight">Cart</Link>
                                 </li>
                                 <li className='w-full'>
+                                    <Link to="/wishlist" className="block px-4 py-2 text-center hover:text-golden hover:bg-goldenLight">Wishlist</Link>
+                                </li>
+                                <li className='w-full'>
                                     <Link to="/orders" className="block px-4 py-2 text-center hover:text-golden hover:bg-goldenLight">Orders</Link>
                                 </li>
                                 <li className='w-full'>

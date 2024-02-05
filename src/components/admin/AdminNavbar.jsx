@@ -15,7 +15,7 @@ const AdminNavbar = () => {
                     <Link to="/admin/product/add">Add Product</Link>
                 </li>
                 <li className="main-ul-li">
-                    <Link to="/admin/">Product Catalogue</Link>
+                    <Link to="/admin/catalog">Product Catalogue</Link>
                 </li>
             </ul>
             <div className="signin">

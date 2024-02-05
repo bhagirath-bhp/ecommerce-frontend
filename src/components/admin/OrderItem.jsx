@@ -4,17 +4,18 @@ import { useState } from "react";
 
 
 
-const OrderItem = ({order}) => {
+const OrderItem = ({order, index}) => {
     const [open, setOpen] = useState(false);
     const handleOpen = () => setOpen(!open);
     
     
     const orderItems = order.orderitems;
+    console.log(order)
     const orderItemComponentSet = orderItems.map((data)=>( <OrderProductItem key={Math.random()} id={data.id} name={data.product.name} quantity={data.quantity} price={data.price}/> ))
     return (
         <tr className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
             <td className="p-4">
-                1
+                {index+1}
             </td>
             <td className="px-6 py-4 font-semibold text-gray-900 dark:text-white">
                 {order.user.first_name}
