@@ -24,7 +24,7 @@ const UserBadge = () => {
                 </div>
                 <ul className="py-2">
                     <li>
-                        <Link to="#" className="block px-4 py-2 text-sm hover:text-golden hover:bg-goldenLight">Profile</Link>
+                        <Link to="/profile" className="block px-4 py-2 text-sm hover:text-golden hover:bg-goldenLight">Profile</Link>
                     </li>
                     <li>
                         <Link to="/cart" className="block px-4 py-2 text-sm hover:text-golden hover:bg-goldenLight">Cart</Link>

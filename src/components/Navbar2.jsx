@@ -39,11 +39,15 @@ const Navbar2 = () => {
         setSearchText(e.target.value);
 
         clearTimeout(searchTimeout);
-
-        const newTimeout = setTimeout(async () => {
-            const response = await search(searchText);
-            setSearcchItems(response)
-        }, 500);
+        if(e.target.value.length>2){
+            const newTimeout = setTimeout(async () => {
+                const response = await search(searchText);
+                setSearcchItems(response)
+            }, 500);
+        }
+        else{
+            setSearcchItems([]);
+        }
         setSearchTimeout(newTimeout);
 
     }
@@ -69,7 +73,7 @@ const Navbar2 = () => {
                     {/* <IoIosSearch className="text-black text-2xl my-2 mx-5" /> */}
                     <input
                         type="text"
-                        placeholder="Search..."
+                        placeholder="Search... (minimum 3 characters)"
                         className="bg-white w-[80%] text-black rounded-lg p-2 focus:outline-none "
                         onChange={handleSearchChange}
                     />
@@ -103,7 +107,7 @@ const Navbar2 = () => {
                         {Cookies.get('token') ? (
                             <ul className="py-2 w-full">
                                 <li className='w-full'>
-                                    <Link to="#" className="block px-4 py-2 text-center hover:text-golden hover:bg-goldenLight">Profile</Link>
+                                    <Link to="/profile" className="block px-4 py-2 text-center hover:text-golden hover:bg-goldenLight">Profile</Link>
                                 </li>
                                 <li className='w-full'>
                                     <Link to="/cart" className="block px-4 py-2 text-center hover:text-golden hover:bg-goldenLight">Cart</Link>

@@ -10,7 +10,8 @@ const Product = (props) => {
             className="product min-w-[350px] overflow-hidden rounded-lg border-[1px] border-black m-5 transition duration-300 ease-in-out transform hover:shadow-lg hover:scale-105 cursor-pointer"
             onClick={() => {
                 if (!!props.productId) {
-                    navigate(`/product/${props.productId}`);
+                    // navigate(`/product/${props.productId}`);
+                    window.location.replace(`/product/${props.productId}`);
                 } else {
                     setToastState(['Something went wrong!', 'error', 'top-right', props.productId]);
                 }
