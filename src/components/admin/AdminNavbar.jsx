@@ -2,11 +2,10 @@ import Cookies from "js-cookie";
 import { Link } from "react-router-dom";
 import UserBadge from "../UserBadge";
 
-
 const AdminNavbar = () => {
     return (
         <nav className='navbar smMobile:hidden tablet:flex'>
-            <div className="logo cursor-pointer" onClick={() => { window.open('/', "_self") }}></div>
+            <div className="logo cursor-pointer" onClick={() => { window.open('/') }}></div>
             <ul className="navul flex">
                 <li className="main-ul-li">
                     <Link to="/admin/orders">Orders</Link>
