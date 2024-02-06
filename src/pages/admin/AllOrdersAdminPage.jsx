@@ -12,6 +12,7 @@ const AllOrdersAdminPage = () => {
 
     async function fetchOrders(page) {
         const response = await getAllOrdersForAdmin(page);
+        console.log(response)
         setOrders(response.orders);
         setPagination(response.pagination);
     }
@@ -22,7 +23,7 @@ const AllOrdersAdminPage = () => {
         fetchOrders(1);
     }, [])
 
-    const ordersComponentSet = orders.map((orderItem, index)=>( <OrderItem key={Math.random()} index={index} order={orderItem}/>  ))
+    const ordersComponentSet = orders.map((orderItem, index)=>( <OrderItem key={index} index={index} order={orderItem}/>  ))
     return (
         <div className="relative overflow-x-auto shadow-md sm:rounded-lg">
             <AdminNavbar />
@@ -37,14 +38,17 @@ const AllOrdersAdminPage = () => {
                                 Buyer
                             </th>
                             <th scope="col" className="px-6 py-3 text-sm">
+                                Product
+                            </th>
+                            <th scope="col" className="px-6 py-3 text-sm">
                                 Qty
                             </th>
                             <th scope="col" className="px-6 py-3 text-sm">
                                 Price
                             </th>
-                            <th scope="col" className="px-6 py-3 text-sm">
+                            {/* <th scope="col" className="px-6 py-3 text-sm">
                                 Action
-                            </th>
+                            </th> */}
                         </tr>
                     </thead>
                     <tbody>
