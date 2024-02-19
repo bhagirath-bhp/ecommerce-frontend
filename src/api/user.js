@@ -42,7 +42,7 @@ export const addAddress = async (address_line_1, address_line_2, city, country, 
                 'Authorization': `Bearer ${Cookies.get('token')}`
             }
         })
-        .catch((error)=>{
+        .catch((error) => {
             console.log(error)
         })
 
@@ -71,16 +71,19 @@ export const updateAddress = async (address_line_1, address_line_2, city, zipCod
 
 // Remove Address
 export const removeAddress = async (addressId, userId) => {
-    try {
-        const response = await axios.delete(`${uri}/address/remove`, { data: { addressId, userId } });
+    const response = await axios
+        .delete(`${uri}/address/remove`, { data: { addressId, userId } }, {
+            headers: {
+                'Authorization': `Bearer ${Cookies.get('token')}`
+            }
+        })
+        .catch((error) => {
+            console.log(error)
+        })
 
-        if (response.status === 200) {
-            return response.data;
-        } else {
-            return null;
-        }
-    } catch (error) {
-        console.error(error);
+    if (response.status === 200) {
+        return response.data;
+    } else {
         return null;
     }
 };
@@ -91,7 +94,7 @@ export const getAddress = async (userId) => {
                 'Authorization': `Bearer ${Cookies.get('token')}`
             }
         })
-        .catch((error)=>{
+        .catch((error) => {
             console.log(error)
         })
 

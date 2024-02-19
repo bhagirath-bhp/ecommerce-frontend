@@ -2,14 +2,15 @@ import Cookies from "js-cookie";
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { userState } from "./state/RecoilState";
-import { useSetRecoilState } from "recoil";
+import { useRecoilState } from "recoil";
 
 
 
 
 const UserBadge = () => {
     const [userCick, setUserClick] = useState(false);
-    const setUser = useSetRecoilState(userState);
+    const [user, setUser] = useRecoilState(userState);
+    console.log(user)
     const navigate = useNavigate();
     return (
         <div className="flex items-center md:order-2 flex-col relative text-golden">

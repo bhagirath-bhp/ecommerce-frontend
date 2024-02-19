@@ -6,8 +6,9 @@ import AddressForm from '../components/AddressForm';
 import { addOrder } from '../api/order';
 import { useRecoilState, useRecoilValue } from 'recoil';
 import { addressListState, userState } from '../components/state/RecoilState';
-import { getAddress } from '../api/user';
+import { getAddress, removeAddress } from '../api/user';
 import { useNavigate } from 'react-router-dom';
+
 
 
 const AddressPage = () => {
@@ -20,6 +21,7 @@ const AddressPage = () => {
   useEffect(()=>{
     async function fetchAddress(){
       const response  = await getAddress(user.userId);
+      console.log(response)
       console.log(response, addresses);
       if(response){
         if(Array.isArray(response)){
@@ -53,7 +55,9 @@ const AddressPage = () => {
     console.log("Proceeding to checkout with address: ", addresses[selectedAddress]);
   };
 
-  const handleDeleteAddress = (index) => {
+  const handleDeleteAddress = async (index, addressId) => {
+    const response = await removeAddress(addressId, user.userId);
+    console.log(response)
     const newAddresses = [...addresses];
     newAddresses.splice(index, 1);
     setAddresses(newAddresses);
@@ -81,7 +85,7 @@ const AddressPage = () => {
         </button>
         &nbsp;&nbsp;&nbsp;
         <button
-            onClick={() => handleDeleteAddress(index)}
+            onClick={() => handleDeleteAddress(index ,address.addressId)}
             className="bg-red-600 text-white py-2 px-8 rounded hover:bg-red-700 transition duration-300"
           >
             Delete

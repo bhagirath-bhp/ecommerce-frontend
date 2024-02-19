@@ -40,7 +40,7 @@ const Homepage = () => {
     fetchProducts();
   }, [])
   const imgComponentSet = imgSet.map(img => { return <ImgDiscover key={img.key} url={img.url || "noimg.jpg"} className='img-rect' /> });
-  const productComponentSet = productSet.map((product)=>(<Product key={product.productId} productId={product.productId} name={product.name} description={product.description} price={product.price}  url={product.url || "noimg.jpg"}/>))
+  const productComponentSet = productSet.map((product)=>(<Product key={product.productId} productId={product.productId} name={product.name} description={product.description} price={product.price}  url={product.images[0].imageURL || "noimg.jpg"}/>))
   return (
     <div>
       {/* Navbar */}
