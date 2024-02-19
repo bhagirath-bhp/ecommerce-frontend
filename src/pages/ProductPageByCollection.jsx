@@ -6,11 +6,12 @@ import { getProductsByCollectionId } from '../api/products';
 import { useParams } from 'react-router-dom';
 const ProductPageByCollection = () => {
   const [products, setProducts] = useState([]);
-   const collectionId = useParams();
+   const collectionId = useParams().collectionId;
+  //  console.log(collectionId)
 
   async function fetchProducts (collectionId) {
     const items = await getProductsByCollectionId(collectionId);
-    setProducts(items.products);
+    setProducts(items);
   }
 
   useEffect(() => {
