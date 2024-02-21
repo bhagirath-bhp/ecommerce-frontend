@@ -15,6 +15,7 @@ import { loadStripe } from '@stripe/stripe-js';
 
 const CartPage = () => {
   const [cart, setCart] = useState([]);
+  const [cartComponentSet, setCartComponentSet] = useState([]);
   const user = useRecoilValue(userState);
   const navigate = useNavigate();
   
@@ -36,18 +37,28 @@ const CartPage = () => {
     const response = await reduceQuantity(id, productId, newQuantity);
     if(response=="changed the quantity"){
       const newCart = cart.map((item) =>
-        item.id === id ? { ...item, quantity: newQuantity, total: newQuantity * item.price } : item
+        item.productId === productId ? { ...item, quantity: newQuantity, total: newQuantity * item.price } : item
       );
       setCart(newCart);
     }
   };
-  
+  useEffect(()=>{
+    setCartComponentSet(cart.map((item) => (
+       <CartItem
+         key={item.productId}
+         item={item}
+         onQuantityChange={handleQuantityChange}
+         onDelete={handleDelete}
+       />
+     )))
+  }, [cart])
   // removeFromCart
   const handleDelete = async (id, productId) => {
-    const newCart = cart.filter((item) => item.id !== id);
     const response = await removeFromCart(id, productId);
-    console.log(response);
-    setCart(newCart);
+    if(response){
+      const newCart = cart.filter((item) => item.id !== id);
+      setCart(newCart);
+    }
   };
 
   const handleCheckout = async () =>{
@@ -57,14 +68,7 @@ const CartPage = () => {
   const subtotal = cart.reduce((acc, item) => acc + item.total, 0);
   const deliveryCharges = 50;
   const grandTotal = subtotal + deliveryCharges;
-  const cartComponentSet = cart.map((item) => (
-    <CartItem
-      key={item.id}
-      item={item}
-      onQuantityChange={handleQuantityChange}
-      onDelete={handleDelete}
-    />
-  ))
+
 
   return (
     <div className="flex flex-col h-screen justify-between">
