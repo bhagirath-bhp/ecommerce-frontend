@@ -56,7 +56,7 @@ const CartPage = () => {
   const handleDelete = async (id, productId) => {
     const response = await removeFromCart(id, productId);
     if(response){
-      const newCart = cart.filter((item) => item.id !== id);
+      const newCart = cart.filter((item) => item.productId !== productId);
       setCart(newCart);
     }
   };
