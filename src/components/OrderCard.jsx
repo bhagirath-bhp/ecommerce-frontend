@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 
 const OrderCard = ({ order }) => {
     // Placeholder functions for button actions
+    console.log(order)
     const navigate = useNavigate();
     // const handleViewItemClick = () => {/* ... */};
     // const handleBuyAgainClick = () => {/* ... */};
@@ -25,7 +26,7 @@ const OrderCard = ({ order }) => {
                 </div>
             </div>
             <div className="mt-4 flex justify-end">
-                <Button className="bg-golden text-sm text-black my-2" onClick={() => { navigate('/ordersdetails', { state: { productId: "abc" } }) }}>View Order Details</Button>
+                {/* <Button className="bg-golden text-sm text-black my-2" onClick={() => { navigate('/ordersdetails', { state: { productId: "abc" } }) }}>View Order Details</Button> */}
                 {/* <Button className="bg-golden text-sm text-black my-2" onClick={()=>{navigate('/oneproduct', {state: {productId: "abc"}})}}>View Item</Button> */}
 
                 {/* {order.status === 'delivered' ? (

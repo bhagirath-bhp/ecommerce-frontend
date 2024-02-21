@@ -1,11 +1,10 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import AdminNavbar from '../../components/admin/AdminNavbar';
-import AdminProduct from '../../components/admin/AdminProduct';// Adjust the import path as needed
+import AdminProduct from '../../components/admin/AdminProduct';
 
 const AdminCatalogPage = () => {
   const navigate = useNavigate();
-  const authId = 'your-auth-id'; // Replace with actual auth ID or retrieve from context/state
   const products = [
     { key:1, title: "Product1", description: "This is a very nice product.", price: 489, url: "/public/product-image1.png" },
     { key:2, title: "Product1", description: "This is a very nice product.", price: 489, url: "/public/product-image2.png" },

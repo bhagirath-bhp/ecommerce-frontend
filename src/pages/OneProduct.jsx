@@ -50,14 +50,7 @@ const OneProduct = () => {
         async function fetchRecommendedProductSet() {
             const response = await getFiveRandomProducts();
             if (response) {
-                if (Array.isArray(response)) {
-                    response.forEach((product) => {
-                        setRecommendedProductSet(...recommendedProductSet, product);
-                    })
-                }
-                else {
-                    setRecommendedProductSet(response);
-                }
+                setRecommendedProductSet([...recommendedProductSet , ...response]);
             }
         }
         fetchProduct();
@@ -123,17 +116,7 @@ const OneProduct = () => {
             MagicalEssence: "Potion of Prosperity",
         },
     };
-    const productSet = [
-        { key: 1, title: "Product1", description: "This is a very nice product.", price: 489, url: "/public/product-image1.png" },
-        { key: 2, title: "Product1", description: "This is a very nice product.", price: 489, url: "/public/product-image2.png" },
-        { key: 3, title: "Product1", description: "This is a very nice product.", price: 489, url: "/public/product-image3.png" },
-        { key: 4, title: "Product1", description: "This is a very nice product.", price: 489, url: "/public/product-image4.png" },
-        { key: 5, title: "Product1", description: "This is a very nice product.", price: 489, url: "/public/product-image1.png" },
-        { key: 6, title: "Product1", description: "This is a very nice product.", price: 489, url: "/public/product-image2.png" }
-    ];
-    const productComponentSet = productSet.map((product) => (<Product key={product.key} name={product.title} description={product.description} url={product.url} price={product.price} />))
-    // console.log(recommendedProductSet)
-    // const productComponentSet = recommendedProductSet.map((product) => (<Product key={product.productId} name={product.name} description={product.description} url={product.url || "noimg.jpg"} price={product.price} />))
+    const recommendedProductComponentSet = recommendedProductSet.map((product) => (<Product key={product.productId} name={product.name} description={product.description} url={product.images[0].imageURL || "noimg.jpg"} price={product.price} />))
 
     return (
         <div className="font-sans">
@@ -233,8 +216,8 @@ const OneProduct = () => {
                     </section>
                     <section id="related-items max-w-[90vw]">
                         <h3 className="text-2xl font-bold">More items you may like in apparel</h3>
-                        <div className="more-products-set noscrollbar flex justify-between w-full my-9 overflow-x-scroll">
-                            {productComponentSet}
+                        <div className="more-products-set noscrollbar flex justify-evenly w-full my-9 overflow-x-scroll">
+                            {recommendedProductComponentSet}
                         </div>
                     </section>
                 </main>)}

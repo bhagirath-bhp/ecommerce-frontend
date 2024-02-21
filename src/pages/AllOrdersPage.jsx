@@ -27,37 +27,38 @@ const AllOrdersPage = () => {
   useEffect(() => {
     fetchOrders();
   }, [])
-  useEffect(()=>{
+  useEffect(() => {
+    console.log(orders)
     const orderItemsComponentSet = (orderSet) => {
-      return orderSet
-        ? orderSet.orderitems.map((item) => (
+      if (orderSet)
+        return orderSet.orderitems.map((item) => (
           <OrderCard
             key={Math.random()}
             order={{
               productName: item.product.name,
               price: item.price,
-              imgUrl: (item.imgUrl) || "/noimg.jpg",
+              imageUrl: (item.imgUrl) || "/noimg.jpg",
               description: (item.description) || "Lorem ipsum dolor sit amet consectetur adipisicing elit. Itaque, explicabo!"
             }} />
         ))
-        :
-        <p>Something Went Wrong</p>
+      else
+        return <p>Something Went Wrong</p>
     }
     const ordersComponentSetHold = (orders)
-      ? orders.map((orderSet) => (
+      ? orders.orders.map((orderSet) => (
         <div key={orderSet.orderId} className='border-b-[1px] border-gray-400 my-[3rem] py-[2rem] w-full'>
           {
             orderItemsComponentSet(orderSet)
           }
-  
         </div>
       ))
       : (
         <p>No orders found</p>
-      )
-      setOrdersComponentSet(ordersComponentSetHold);
+      );
+
+    setOrdersComponentSet(ordersComponentSetHold);
   }, [orders])
-  
+
 
 
   return (
