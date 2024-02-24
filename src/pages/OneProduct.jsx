@@ -36,8 +36,8 @@ const OneProduct = () => {
                 if (productId) {
                     const product = await getAProductById(productId);
                     setProductData1(product);
-                    console.log(product.name.substring(1, 4))
-                    if (product.name.substring(1, 4) === "DSP") {
+                    // console.log(product.name.substring(0, 5).includes("DSP"))
+                    if (product.name.substring(1, 4).includes("DSP")) {
                         setIsDsp(true);
                     } else {
                         setIsDsp(false)

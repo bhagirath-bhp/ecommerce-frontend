@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Button } from "@material-tailwind/react"
 import { FaHeart } from "react-icons/fa";
 import { addToCart } from "../api/cart";
+import { removeFromWishlist } from "../api/wishlist";
 
 
 const WishlistItem = ({item}) => {
@@ -19,7 +20,11 @@ const WishlistItem = ({item}) => {
                 navigate('/cart');
             }, 1500);
         console.log(productId)
+    }
 
+    const handleRemoveFromWishlist = async (wishlistId, productId) => {
+        const response = await removeFromWishlist(wishlistId, productId);
+        console.log(response);
     }
     return (
         <div key={item.id} className="p-4 border border-gold rounded bg-white">
@@ -33,7 +38,7 @@ const WishlistItem = ({item}) => {
                     onClick={() => { handleAddToCart(item.id) }}
                 >Add to Cart</Button>
                 <FaHeart
-                    onClick={() => removeFromWishlist(item.id)}
+                    onClick={() => removeFromWishlist(item.id, item.productId)}
                     //   className={`text-gold text-2xl cursor-pointer ${wishlist.some((wItem) => wItem.id === item.id) ? 'filled' : ''
                     //     }`}
                     className={`text-gold text-2xl cursor-pointer`}
