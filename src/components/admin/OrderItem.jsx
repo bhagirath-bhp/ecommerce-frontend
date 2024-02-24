@@ -26,9 +26,9 @@ const OrderItem = ({ order, index }) => {
             <td className="px-6 py-4">
                 <p>{orderItems.length}</p>
             </td>
-            <td className="px-6 py-4 font-semibold text-gray-900 dark:text-white">
+            {/* <td className="px-6 py-4 font-semibold text-gray-900 dark:text-white">
                 {order.totalAmount}
-            </td>
+            </td> */}
             <td className="px-6 py-4">
                 <div className="dsp m-5">
                     <Button onClick={handleOpen} variant="outlined" className="btn-gold">

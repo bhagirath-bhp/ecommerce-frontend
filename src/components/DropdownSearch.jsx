@@ -1,4 +1,12 @@
 import AsyncSelect from 'react-select/async';
+import { getSpells } from '../api/spell';
+import { useEffect } from 'react';
+
+const fetchSpells = async () => {
+    const respone = await getSpells();
+    console.log(respone)
+}
+fetchSpells();
 
 const dragonSpells = [
     {

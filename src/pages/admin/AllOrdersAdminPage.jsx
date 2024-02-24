@@ -46,9 +46,9 @@ const AllOrdersAdminPage = () => {
                             {/* <th scope="col" className="px-6 py-3 text-sm">
                                 Amount
                             </th> */}
-                            {/* <th scope="col" className="px-6 py-3 text-sm">
+                            <th scope="col" className="px-6 py-3 text-sm">
                                 Action
-                            </th> */}
+                            </th>
                         </tr>
                     </thead>
                     <tbody>

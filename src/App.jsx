@@ -22,6 +22,8 @@ import AddProductPage from './pages/admin/AddProductPage'
 import EditProductPage from './pages/admin/EditProductPage'
 import AdminCatalogPage from './pages/admin/AdminCatalogPage'
 import AllOrdersAdminPage from './pages/admin/AllOrdersAdminPage'
+import AddSpellPage from './pages/admin/AddSpellPage'
+
 
 
 function App() {
@@ -43,12 +45,13 @@ function App() {
           <Route path='/address' element={<AddressPage/>} ></Route>
           <Route path='/ordersdetails' element={<OrderDetails/>} ></Route>
           <Route path='/admin/product/add' element={<AddProductPage/>} ></Route>
+          <Route path='/admin/spell/add' element={<AddSpellPage/>} ></Route>
           <Route path="/admin/product/edit:productId" element={<EditProductPage />}></Route>
           <Route path="/admin/catalog/" element={<AdminCatalogPage />}></Route>
+          <Route path='/admin/orders' element={<AllOrdersAdminPage/>} ></Route>
           <Route path='/error/:eid' element={ <Error500/> } ></Route>
           <Route path='/success' element={ <SuccessPage/> } ></Route>
           <Route path='/profile' element={ <ProfilePage/> } ></Route>
-          <Route path='/admin/orders' element={<AllOrdersAdminPage/>} ></Route>
         </Routes>
       </BrowserRouter>
       <CustomToaster/>
