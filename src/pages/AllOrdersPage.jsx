@@ -37,7 +37,7 @@ const AllOrdersPage = () => {
             order={{
               productName: item.product.name,
               price: item.price,
-              imageUrl: (item.imgUrl) || "/noimg.jpg",
+              imageUrl: (item.product.images[0].imageURL) || "/noimg.jpg",
               description: (item.description) || "Lorem ipsum dolor sit amet consectetur adipisicing elit. Itaque, explicabo!"
             }} />
         ))

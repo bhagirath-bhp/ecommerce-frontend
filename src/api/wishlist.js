@@ -42,3 +42,23 @@ export const getWishlist = async (userId) => {
         return null;
     }
 };
+
+
+export const removeFromWishlist = async (wishlistId, productId) => {
+    try {
+        const response = await axios.get(`${uri}/wishlist/remove`, { wishlistId, productId }, {
+            headers: {
+                'Authorization': `Bearer ${Cookies.get('token')}`
+            }
+        });
+
+        if (response.status === 200) {
+            return response.data;
+        } else {
+            return null;
+        }
+    } catch (error) {
+        console.error(error);
+        return null;
+    }
+};

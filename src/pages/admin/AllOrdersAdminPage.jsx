@@ -37,15 +37,15 @@ const AllOrdersAdminPage = () => {
                             <th scope="col" className="px-6 py-3 text-sm">
                                 Buyer
                             </th>
-                            <th scope="col" className="px-6 py-3 text-sm">
+                            {/* <th scope="col" className="px-6 py-3 text-sm">
                                 Product
-                            </th>
+                            </th> */}
                             <th scope="col" className="px-6 py-3 text-sm">
                                 Qty
                             </th>
-                            <th scope="col" className="px-6 py-3 text-sm">
-                                Price
-                            </th>
+                            {/* <th scope="col" className="px-6 py-3 text-sm">
+                                Amount
+                            </th> */}
                             {/* <th scope="col" className="px-6 py-3 text-sm">
                                 Action
                             </th> */}
