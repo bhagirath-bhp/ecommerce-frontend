@@ -14,8 +14,7 @@ const ProfilePage = () => {
                     <Button className="btn-gold w-[10rem]">View Cart</Button>
                     <Button className="btn-gold w-[10rem]">View Orders</Button>
                     <Button className="btn-gold w-[10rem]">Update Address</Button>
-                    <Button className="btn-gold w-[10rem]">Buy Again</Button>
-
+                    <Button className="btn-gold w-[10rem]">Sign Out</Button>
                 </div>
             </div>
         </div>
