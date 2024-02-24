@@ -21,11 +21,11 @@ const OrderItem = ({ order, index }) => {
                 {index+1}
             </td>
             <td className="px-6 py-4 font-semibold text-gray-900 dark:text-white">
-                {order.user.first_name + ' ' + order.user.last_name}
+                {uname}
             </td>
-            <td className="px-6 py-4">
+            {/* <td className="px-6 py-4">
                 <p>{orderItems.length}</p>
-            </td>
+            </td> */}
             {/* <td className="px-6 py-4 font-semibold text-gray-900 dark:text-white">
                 {order.totalAmount}
             </td> */}
@@ -35,7 +35,7 @@ const OrderItem = ({ order, index }) => {
                         View Order
                     </Button>
                     <Dialog open={open} handler={handleOpen} className="text-2xl" size="xl">
-                        <DialogHeader>Product 1</DialogHeader>
+                        <DialogHeader>Buyer: {uname}</DialogHeader>
                         <DialogBody>
                             <table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
                                 <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">

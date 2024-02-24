@@ -25,7 +25,7 @@ const AllOrdersAdminPage = () => {
 
     const ordersComponentSet = orders.map((orderItem, index)=>( <OrderItem key={index} index={index} order={orderItem}/>  ))
     return (
-        <div className="relative overflow-x-auto shadow-md sm:rounded-lg">
+        <div className="relative overflow-x-auto shadow-md">
             <AdminNavbar />
             <div className="container py-[3rem]">
                 <table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
@@ -40,9 +40,9 @@ const AllOrdersAdminPage = () => {
                             {/* <th scope="col" className="px-6 py-3 text-sm">
                                 Product
                             </th> */}
-                            <th scope="col" className="px-6 py-3 text-sm">
+                            {/* <th scope="col" className="px-6 py-3 text-sm">
                                 Qty
-                            </th>
+                            </th> */}
                             {/* <th scope="col" className="px-6 py-3 text-sm">
                                 Amount
                             </th> */}
