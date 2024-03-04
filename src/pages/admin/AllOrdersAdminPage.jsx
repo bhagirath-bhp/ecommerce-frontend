@@ -12,7 +12,7 @@ const AllOrdersAdminPage = () => {
 
     async function fetchOrders(page) {
         const response = await getAllOrdersForAdmin(page);
-        console.log(response)
+        // console.log(response)
         setOrders(response.orders);
         setPagination(response.pagination);
     }

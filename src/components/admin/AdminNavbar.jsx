@@ -19,7 +19,18 @@ const AdminNavbar = () => {
             </ul>
             <div className="signin">
                 {Cookies.get('token') ? (
-                    <UserBadge />
+                    <ul className="navul flex">
+                        <li className="main-ul-li">
+                            <Link
+                                to="/"
+                                className="block px-4 py-1 text-md"
+                                onClick={() => {
+                                    Cookies.remove('token')
+                                    setUser(false);
+                                    window.location.replace("/")
+                                }}>Sign out</Link>
+                        </li>
+                    </ul>
                 ) : (
                     <Link to="/login" className="mx-4 main-ul-li hover:bg-goldenLight text-center">Sign in</Link>
                 )}
